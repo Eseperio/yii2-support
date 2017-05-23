@@ -1,0 +1,39 @@
+{
+    "name"             : "yii/support",
+    "version"          : "1.0.0",
+    "description"      : "Yii2 support module. Ticket system with customer.",
+    "homepage"         : "https://git.hexa.com.ua/yii2/support",
+    "type"             : "module",
+    "minimum-stability": "stable",
+    "author"           : [
+        {
+            "name" : "Yevhenii Pylypenko",
+            "email": "i.pylypenko@hexa.com.ua",
+            "role" : "Developer"
+        },
+        {
+            "name" : "Alexander Oganov",
+            "email": "a.ohanov@hexa.com.ua",
+            "role" : "Developer"
+        }
+    ],
+    "require"          : {
+        "php"         : ">=5.6",
+        "yiisoft/yii2": "~2.0"
+    },
+    "require-dev"      : {
+        "codeception/codeception"  : "^2.2",
+        "codeception/verify"       : "~0.3.1",
+        "codeception/specify"      : "~0.4.5",
+        "squizlabs/php_codesniffer": "~2.8.0",
+        "satooshi/php-coveralls"   : "~1.0",
+        "phpunit/php-code-coverage": "~4.0",
+        "fzaninotto/faker"         : "^1.6"
+    },
+    "autoload"         : {
+        "psr-4": {
+            "Hexa\\Yii\\Support\\"       : "src",
+            "Hexa\\Yii\\Support\\Tests\\": "tests"
+        }
+    }
+}
