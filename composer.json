@@ -32,8 +32,8 @@
     },
     "autoload"         : {
         "psr-4": {
-            "Hexa\\Yii\\Support\\"       : "src",
-            "Hexa\\Yii\\Support\\Tests\\": "tests"
+            "hexa\\yiisupport\\"       : "src",
+            "hexa\\yiisupport\\tests\\": "tests"
         }
     }
 }
