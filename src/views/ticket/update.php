@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => 
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-echo $this->render('@yiisupport/views/layouts/update', [
+echo $this->render('/layouts/update', [
     'model'   => $model,
     'options' => [
         'class' => 'ticket-update js-ticket-update'

@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Priorities'), 'url' 
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-echo $this->render('@yiisupport/views/layouts/update', [
+echo $this->render('/layouts/update', [
     'model'   => $model,
     'options' => [
         'class' => 'priority-update js-priority-update'

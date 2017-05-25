@@ -7,7 +7,7 @@ $this->title                   = Yii::t('app', 'Create Ticket');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('@yiisupport/views/layouts/create', [
+echo $this->render('/layouts/create', [
     'model'   => $model,
     'options' => [
         'class' => 'status-create js-status-create'

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => 
 $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="ticket-view">
 
-    <?php echo $this->render('@yiisupport/views/layouts/view', [
+    <?php echo $this->render('/layouts/view', [
         'model' => $model
     ]); ?>
 

@@ -7,7 +7,7 @@ $this->title                   = Yii::t('app', "Create Priority");
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Priorities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('@yiisupport/views/layouts/create', [
+echo $this->render('/layouts/create', [
     'model'   => $model,
     'options' => [
         'class' => 'priority-create js-priority-create'

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="status-view">
 
-    <?php echo $this->render('@yiisupport/views/layouts/view', [
+    <?php echo $this->render('/layouts/view', [
         'model' => $model
     ]); ?>
 

@@ -6,7 +6,7 @@
 $this->title                   = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('@yiisupport/views/layouts/index', [
+echo $this->render('/layouts/index', [
     'dataProvider' => $dataProvider,
     'modelName'    => 'Category',
     'columns'      => [
