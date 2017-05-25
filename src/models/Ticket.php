@@ -55,8 +55,6 @@ class Ticket extends ActiveRecord
     {
         return [
             'id',
-            'client_id',
-            'site_id',
             'subject',
             'content',
             'status'   => function ($model) {
@@ -85,7 +83,6 @@ class Ticket extends ActiveRecord
         return [
             [
                 [
-                    'client_id',
                     'priority_id',
                     'category_id',
                     'status_id',
