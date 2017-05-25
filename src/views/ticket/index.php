@@ -11,10 +11,6 @@ echo $this->render('/layouts/index', [
     'modelName'    => 'Ticket',
     'columns'      => [
         'id',
-        [
-            'attribute' => 'client_id',
-            'value'     => 'client.email',
-        ],
         'subject',
         'content:ntext',
         [

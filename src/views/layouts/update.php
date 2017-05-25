@@ -11,7 +11,7 @@ use yii\helpers\Html;
 echo Html::beginTag('div', $options)
 
     . Html::tag('h1', Html::encode($this->title))
-    . $this->render('_form', [
+    . $this->context->renderPartial('_form', [
         'model' => $model,
     ])
     . Html::endTag('div');

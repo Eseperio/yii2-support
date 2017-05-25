@@ -13,7 +13,7 @@ echo Html::beginTag('div', $options); ?>
         <?php echo Html::encode($this->title); ?>
     </h1>
 
-<?php echo $this->render('_form', [
+<?php echo $this->context->renderPartial('_form', [
     'model' => $model,
 ]);
 
