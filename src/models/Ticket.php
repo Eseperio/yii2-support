@@ -4,6 +4,7 @@ namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveRecord;
 use hexa\yiisupport\db\TicketQuery;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
@@ -44,6 +45,11 @@ class Ticket extends ActiveRecord
                 'class'              => TimestampBehavior::className(),
                 'value'              => new Expression('NOW()'),
                 'createdAtAttribute' => 'created_at',
+            ],
+            [
+                'class'              => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false,
             ],
         ];
     }
