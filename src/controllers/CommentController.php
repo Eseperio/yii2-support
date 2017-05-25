@@ -1,12 +1,12 @@
 <?php
 
-namespace modules\support\controllers;
+namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use modules\support\models\TicketComment;
+use hexa\yiisupport\models\TicketComment;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
@@ -53,7 +53,7 @@ class CommentController extends Controller
      */
     public function actionCreate($entity)
     {
-        $hash = \Yii::$app->security->decryptByKey(utf8_decode($entity), 'comment');
+        $hash = \Yii::$app->security->decryptByKey(utf8_decode($entity), $this->module->param('secret'));
 
         if ($hash !== false) {
 
@@ -74,7 +74,7 @@ class CommentController extends Controller
 
         return $this->asJson([
             'status'  => 'error',
-            'message' => 'Oops, something went wrong. Please try again later.'
+            'message' => \Yii::t('app', 'Oops, something went wrong. Please try again later.')
         ]);
     }
 }

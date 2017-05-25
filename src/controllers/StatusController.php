@@ -1,19 +1,17 @@
 <?php
 
-namespace modules\support\controllers;
+namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\actions\CreateAction;
 use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use modules\support\models\TicketStatus;
+use hexa\yiisupport\models\TicketStatus;
 use yii\web\Controller;
 
 /**
  * Class StatusController
- *
- * @package modules\support\controllers
  */
 class StatusController extends Controller
 {

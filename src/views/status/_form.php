@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketStatus */
+/* @var $model \hexa\yiisupport\models\TicketStatus */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

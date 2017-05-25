@@ -1,4 +1,10 @@
 <?php
 return [
-    'id' => 'support',
+    'id'         => 'support',
+    'components' => [
+
+    ],
+    'params'     => [
+        'secret' => 'comment'
+    ]
 ];

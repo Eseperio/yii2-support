@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
-/* @var $comment \modules\support\models\TicketComment */
+/* @var $comment \hexa\yiisupport\models\TicketComment */
 /* @var $comments array */
 /* @var $maxLevel null|integer comments max level */
 

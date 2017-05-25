@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\support\models;
+namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveRecord;
 use hexa\yiisupport\db\TicketQuery;

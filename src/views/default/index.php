@@ -29,8 +29,12 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                             <i class="glyphicon glyphicon-th"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <h1><?php echo $all ?></h1>
-                            <div>Total tickets</div>
+                            <h1>
+                                <?php echo $all ?>
+                            </h1>
+                            <div>
+                                <?php echo Yii::t('app', 'Total tickets'); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,8 +48,10 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                             <i class="glyphicon glyphicon-wrench"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <h1><?php echo $opened ?></h1>
-                            <div>Open tickets</div>
+                            <h3><?php echo $opened; ?></h3>
+                            <div>
+                                <?php echo Yii::t('app', 'Open tickets'); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,8 +65,12 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                             <i class="glyphicon glyphicon-thumbs-up"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <h1><?php echo $closed ?></h1>
-                            <span>Closed tickets</span>
+                            <h3>
+                                <?php echo $closed; ?>
+                            </h3>
+                            <span>
+                                <?php echo Yii::t('app', 'Closed tickets'); ?>
+                            </span>
                         </div>
                     </div>
                 </div>

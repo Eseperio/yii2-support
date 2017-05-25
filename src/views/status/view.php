@@ -1,44 +1,26 @@
 <?php
 
-use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketStatus */
+/* @var $model \hexa\yiisupport\models\TicketStatus */
 
-$this->title                   = 'Status: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Statuses', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="ticket-view">
+$this->title                   = $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Statuses'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title; ?>
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
+<div class="status-view">
 
-    <p>
-        <?php echo Html::a(
-            'Update', ['update', 'id' => $model->id],
-            ['class' => 'btn btn-primary']
-        ) ?>
-        <?php echo Html::a(
-            'Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data'  => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method'  => 'post',
-            ],
-            ]
-        ) ?>
-    </p>
+    <?php echo $this->render('@yiisupport/views/layouts/view', [
+        'model' => $model
+    ]); ?>
 
-    <?php echo DetailView::widget(
-        [
+    <?php echo DetailView::widget([
         'model'      => $model,
         'attributes' => [
             'id',
             'name',
-            'color',
-        ],
+            'color'
         ]
-    ) ?>
-
+    ]); ?>
 </div>

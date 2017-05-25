@@ -1,23 +1,16 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketPriority */
+/* @var $model \hexa\yiisupport\models\TicketPriority */
 
-$this->title                   = 'Update Priority: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Priorities', 'url' => ['index']];
+$this->title                   = Yii::t('app', 'Update Priority: {priority}', ['priority' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Priorities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="ticket-update">
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render(
-        '_form', [
-        'model' => $model,
-        ]
-    ) ?>
-
-</div>
+echo $this->render('@yiisupport/views/layouts/update', [
+    'model'   => $model,
+    'options' => [
+        'class' => 'priority-update js-priority-update'
+    ]
+]);

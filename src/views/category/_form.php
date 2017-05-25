@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketCategory */
+/* @var $model \hexa\yiisupport\models\TicketCategory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?php echo Html::submitButton(
-            $model->isNewRecord ? 'Create' : 'Update', [
-            'class' => $model->isNewRecord ? 'btn btn-success'
-                : 'btn btn-primary',
+            Yii::t('app', $model->isNewRecord ? 'Create' : 'Update'),
+            [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
             ]
         ) ?>
     </div>

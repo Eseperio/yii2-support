@@ -1,23 +1,16 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketStatus */
+/* @var $model \hexa\yiisupport\models\TicketStatus */
 
-$this->title                   = 'Update Status: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tickets', 'url' => ['index']];
+$this->title                   = Yii::t('app', 'Update Status: {status}', ['status' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Status'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="ticket-update">
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render(
-        '_form', [
-        'model' => $model,
-        ]
-    ) ?>
-
-</div>
+echo $this->render('@yiisupport/views/layouts/update', [
+    'model'   => $model,
+    'options' => [
+        'class' => 'status-update js-status-update'
+    ]
+]);

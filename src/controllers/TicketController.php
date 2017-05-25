@@ -1,13 +1,13 @@
 <?php
 
-namespace modules\support\controllers;
+namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\actions\CreateAction;
 use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use modules\support\models\Ticket;
+use hexa\yiisupport\models\Ticket;
 use yii\web\Controller;
 
 /**

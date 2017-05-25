@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\Ticket */
+/* @var $model \hexa\yiisupport\models\Ticket */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,20 +19,20 @@ use yii\widgets\ActiveForm;
     <?php echo $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <?php echo $form->field($model, 'status_id')->dropdownList(
-        \modules\support\models\TicketStatus::find()->select(['name', 'id'])
+        \hexa\yiisupport\models\TicketStatus::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
         ['prompt' => '-- Select Status --']
     ); ?>
 
     <?php echo $form->field($model, 'priority_id')->dropdownList(
-        \modules\support\models\TicketPriority::find()->select(['name', 'id'])
+        \hexa\yiisupport\models\TicketPriority::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
         ['prompt' => '-- Select Priority --']
     ); ?>
     <?php echo $form->field($model, 'category_id')->dropdownList(
-        \modules\support\models\TicketCategory::find()->select(['name', 'id'])
+        \hexa\yiisupport\models\TicketCategory::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
         ['prompt' => '-- Select Category --']

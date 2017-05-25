@@ -1,8 +1,8 @@
 <?php
 
-namespace modules\support\controllers;
+namespace hexa\yiisupport\controllers;
 
-use modules\support\models\Ticket;
+use hexa\yiisupport\models\Ticket;
 use yii\web\Controller;
 
 /**

@@ -2,6 +2,8 @@
 
 namespace hexa\yiisupport;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * Class Module
  */
@@ -36,19 +38,19 @@ class Module extends \yii\base\Module
         parent::init();
 
         \Yii::setAlias('@yiisupport', __DIR__);
+        \Yii::configure($this, require(__DIR__ . '/config.php'));
     }
 
     /**
-     * @inheritdoc
+     * Get param value.
+     *
+     * @param string|int $key
+     * @param mixed      $default
+     *
+     * @return mixed
      */
-    public function beforeAction($action)
+    public function param($key, $default = null)
     {
-        if (parent::beforeAction($action)) {
-            /* @var $action \yii\base\Action */
-
-            return true;
-        }
-
-        return false;
+        return ArrayHelper::getValue($this->params, $key, $default);
     }
 }

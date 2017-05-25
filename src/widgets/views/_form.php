@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var $this   \yii\web\View
- * @var $model  \modules\support\models\TicketComment
+ * @var $model  \hexa\yiisupport\models\TicketComment
  * @var $hash   string
  * @var $formId string comment form id
  */

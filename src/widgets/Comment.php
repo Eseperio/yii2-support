@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\support\widgets;
+namespace hexa\yiisupport\widgets;
 
-use modules\support\CommentAsset;
-use modules\support\models\TicketComment;
+use hexa\yiisupport\CommentAsset;
+use hexa\yiisupport\models\TicketComment;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\Json;
@@ -28,6 +28,12 @@ class Comment extends Widget
      * @var array comment widget client options
      */
     public $clientOptions = [];
+
+    /**
+     * Secret keyword for generate hash string.
+     * @var string
+     */
+    public $secret;
 
     /**
      * @var string

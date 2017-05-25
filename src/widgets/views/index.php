@@ -5,7 +5,7 @@ use yii\widgets\Pjax;
 /**
  * @var $this                \yii\web\View
  * @var $comments            array
- * @var $model               \modules\support\models\TicketComment
+ * @var $model               \hexa\yiisupport\models\TicketComment
  * @var $maxLevel            null|integer comments max level
  * @var $hash                string
  * @var $containerId         string

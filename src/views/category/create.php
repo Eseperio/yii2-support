@@ -1,22 +1,15 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\TicketCategory */
+/* @var $model \hexa\yiisupport\models\TicketCategory */
 
-$this->title = 'Create Category';
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->title                   = Yii::t('app', 'Create Category');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="ticket-create">
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render(
-        '_form', [
-        'model' => $model,
-        ]
-    ) ?>
-
-</div>
+echo $this->render('@yiisupport/views/layouts/create', [
+    'model'   => $model,
+    'options' => [
+        'class' => 'category-create js-category-create'
+    ]
+]);

@@ -1,22 +1,15 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model \modules\support\models\Ticket */
+/* @var $model \hexa\yiisupport\models\Ticket */
 
-$this->title = 'Create Ticket';
-$this->params['breadcrumbs'][] = ['label' => 'Tickets', 'url' => ['index']];
+$this->title                   = Yii::t('app', 'Create Ticket');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="ticket-create">
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render(
-        '_form', [
-        'model' => $model,
-        ]
-    ) ?>
-
-</div>
+echo $this->render('@yiisupport/views/layouts/create', [
+    'model'   => $model,
+    'options' => [
+        'class' => 'status-create js-status-create'
+    ]
+]);
