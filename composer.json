@@ -1,5 +1,5 @@
 {
-    "name"             : "yii/support",
+    "name"             : "yii2/support",
     "version"          : "1.0.0",
     "description"      : "Yii2 support module. Ticket system with customer.",
     "homepage"         : "https://git.hexa.com.ua/yii2/support",
