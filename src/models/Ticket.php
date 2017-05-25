@@ -31,7 +31,7 @@ class Ticket extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket';
+        return '{{%ticket}}';
     }
 
     /**

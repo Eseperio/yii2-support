@@ -21,7 +21,7 @@ class TicketPriority extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_priority';
+        return '{{%ticket_priority}}';
     }
 
     /**

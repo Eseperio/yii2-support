@@ -25,7 +25,7 @@ class TicketComment extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_comment';
+        return '{{%ticket_comment}}';
     }
 
     /**

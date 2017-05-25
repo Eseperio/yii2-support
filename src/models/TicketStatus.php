@@ -20,7 +20,7 @@ class TicketStatus extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_status';
+        return '{{%ticket_status}}';
     }
 
     /**
