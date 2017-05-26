@@ -60,7 +60,7 @@ abstract class BaseAction extends Action
      */
     protected function findModel($id)
     {
-        if (($model = $this->modelClass::findOne($id)) !== null) {
+        if (($model = $this->modelClass::find()->byId($id)->one()) !== null) {
             return $model;
         }
 

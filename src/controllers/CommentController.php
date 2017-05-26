@@ -7,6 +7,7 @@ use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\TicketComment;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
@@ -44,6 +45,31 @@ class CommentController extends Controller
     }
 
     /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index', 'view', 'create', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['index', 'view', 'create'],
+                        'roles'   => [$this->module->userRole],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['delete', 'update'],
+                        'roles'   => [$this->module->adminRole],
+                    ]
+                ],
+            ],
+        ];
+    }
+
+    /**
      * Creates a new Ticket model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
@@ -60,7 +86,7 @@ class CommentController extends Controller
             $model = new TicketComment();
             $model->setAttributes(Json::decode($hash));
 
-            if ($model->load(\Yii::$app->getRequest()->post()) && $model->save()) {
+            if ($model->load(\Yii::$app->request->post()) && $model->save()) {
                 return $this->asJson([
                     'status' => 'success'
                 ]);

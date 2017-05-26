@@ -8,6 +8,7 @@ use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\TicketCategory;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -43,6 +44,25 @@ class CategoryController extends Controller
                 'class'      => UpdateAction::className(),
                 'modelClass' => $className
             ]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index', 'view', 'create', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->adminRole],
+                    ]
+                ],
+            ],
         ];
     }
 }

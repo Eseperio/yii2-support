@@ -8,6 +8,7 @@ use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\Ticket;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -44,6 +45,31 @@ class TicketController extends Controller
                 'class'      => UpdateAction::className(),
                 'modelClass' => $className
             ]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index', 'view', 'create', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'allow'   => true,
+                        'actions' => ['delete', 'update'],
+                        'roles'   => [$this->module->adminRole],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['index', 'view', 'create'],
+                        'roles'   => [$this->module->userRole],
+                    ]
+                ],
+            ],
         ];
     }
 }

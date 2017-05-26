@@ -20,12 +20,12 @@ class m170524_145721_create_ticket_table extends Migration
         $this->createTable(
             self::$_tableName, [
                 'id'           => $this->primaryKey(),
-                'user_id'      => $this->integer(),
                 'subject'      => $this->string(255)->notNull(),
                 'content'      => $this->text(),
                 'status_id'    => $this->integer(),
                 'priority_id'  => $this->integer(),
                 'category_id'  => $this->integer(),
+                'created_by'   => $this->integer(),
                 'completed_at' => $this->timestamp()->defaultValue(null),
                 'created_at'   => $this->timestamp()->defaultValue(null),
                 'updated_at'   => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',

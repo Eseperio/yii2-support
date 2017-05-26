@@ -48,7 +48,7 @@ class Ticket extends ActiveRecord
             ],
             [
                 'class'              => BlameableBehavior::className(),
-                'createdByAttribute' => 'user_id',
+                'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => false,
             ],
         ];
@@ -62,6 +62,7 @@ class Ticket extends ActiveRecord
         return [
             'id',
             'subject',
+            'created_by',
             'content',
             'status'   => function ($model) {
                 return $model->status;
@@ -121,7 +122,7 @@ class Ticket extends ActiveRecord
                 'skipOnError'     => true,
                 'targetClass'     => TicketStatus::className(),
                 'targetAttribute' => ['status_id' => 'id']
-            ],
+            ]
         ];
     }
 
@@ -131,14 +132,15 @@ class Ticket extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => 'ID',
-            'subject'     => 'Subject',
-            'content'     => 'Content',
-            'status_id'   => 'Ticket Status',
-            'priority_id' => 'Ticket Priority',
-            'category_id' => 'Ticket Category',
-            'created_at'  => 'Created At',
-            'updated_at'  => 'Updated At',
+            'created_by'  => \Yii::t('app', 'Author'),
+            'id'          => \Yii::t('app', 'ID'),
+            'subject'     => \Yii::t('app', 'Subject'),
+            'content'     => \Yii::t('app', 'Content'),
+            'status_id'   => \Yii::t('app', 'Ticket Status'),
+            'priority_id' => \Yii::t('app', 'Ticket Priority'),
+            'category_id' => \Yii::t('app', 'Ticket Category'),
+            'created_at'  => \Yii::t('app', 'Created At'),
+            'updated_at'  => \Yii::t('app', 'Updated At'),
         ];
     }
 

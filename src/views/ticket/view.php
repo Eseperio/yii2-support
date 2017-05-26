@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $model \hexa\yiisupport\models\Ticket */
 /* @var $commentModel \hexa\yiisupport\models\TicketComment */
 
-$this->title                   = $model->id;
+$this->title                   = Yii::t('app', 'Ticket: {subject}', ['subject' => $model->subject]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="ticket-view">
@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title; ?>
         'model'      => $model,
         'attributes' => [
             'id',
-            'client.email:email',
             'subject',
             'content:ntext',
             'status.name',

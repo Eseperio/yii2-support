@@ -7,14 +7,18 @@ use yii\helpers\Html;
 
 
 echo Html::tag('h1', Html::encode($this->title))
+    . Html::tag('p');
 
-    . Html::tag('p')
-    . Html::a(
+if (Yii::$app->user->can($this->context->module->adminRole)) :
+    echo Html::a(
         Yii::t('app', 'Update'),
         ['update', 'id' => $model->id],
         ['class' => 'btn btn-primary']
-    )
-    . Html::a(
+    );
+endif;
+
+if (Yii::$app->user->can($this->context->module->adminRole)) :
+    Html::a(
         Yii::t('app', 'Delete'),
         ['delete', 'id' => $model->id],
         [
@@ -24,5 +28,7 @@ echo Html::tag('h1', Html::encode($this->title))
                 'method'  => 'post',
             ],
         ]
-    )
-    . Html::endTag('p');
+    );
+endif;
+
+echo Html::endTag('p');

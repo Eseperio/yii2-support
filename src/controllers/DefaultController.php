@@ -3,6 +3,7 @@
 namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\models\Ticket;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -24,5 +25,24 @@ class DefaultController extends Controller
             'opened' => $opened,
             'closed' => $closed,
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only'  => ['index'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [$this->module->adminRole],
+                    ]
+                ],
+            ],
+        ];
     }
 }

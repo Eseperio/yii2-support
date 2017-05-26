@@ -3,7 +3,7 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveRecord;
-use hexa\yiisupport\db\TicketQuery;
+use hexa\yiisupport\db\TicketCommentQuery;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 
@@ -96,10 +96,10 @@ class TicketComment extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TicketQuery
+     * @return TicketCommentQuery
      */
     public static function find()
     {
-        return new TicketQuery(get_called_class());
+        return new TicketCommentQuery(get_called_class());
     }
 }

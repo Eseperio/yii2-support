@@ -15,14 +15,14 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'hexa\yiisupport\controllers';
 
     /**
-     * @var string Default url for breadcrumb
+     * @var string Admin role
      */
-    public $defaultUrl;
+    public $adminRole;
 
     /**
-     * @var string Default url label for breadcrumb
+     * @var string User role
      */
-    public $defaultUrlLabel;
+    public $userRole;
 
     /**
      * @inheritdoc
