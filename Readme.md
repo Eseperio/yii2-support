@@ -37,3 +37,16 @@ Your project must support rbac and have at least two roles. One for administrato
 ```text
 php yii support/permissions
 ```
+
+### Include module
+
+Configuring module
+```php
+'modules' => [
+    'support' => [
+        'class'    => 'hexa\yiisupport\Module',
+        'userRole' => 'partner', // Default to user
+        'adminRole => 'admin'    // Default to admin
+    ]
+]
+```
