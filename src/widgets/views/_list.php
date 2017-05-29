@@ -1,9 +1,15 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $comment \hexa\yiisupport\models\TicketComment */
-/* @var $comments array */
-/* @var $maxLevel null|integer comments max level */
+use hexa\yiisupport\models\TicketComment;
+use yii\web\View;
+
+/**
+ * @var $this               View
+ * @var $comment            TicketComment
+ * @var $comments           array
+ * @var $authorNameTemplate string
+ * @var $maxLevel           null|integer comments max level
+ **/
 
 if (!empty($comments)) : ?>
     <?php foreach ($comments as $comment) : ?>
@@ -11,9 +17,9 @@ if (!empty($comments)) : ?>
         <div class="panel panel-default" id="comment-<?php echo $comment->id ?>">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    Floy Christiansen
+                    <?php echo $comment->resolveAuthorSignature($authorNameTemplate); ?>
                     <span class="pull-right">
-                        <?php echo $comment->created_at ?>
+                        <?php echo Yii::$app->formatter->asDatetime($comment->created_at); ?>
                     </span>
                 </h3>
             </div>

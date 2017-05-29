@@ -26,6 +26,12 @@ abstract class BaseAction extends Action
     public $modelClass;
 
     /**
+     * Rendering params.
+     * @var array
+     */
+    public $params;
+
+    /**
      * @inheritdoc
      */
     public function init()

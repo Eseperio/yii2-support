@@ -1,10 +1,13 @@
 <?php
 return [
-    'id'         => 'support',
-    'components' => [
+    'id'                 => 'support',
+    'adminRole'          => 'admin',
+    'userRole'           => 'user',
+    'authorNameTemplate' => "{name} {email}",
+    'components'         => [
 
     ],
-    'params'     => [
+    'params'             => [
         'secret' => 'comment'
     ]
 ];

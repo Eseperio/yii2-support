@@ -6,6 +6,8 @@ use hexa\yiisupport\CommentAsset;
 use hexa\yiisupport\models\TicketComment;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -15,9 +17,14 @@ use yii\helpers\Json;
 class Comment extends Widget
 {
     /**
-     * @var object
+     * @var string encrypted entity key from params: entity, entityId, relatedTo
      */
-    public $model;
+    public $hash;
+
+    /**
+     * @var int
+     */
+    public $ticketId;
 
     /**
      * @var string pjax container id
@@ -25,20 +32,32 @@ class Comment extends Widget
     public $containerId;
 
     /**
+     * Generate author name from template.
+     * @var string
+     * @see TicketComment::resolveAuthorSignature()
+     */
+    public $authorNameTemplate = "{name} {email}";
+
+    /**
+     * @var string
+     */
+    public $commentClass = 'hexa\yiisupport\models\TicketComment';
+
+    /**
+     * @var array the HTML attributes for the widget container tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     */
+    public $formOptions = [];
+
+    /**
      * @var array comment widget client options
      */
     public $clientOptions = [];
 
     /**
-     * Secret keyword for generate hash string.
-     * @var string
+     * @var ActiveRecord[]
      */
-    public $secret;
-
-    /**
-     * @var string
-     */
-    public $formId = 'comment-form';
+    public $comments = [];
 
     /**
      * @inheritdoc
@@ -46,9 +65,19 @@ class Comment extends Widget
     public static $autoIdPrefix = 'comment-pjax-container';
 
     /**
-     * @var string encrypted entity key from params: entity, entityId, relatedTo
+     * Default form options.
+     * @var array the HTML attributes for the widget container tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    protected $hash;
+    protected $defaultFormOptions = [
+        'options'          => [
+            'id'    => 'comment-form',
+            'class' => 'comment-box'
+        ],
+        'action'           => ['create'],
+        'validateOnChange' => false,
+        'validateOnBlur'   => false
+    ];
 
     /**
      * @inheritdoc
@@ -58,15 +87,15 @@ class Comment extends Widget
     {
         parent::init();
 
-        if (empty($this->model)) {
-            throw new InvalidConfigException('The "model" property must be set.');
+        if (empty($this->ticketId)) {
+            throw new InvalidConfigException('The "ticketId" property must be set.');
         }
 
         if (empty($this->containerId)) {
             $this->containerId = $this->getId();
         }
 
-        $this->hash = $this->generateHash();
+        $this->formOptions = ArrayHelper::merge($this->formOptions, $this->defaultFormOptions);
 
         $this->registerAssets();
     }
@@ -76,18 +105,18 @@ class Comment extends Widget
      */
     public function run()
     {
-        $model    = \Yii::createObject([
-            'class'     => TicketComment::className(),
-            'ticket_id' => $this->model->id
+        $model = \Yii::createObject([
+            'class'     => $this->commentClass,
+            'ticket_id' => $this->ticketId
         ]);
-        $comments = TicketComment::find()->byTicketId($this->model->id)->all();
 
         return $this->render('index', [
-            'comments'    => $comments,
-            'model'       => $model,
-            'containerId' => $this->containerId,
-            'formId'      => $this->formId,
-            'hash'        => $this->hash
+            'model'              => $model,
+            'comments'           => $this->comments,
+            'containerId'        => $this->containerId,
+            'formOptions'        => $this->formOptions,
+            'hash'               => $this->hash,
+            'authorNameTemplate' => $this->authorNameTemplate
         ]);
     }
 
@@ -96,27 +125,15 @@ class Comment extends Widget
      */
     protected function registerAssets()
     {
-        $this->clientOptions = [
+        $formId  = ArrayHelper::getValue($this->formOptions, 'options.id', 'comment-form');
+        $options = ArrayHelper::merge([
             'pjaxContainerId' => "#{$this->containerId}",
-            'formSelector'    => "#{$this->formId}",
-        ];
+            'formSelector'    => "#{$formId}",
+        ], $this->clientOptions);
 
-        $options = Json::encode($this->clientOptions);
+        $options = Json::encode($options);
 
         $this->getView()->registerAssetBundle(CommentAsset::className());
-        $this->getView()->registerJs("jQuery('#{$this->formId}').comment({$options})");
-    }
-
-    /**
-     * @return string
-     */
-    protected function generateHash()
-    {
-        return utf8_encode(\Yii::$app->getSecurity()->encryptByKey(
-            Json::encode([
-                'ticket_id' => $this->model->id
-            ]),
-            'comment'
-        ));
+        $this->getView()->registerJs("jQuery('#{$formId}').comment({$options})");
     }
 }

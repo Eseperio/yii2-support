@@ -1,35 +1,19 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
- * @var $this   \yii\web\View
- * @var $model  \hexa\yiisupport\models\TicketComment
- * @var $hash   string
- * @var $formId string comment form id
+ * @var $this        \yii\web\View
+ * @var $model       \hexa\yiisupport\models\TicketComment
+ * @var $hash        string
+ * @var $formOptions array of html attributes
  */
 
 ?>
 
 <div class="comment-form-container">
-    <?php $form = ActiveForm::begin(
-        [
-            'options'          => [
-                'id'    => $formId,
-                'class' => 'comment-box'
-            ],
-            'action'           => Url::to(
-                [
-                    'create',
-                    'entity' => $hash
-                ]
-            ),
-            'validateOnChange' => false,
-            'validateOnBlur'   => false
-        ]
-    ); ?>
+    <?php $form = ActiveForm::begin($formOptions); ?>
 
     <?php echo $form->field($model, 'content', ['template' => '{input}{error}'])->textarea([
         'placeholder' => Yii::t('app', 'Add a comment...'),

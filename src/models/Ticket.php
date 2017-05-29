@@ -7,6 +7,7 @@ use hexa\yiisupport\db\TicketQuery;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "ticket".
@@ -184,9 +185,32 @@ class Ticket extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUser()
+    {
+        return $this->hasOne(\Yii::$app->user->identityClass, ['id' => 'created_by']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getComments()
     {
         return $this->hasMany(TicketComment::className(), ['ticket_id' => 'id']);
+    }
+
+    /**
+     * @param string $secret Secret word.
+     *
+     * @return string
+     */
+    public function getHash($secret)
+    {
+        return utf8_encode(\Yii::$app->getSecurity()->encryptByKey(
+            Json::encode([
+                'ticket_id' => $this->id
+            ]),
+            $secret
+        ));
     }
 
     /**

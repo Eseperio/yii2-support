@@ -1,14 +1,22 @@
 <?php
 
+use hexa\yiisupport\models\Ticket;
+use hexa\yiisupport\models\TicketComment;
+use hexa\yiisupport\widgets\Comment;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Ticket */
-/* @var $commentModel \hexa\yiisupport\models\TicketComment */
+/**
+ * @var $this                  yii\web\View
+ * @var $model                 Ticket
+ * @var $comments              TicketComment[]
+ * @var $secret                string
+ * @var $authorNameTemplate    string
+ **/
 
 $this->title                   = Yii::t('app', 'Ticket: {subject}', ['subject' => $model->subject]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
+
 <div class="ticket-view">
 
     <?php echo $this->render('/layouts/view', [
@@ -30,9 +38,16 @@ $this->params['breadcrumbs'][] = $this->title; ?>
         ]
     ]); ?>
 
-    <?php echo \hexa\yiisupport\widgets\Comment::widget([
-        'model'  => $model,
-        'secret' => Yii::$app->controller->module->param('secret')
+    <?php echo Comment::widget([
+        'ticketId'           => $model->id,
+        'hash'               => $model->getHash($secret),
+        'comments'           => $comments,
+        'authorNameTemplate' => $authorNameTemplate,
+        'formOptions'        => [
+            'action' => [
+                'comment/create', 'entity' => $model->getHash($secret)
+            ]
+        ]
     ]); ?>
 
 </div>

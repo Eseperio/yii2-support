@@ -8,6 +8,7 @@ use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\Ticket;
+use hexa\yiisupport\models\TicketComment;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
@@ -23,6 +24,7 @@ class TicketController extends Controller
     public function actions()
     {
         $className = Ticket::className();
+        $id        = \Yii::$app->request->get('id');
 
         return [
             'index'  => [
@@ -31,7 +33,12 @@ class TicketController extends Controller
             ],
             'view'   => [
                 'class'      => ViewAction::className(),
-                'modelClass' => $className
+                'modelClass' => $className,
+                'params'     => [
+                    'comments'           => TicketComment::find()->byTicketId($id)->all(),
+                    'secret'             => $this->module->param('secret'),
+                    'authorNameTemplate' => $this->module->param('authorNameTemplate', "{name} {email}")
+                ]
             ],
             'create' => [
                 'class'      => CreateAction::className(),

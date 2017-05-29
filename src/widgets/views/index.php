@@ -1,16 +1,20 @@
 <?php
 
+use hexa\yiisupport\db\ActiveRecord;
+use hexa\yiisupport\models\TicketComment;
+use yii\web\View;
 use yii\widgets\Pjax;
 
 /**
- * @var $this                \yii\web\View
- * @var $comments            array
- * @var $model               \hexa\yiisupport\models\TicketComment
- * @var $maxLevel            null|integer comments max level
- * @var $hash                string
- * @var $containerId         string
- * @var $formId              string comment form id
- * @var $showDeletedComments boolean show deleted comments
+ * @var $this                                   View
+ * @var $comments                               array
+ * @var $model                                  TicketComment|ActiveRecord
+ * @var $maxLevel                               null|integer comments max level
+ * @var $hash                                   string
+ * @var $authorNameTemplate                     string
+ * @var $containerId                            string
+ * @var $formOptions                            string Array of html attributes
+ * @var $showDeletedComments                    boolean show deleted comments
  **/
 
 $showDeletedComments = true;
@@ -29,11 +33,15 @@ Pjax::begin([
 
             <div class="title-separator"></div>
         </div>
-        <?php echo $this->render('_list', ['comments' => $comments, 'maxLevel' => 3]); ?>
+        <?php echo $this->render('_list', [
+            'comments'           => $comments,
+            'maxLevel'           => 3,
+            'authorNameTemplate' => $authorNameTemplate
+        ]); ?>
         <?php echo $this->render('_form', [
-            'model'  => $model,
-            'hash'   => $hash,
-            'formId' => $formId
+            'model'       => $model,
+            'hash'        => $hash,
+            'formOptions' => $formOptions
         ]); ?>
 
     </div>

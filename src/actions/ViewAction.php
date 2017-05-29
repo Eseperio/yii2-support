@@ -10,6 +10,7 @@
 
 namespace hexa\yiisupport\actions;
 
+use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
 
 /**
@@ -24,9 +25,9 @@ class ViewAction extends BaseAction
      */
     public function run($id)
     {
-        return $this->controller->render('view', [
+        return $this->controller->render('view', ArrayHelper::merge([
             'model' => $this->findModel($id),
-        ]);
+        ], (array)$this->params));
     }
 
     /**

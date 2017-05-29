@@ -10,11 +10,6 @@ use yii\helpers\ArrayHelper;
 class Module extends \yii\base\Module
 {
     /**
-     * @inheritdoc
-     */
-    public $controllerNamespace = 'hexa\yiisupport\controllers';
-
-    /**
      * @var string Admin role
      */
     public $adminRole;
@@ -25,10 +20,30 @@ class Module extends \yii\base\Module
     public $userRole;
 
     /**
+     * @var string
+     */
+    public $authorNameTemplate;
+
+    /**
      * @inheritdoc
      * @var string
      */
     public $version = '1.0.0';
+
+    /**
+     * @inheritdoc
+     */
+    public $controllerNamespace = 'hexa\yiisupport\controllers';
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent = null, $config = [])
+    {
+        $config = ArrayHelper::merge(require(__DIR__ . '/config.php'), $config);
+
+        parent::__construct($id, $parent, $config);
+    }
 
     /**
      * @inheritdoc
@@ -38,7 +53,6 @@ class Module extends \yii\base\Module
         parent::init();
 
         \Yii::setAlias('@yiisupport', __DIR__);
-        \Yii::configure($this, require(__DIR__ . '/config.php'));
     }
 
     /**

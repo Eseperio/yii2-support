@@ -6,17 +6,19 @@ use hexa\yiisupport\db\ActiveRecord;
 use hexa\yiisupport\db\TicketCommentQuery;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "ticket_comment".
  *
- * @property integer $id
- * @property string  $content
- * @property integer $ticket_id
- * @property string  $created_at
- * @property string  $updated_at
+ * @property integer           $id
+ * @property string            $content
+ * @property integer           $ticket_id
+ * @property string            $created_at
+ * @property string            $updated_at
  *
- * @property Ticket  $ticket
+ * @property Ticket            $ticket
+ * @property IdentityInterface $user
  */
 class TicketComment extends ActiveRecord
 {
@@ -92,6 +94,30 @@ class TicketComment extends ActiveRecord
         $query = static::find()->byTicketId($this->ticket_id);
 
         return $query->count();
+    }
+
+    /**
+     * Resolve author name. Parse template and selecting from the template user properties.
+     *
+     * @param string $template
+     *
+     * @return string|null
+     */
+    public function resolveAuthorSignature($template)
+    {
+        $author = preg_replace_callback("/{\\w+}/", function ($matches) {
+
+            list($property) = $matches;
+
+            $property = str_replace(['{', '}'], '', $property);
+            if (isset($this->ticket->user->{$property})) {
+                return $this->ticket->user->{$property};
+            }
+
+            return null;
+        }, $template);
+
+        return $author;
     }
 
     /**

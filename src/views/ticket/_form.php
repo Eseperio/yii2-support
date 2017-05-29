@@ -20,29 +20,27 @@ use yii\widgets\ActiveForm;
         \hexa\yiisupport\models\TicketStatus::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
-        ['prompt' => '-- Select Status --']
+        ['prompt' => Yii::t('app', 'Select Status')]
     ); ?>
 
     <?php echo $form->field($model, 'priority_id')->dropdownList(
         \hexa\yiisupport\models\TicketPriority::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
-        ['prompt' => '-- Select Priority --']
+        ['prompt' => Yii::t('app', 'Select Priority')]
     ); ?>
     <?php echo $form->field($model, 'category_id')->dropdownList(
         \hexa\yiisupport\models\TicketCategory::find()->select(['name', 'id'])
             ->indexBy('id')
             ->column(),
-        ['prompt' => '-- Select Category --']
+        ['prompt' => Yii::t('app', 'Select Category')]
     ); ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(
-            $model->isNewRecord ? 'Create' : 'Update', [
-            'class' => $model->isNewRecord ? 'btn btn-success'
-                : 'btn btn-primary',
-            ]
-        ) ?>
+            Yii::t('app', 'Save'), [
+            'class' => 'btn btn-primary',
+        ]); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
