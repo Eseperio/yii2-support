@@ -1,8 +1,8 @@
 {
-    "name"             : "yii2/support",
+    "name"             : "hexa/yiisupport",
     "version"          : "1.0.0",
     "description"      : "Yii2 support module. Ticket system with customer.",
-    "homepage"         : "https://git.hexa.com.ua/yii2/support",
+    "homepage"         : "https://git.hexa.com.ua/hexa/yiisupport",
     "type"             : "yii2-extension",
     "minimum-stability": "stable",
     "author"           : [

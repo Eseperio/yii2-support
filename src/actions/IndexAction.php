@@ -12,6 +12,8 @@ namespace hexa\yiisupport\actions;
 
 
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class IndexAction
@@ -24,11 +26,38 @@ class IndexAction extends BaseAction
     public function run()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => $this->modelClass::find(),
+            'query' => $this->getQuery(),
         ]);
 
         return $this->controller->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    protected function getQuery()
+    {
+        $query     = $this->modelClass::find();
+        $adminRole = ArrayHelper::getValue($this->controller->module, 'adminRole');
+
+        if (!\Yii::$app->user->can($adminRole)) {
+            $query->where([$this->getIdentityPrimaryKey() => \Yii::$app->user->id]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Return name of primary key for identity AR model.
+     * @return string
+     */
+    protected function getIdentityPrimaryKey()
+    {
+        $class = \Yii::$app->user->identityClass;
+        list($primaryKey) = $class::primaryKey();
+
+        return $primaryKey;
     }
 }

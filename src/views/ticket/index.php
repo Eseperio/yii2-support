@@ -28,7 +28,13 @@ echo $this->render('/layouts/index', [
         'completed_at',
         'created_at',
         'updated_at',
-        ['class' => 'yii\grid\ActionColumn'],
+        [
+            'class'          => 'yii\grid\ActionColumn',
+            'visibleButtons' => [
+                'update' => Yii::$app->user->can($this->context->module->adminRole),
+                'delete' => Yii::$app->user->can($this->context->module->adminRole),
+            ]
+        ],
     ],
     'options'      => [
         'class' => 'ticket-index js-ticket-index'

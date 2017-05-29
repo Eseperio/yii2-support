@@ -73,7 +73,7 @@ class TicketController extends Controller
                     [
                         'allow'   => true,
                         'actions' => ['index', 'view', 'create'],
-                        'roles'   => [$this->module->userRole],
+                        'roles'   => ['@'],
                     ]
                 ],
             ],

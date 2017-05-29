@@ -2,13 +2,20 @@
 
 namespace hexa\yiisupport;
 
+use yii\base\BootstrapInterface;
+use yii\console\Application;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class Module
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements BootstrapInterface
 {
+    /**
+     * @inheritdoc
+     */
+    public $controllerNamespace = 'hexa\yiisupport\controllers';
+
     /**
      * @var string Admin role
      */
@@ -33,16 +40,24 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'hexa\yiisupport\controllers';
-
-    /**
-     * @inheritdoc
-     */
     public function __construct($id, $parent = null, $config = [])
     {
-        $config = ArrayHelper::merge(require(__DIR__ . '/config.php'), $config);
+        $config = ArrayHelper::merge(require(__DIR__ . '/config/main.php'), $config);
 
         parent::__construct($id, $parent, $config);
+    }
+
+    /**
+     * @param \yii\base\Application $app
+     */
+    public function bootstrap($app)
+    {
+        if ($app instanceof Application) {
+            $app->controllerMap[$this->id] = [
+                'class'  => 'hexa\yiisupport\console\RbacController',
+                'module' => $this,
+            ];
+        }
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace hexa\yiisupport\models;
 
-use Yii;
+use hexa\yiisupport\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -54,5 +54,13 @@ class TicketCategory extends ActiveRecord
     public function getTickets()
     {
         return $this->hasMany(Ticket::className(), ['ticket_category_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public static function find()
+    {
+        return new ActiveQuery(get_called_class());
     }
 }

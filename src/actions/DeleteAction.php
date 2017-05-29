@@ -24,6 +24,6 @@ class DeleteAction extends BaseAction
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect([$this->controller->getUniqueId()]);
     }
 }

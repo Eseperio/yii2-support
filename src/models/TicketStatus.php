@@ -2,6 +2,7 @@
 
 namespace hexa\yiisupport\models;
 
+use hexa\yiisupport\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -56,5 +57,13 @@ class TicketStatus extends ActiveRecord
             Ticket::className(),
             ['ticket_status_id' => 'id']
         );
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public static function find()
+    {
+        return new ActiveQuery(get_called_class());
     }
 }

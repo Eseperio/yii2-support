@@ -28,7 +28,7 @@ class UpdateAction extends BaseAction
         $model = $this->findModel($id);
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([$this->controller->getUniqueId() . '/view', 'id' => $model->id]);
         }
 
         return $this->controller->render('update', [

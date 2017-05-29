@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\rules;
+namespace hexa\yiisupport\rbac;
 
 use yii\rbac\Item;
 use yii\rbac\Rule;

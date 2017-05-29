@@ -57,7 +57,7 @@ class CommentController extends Controller
                     [
                         'allow'   => true,
                         'actions' => ['index', 'view', 'create'],
-                        'roles'   => [$this->module->userRole],
+                        'roles'   => ['@'],
                     ],
                     [
                         'allow'   => true,
