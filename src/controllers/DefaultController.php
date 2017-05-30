@@ -4,7 +4,6 @@ namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\models\Ticket;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 
 /**
  * Class DefaultController
@@ -17,8 +16,8 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $all    = Ticket::find()->count();
-        $opened = Ticket::find()->opened()->count();
-        $closed = Ticket::find()->closed()->count();
+        $opened = Ticket::find()->resolved(false)->count();
+        $closed = Ticket::find()->resolved(true)->count();
 
         return $this->render('index', [
             'all'    => $all,

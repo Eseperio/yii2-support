@@ -28,22 +28,13 @@ class TicketQuery extends ActiveQuery
     }
 
     /**
+     * @param bool $isResolved
+     *
      * @return $this
+     *
      */
-    public function opened()
+    public function resolved($isResolved = true)
     {
-        return $this->andWhere((['completed_at' => null]));
-    }
-
-    /**
-     * @return $this
-     */
-    public function closed()
-    {
-        return $this->andWhere([
-            'IS',
-            'completed_at',
-            new Expression('NOT NULL'),
-        ]);
+        return $this->andOnCondition(['T.status_id' => 'TS.id'])->andOnCondition(['TS.resolve' => (int)$isResolved]);
     }
 }

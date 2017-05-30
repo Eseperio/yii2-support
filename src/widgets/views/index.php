@@ -33,15 +33,16 @@ Pjax::begin([
 
             <div class="title-separator"></div>
         </div>
-        <?php echo $this->render('_list', [
-            'comments'           => $comments,
-            'maxLevel'           => 3,
-            'authorNameTemplate' => $authorNameTemplate
-        ]); ?>
         <?php echo $this->render('_form', [
             'model'       => $model,
             'hash'        => $hash,
             'formOptions' => $formOptions
+        ]); ?>
+
+        <?php echo $this->render('_list', [
+            'comments'           => $comments,
+            'maxLevel'           => 3,
+            'authorNameTemplate' => $authorNameTemplate
         ]); ?>
 
     </div>

@@ -5,12 +5,14 @@ namespace hexa\yiisupport\controllers;
 use hexa\yiisupport\actions\CreateAction;
 use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
+use hexa\yiisupport\actions\ResolveAction;
 use hexa\yiisupport\actions\UpdateAction;
-use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\Ticket;
+use hexa\yiisupport\models\TicketCategory;
 use hexa\yiisupport\models\TicketComment;
+use hexa\yiisupport\models\TicketPriority;
 use yii\filters\AccessControl;
-use yii\web\Controller;
+use yii\web\HttpException;
 
 /**
  * Class TicketController
@@ -24,32 +26,30 @@ class TicketController extends Controller
     public function actions()
     {
         $className = Ticket::className();
-        $id        = \Yii::$app->request->get('id');
 
         return [
-            'index'  => [
+            'index'   => [
                 'class'      => IndexAction::className(),
                 'modelClass' => $className
             ],
-            'view'   => [
-                'class'      => ViewAction::className(),
+            'create'  => [
+                'class'      => CreateAction::className(),
                 'modelClass' => $className,
                 'params'     => [
-                    'comments'           => TicketComment::find()->byTicketId($id)->all(),
-                    'secret'             => $this->module->param('secret'),
-                    'authorNameTemplate' => $this->module->param('authorNameTemplate', "{name} {email}")
+                    'categories' => TicketCategory::list(),
+                    'priorities' => TicketPriority::list()
                 ]
             ],
-            'create' => [
-                'class'      => CreateAction::className(),
-                'modelClass' => $className
-            ],
-            'delete' => [
+            'delete'  => [
                 'class'      => DeleteAction::className(),
                 'modelClass' => $className
             ],
-            'update' => [
+            'update'  => [
                 'class'      => UpdateAction::className(),
+                'modelClass' => $className
+            ],
+            'resolve' => [
+                'class'      => ResolveAction::className(),
                 'modelClass' => $className
             ]
         ];
@@ -63,20 +63,51 @@ class TicketController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['index', 'view', 'create', 'delete', 'update'],
+                'only'  => ['index', 'create', 'delete', 'update'],
                 'rules' => [
                     [
                         'allow'   => true,
-                        'actions' => ['delete', 'update'],
-                        'roles'   => [$this->module->adminRole],
+                        'actions' => ['delete'],
+                        'roles'   => ['deleteTicket'],
                     ],
                     [
                         'allow'   => true,
-                        'actions' => ['index', 'view', 'create'],
+                        'actions' => ['update'],
+                        'roles'   => ['updateTicket'],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['create'],
+                        'roles'   => ['createTicket'],
+                    ],
+                    [
+                        'allow'   => true,
+                        'actions' => ['index'],
                         'roles'   => ['@'],
                     ]
                 ],
             ],
         ];
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionView($id)
+    {
+        $model = $this->isAuthor($id);
+        $hash  = $model->getHash($this->config->get('params.secret'), [
+            'created_by' => \Yii::$app->user->id
+        ]);
+
+        return $this->render('view', [
+            'hash'               => $hash,
+            'model'              => $model,
+            'comments'           => $model->comments,
+            'authorNameTemplate' => $this->config->get('params.authorNameTemplate', "{name} {email}")
+        ]);
     }
 }

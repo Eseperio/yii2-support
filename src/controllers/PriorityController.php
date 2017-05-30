@@ -9,7 +9,6 @@ use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\TicketPriority;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 
 /**
  * Class PriorityController

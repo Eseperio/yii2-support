@@ -19,17 +19,18 @@ class m170524_145534_create_ticket_status_table extends Migration
     {
         $this->createTable(
             self::$_tableName, [
-                'id'    => $this->primaryKey(),
-                'name'  => $this->string(255)->notNull(),
-                'color' => $this->string(45)
+                'id'      => $this->primaryKey(),
+                'name'    => $this->string(255)->notNull(),
+                'color'   => $this->string(45),
+                'default' => $this->integer(1)->defaultValue(0),
+                'resolve' => $this->integer(1)->defaultValue(0)
             ]
         );
 
         $this->batchInsert(
-            self::$_tableName, ['name', 'color'], [
-                ['Pending', '#e69900'],
-                ['Solved', '#15a000'],
-                ['Closed', '#000000']
+            self::$_tableName, ['name', 'color', 'default', 'resolve'], [
+                ['Opened', '#e69900', 1, 0],
+                ['Closed', '#15a000', 0, 1]
             ]
         );
     }

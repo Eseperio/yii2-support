@@ -2,6 +2,8 @@
 
 namespace hexa\yiisupport;
 
+use hexa\yiisupport\helpers\Config;
+use hexa\yiisupport\interfaces\ConfigInterface;
 use yii\base\BootstrapInterface;
 use yii\console\Application;
 use yii\helpers\ArrayHelper;
@@ -11,11 +13,6 @@ use yii\helpers\ArrayHelper;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public $controllerNamespace = 'hexa\yiisupport\controllers';
-
     /**
      * @var string Admin role
      */
@@ -29,7 +26,18 @@ class Module extends \yii\base\Module implements BootstrapInterface
     /**
      * @var string
      */
+    public $showTitle;
+
+    /**
+     * @var string
+     */
     public $authorNameTemplate;
+
+    /**
+     * Category for translated properties.
+     * @var string
+     */
+    public $languageCategory;
 
     /**
      * @inheritdoc
@@ -68,6 +76,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
         parent::init();
 
         \Yii::setAlias('@yiisupport', __DIR__);
+        \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
     }
 
     /**

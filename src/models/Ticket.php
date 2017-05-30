@@ -7,6 +7,7 @@ use hexa\yiisupport\db\TicketQuery;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -19,6 +20,7 @@ use yii\helpers\Json;
  * @property integer         $priority_id
  * @property integer         $category_id
  * @property string          $created_at
+ * @property string          $completed_at
  * @property string          $updated_at
  *
  * @property TicketCategory  $category
@@ -93,7 +95,6 @@ class Ticket extends ActiveRecord
                 [
                     'priority_id',
                     'category_id',
-                    'status_id',
                     'subject',
                     'content'
                 ],
@@ -101,6 +102,7 @@ class Ticket extends ActiveRecord
             ],
             [['content'], 'string'],
             [['status_id', 'priority_id', 'category_id'], 'integer'],
+            ['status_id', 'default', 'value' => TicketStatus::defaultId()],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'max' => 255],
             [
@@ -132,16 +134,18 @@ class Ticket extends ActiveRecord
      */
     public function attributeLabels()
     {
+        $category = $this->getConfig('languageCategory', 'app');
+
         return [
-            'created_by'  => \Yii::t('app', 'Author'),
-            'id'          => \Yii::t('app', 'ID'),
-            'subject'     => \Yii::t('app', 'Subject'),
-            'content'     => \Yii::t('app', 'Content'),
-            'status_id'   => \Yii::t('app', 'Ticket Status'),
-            'priority_id' => \Yii::t('app', 'Ticket Priority'),
-            'category_id' => \Yii::t('app', 'Ticket Category'),
-            'created_at'  => \Yii::t('app', 'Created At'),
-            'updated_at'  => \Yii::t('app', 'Updated At'),
+            'created_by'  => \Yii::t($category, 'Author'),
+            'id'          => \Yii::t($category, 'ID'),
+            'subject'     => \Yii::t($category, 'Subject'),
+            'content'     => \Yii::t($category, 'Content'),
+            'status_id'   => \Yii::t($category, 'Ticket Status'),
+            'priority_id' => \Yii::t($category, 'Ticket Priority'),
+            'category_id' => \Yii::t($category, 'Ticket Category'),
+            'created_at'  => \Yii::t($category, 'Created At'),
+            'updated_at'  => \Yii::t($category, 'Updated At'),
         ];
     }
 
@@ -156,6 +160,14 @@ class Ticket extends ActiveRecord
             'status',
             'comments'
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isResolved()
+    {
+        return $this->status_id === TicketStatus::resolvedId();
     }
 
     /**
@@ -195,22 +207,44 @@ class Ticket extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(TicketComment::className(), ['ticket_id' => 'id']);
+        return $this->hasMany(TicketComment::className(), ['ticket_id' => 'id'])->orderBy(['created_at' => SORT_DESC]);
     }
 
     /**
      * @param string $secret Secret word.
      *
+     * @param array  $params
+     *
      * @return string
      */
-    public function getHash($secret)
+    public function getHash($secret, $params = [])
     {
         return utf8_encode(\Yii::$app->getSecurity()->encryptByKey(
-            Json::encode([
-                'ticket_id' => $this->id
-            ]),
+            Json::encode(ArrayHelper::merge([
+                'ticket_id' => $this->id,
+            ], $params)),
             $secret
         ));
+    }
+
+    /**
+     * @param bool $isResolved
+     *
+     * @return $this
+     */
+    public function setResolved($isResolved = true)
+    {
+        $resolvedId = (int)TicketStatus::resolvedId();
+
+        if ($isResolved && $resolvedId !== $this->status_id) {
+            $this->status_id    = $resolvedId;
+            $this->completed_at = new Expression('NOW()');
+
+        } elseif (!$isResolved && $resolvedId === $this->status_id) {
+            $this->status_id = TicketStatus::defaultId();
+        }
+
+        return $this;
     }
 
     /**

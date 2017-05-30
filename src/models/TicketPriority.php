@@ -3,7 +3,7 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use hexa\yiisupport\db\ActiveRecord;
 
 /**
  * This is the model class for table "ticket_priority".
@@ -41,10 +41,12 @@ class TicketPriority extends ActiveRecord
      */
     public function attributeLabels()
     {
+        $category = $this->getConfig('languageCategory', 'app');
+
         return [
-            'id'    => 'ID',
-            'name'  => 'Priority',
-            'color' => 'Color',
+            'id'    => \Yii::t($category, 'ID'),
+            'name'  => \Yii::t($category, 'Priority'),
+            'color' => \Yii::t($category, 'Color'),
         ];
     }
 

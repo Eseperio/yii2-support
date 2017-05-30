@@ -63,7 +63,7 @@ class ActiveQuery extends BaseActiveQuery
     /**
      * @param integer $id
      *
-     * @return ActiveQuery
+     * @return $this
      */
     public function byId($id)
     {

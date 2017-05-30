@@ -13,6 +13,7 @@ namespace hexa\yiisupport\console;
 use hexa\yiisupport\rbac\AuthorRule;
 use Yii;
 use yii\console\Controller;
+use yii\rbac\Item;
 
 /**
  * Class RbacController
@@ -24,65 +25,107 @@ class RbacController extends Controller
      */
     public function actionPermissions()
     {
+        // Create permissions: createTicket, deleteTicket, updateTicket, resolveTicket, addComment.
+        $createTicket = $this->createPermission('createTicket', null, 'Create ticket');
+        $deleteTicket = $this->createPermission('deleteTicket', null, 'Delete ticket');
+        $updateTicket = $this->createPermission('updateTicket', null, 'Update ticket');
+
+        // Create roles
+        $userRole  = $this->createRole($this->module->userRole);
+        $adminRole = $this->createRole($this->module->adminRole);
+
+        $this
+            ->addChild($userRole, $createTicket)   // Add createTicket to userRole
+
+            ->addChild($adminRole, $createTicket)  // Add createTicket to adminRole
+            ->addChild($adminRole, $deleteTicket)  // Add deleteTicket to adminRole
+            ->addChild($adminRole, $updateTicket); // Add updateTicket to adminRole
+
+        $rule = $this->createAuthorRule('isAuthor');
+
+        // add permission "isAuthor" and link to permission rule.
+        $isAuthor = $this->createPermission('isAuthor', $rule->name, Yii::t('app', 'Resolve, comment own ticket'));
+
+        $this
+            ->addChild($userRole, $isAuthor)
+            ->addChild($adminRole, $userRole);
+    }
+
+    /**
+     * Create permission if not exists.
+     *
+     * @param string $name        Permission name
+     * @param string $ruleName    Rule name
+     * @param string $description Permission description
+     *
+     * @return \yii\rbac\Permission
+     */
+    protected function createPermission($name, $ruleName = null, $description = null)
+    {
         $auth = Yii::$app->authManager;
 
-        // add permission "createTicket"
-        if (!($createTicket = $auth->getPermission('createTicket'))) {
-            $createTicket              = $auth->createPermission('createTicket');
-            $createTicket->description = Yii::t('app', 'Create a ticket');
-            $auth->add($createTicket);
+        // Check if permission already exists
+        if (!($permission = $auth->getPermission($name))) {
+            $permission              = $auth->createPermission($name);
+            $permission->ruleName    = $ruleName;
+            $permission->description = Yii::t('app', $description);
+            $auth->add($permission);
         }
 
-        // add permission "commentTicket"
-        if (!($commentTicket = $auth->getPermission('commentTicket'))) {
-            $commentTicket              = $auth->createPermission('commentTicket');
-            $commentTicket->description = Yii::t('app', 'Update a ticket');
-            $auth->add($commentTicket);
+        return $permission;
+    }
+
+    /**
+     * Create role if not exists.
+     *
+     * @param string $name Role name
+     *
+     * @return \yii\rbac\Role
+     */
+    protected function createRole($name)
+    {
+        $auth = Yii::$app->authManager;
+
+        if (!($role = $auth->getRole($name))) {
+            $role = $auth->createRole($name);
+            $auth->add($role);
         }
 
-        // get role "userRole" and add permission "createTicket"
-        if (!($userRole = $auth->getRole($this->module->userRole))) {
-            $userRole = $auth->createRole($this->module->userRole);
-            $auth->add($userRole);
-        }
+        return $role;
+    }
 
-        if (!$auth->hasChild($userRole, $createTicket)) {
-            $auth->addChild($userRole, $createTicket);
-        }
-
-        // get role "adminRole" and add permission "commentTicket"
-        // and all permission of role "userRole"
-        if (!($adminRole = $auth->getRole($this->module->adminRole))) {
-            $adminRole = $auth->createRole($this->module->adminRole);
-            $auth->add($adminRole);
-        }
-
-        if (!$auth->hasChild($adminRole, $commentTicket)) {
-            $auth->addChild($adminRole, $commentTicket);
-        }
+    /**
+     * @param string $name
+     *
+     * @return AuthorRule|\yii\rbac\Rule
+     */
+    public function createAuthorRule($name)
+    {
+        $auth = Yii::$app->authManager;
 
         // Create author rule if not exist
-        if (!($rule = $auth->getRule('isAuthor'))) {
+        if (!($rule = $auth->getRule($name))) {
             $rule = new AuthorRule;
             $auth->add($rule);
         }
 
-        // add permission "commentOwnTicket" and link to permission rule.
-        if (!($commentOwnTicket = $auth->getPermission('commentOwnTicket'))) {
-            $commentOwnTicket              = $auth->createPermission('commentOwnTicket');
-            $commentOwnTicket->description = Yii::t('app', 'Comment own tickets');
-            $commentOwnTicket->ruleName    = $rule->name;
-            $auth->add($commentOwnTicket);
+        return $rule;
+    }
+
+    /**
+     * @param Item $parent
+     * @param Item $child
+     *
+     * @return $this
+     */
+    protected function addChild($parent, $child)
+    {
+        $auth = Yii::$app->authManager;
+
+        if (!$auth->hasChild($parent, $child)) {
+            $auth->addChild($parent, $child);
         }
 
-        // "commentOwnTicket" will use from "commentTicket"
-        if (!$auth->hasChild($commentOwnTicket, $commentTicket)) {
-            $auth->addChild($commentOwnTicket, $commentTicket);
-        }
-
-        if (!$auth->hasChild($userRole, $commentOwnTicket)) {
-            // разрешаем "автору" обновлять его посты
-            $auth->addChild($userRole, $commentOwnTicket);
-        }
+        return $this;
     }
 }

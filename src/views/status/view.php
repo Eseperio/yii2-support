@@ -12,7 +12,8 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="status-view">
 
     <?php echo $this->render('/layouts/view', [
-        'model' => $model
+        'model'  => $model,
+        'context' => 'status'
     ]); ?>
 
     <?php echo DetailView::widget([

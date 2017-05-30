@@ -1,6 +1,6 @@
 <?php
 /**
- * ViewAction
+ * ResolveAction
  * @version     1.0
  * @license     http://mit-license.org/
  * @author      Tapakan https://github.com/Tapakan
@@ -10,13 +10,13 @@
 
 namespace hexa\yiisupport\actions;
 
-use yii\helpers\ArrayHelper;
+use hexa\yiisupport\models\Ticket;
 use yii\web\ForbiddenHttpException;
 
 /**
- * Class ViewAction
+ * Class ResolveAction
  */
-class ViewAction extends BaseAction
+class ResolveAction extends BaseAction
 {
     /**
      * @param int $id
@@ -25,8 +25,10 @@ class ViewAction extends BaseAction
      */
     public function run($id)
     {
-        return $this->controller->render('view', ArrayHelper::merge([
-            'model' => $this->findModel($id),
-        ], (array)$this->params));
+        /** @var Ticket $model */
+        $model = $this->findModel($id);
+        $model->setResolved(true)->save(false);
+
+        return $this->redirect([$this->controller->getUniqueId() . '/view', 'id' => $model->id]);
     }
 }

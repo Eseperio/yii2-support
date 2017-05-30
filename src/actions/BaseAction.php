@@ -10,6 +10,7 @@
 
 namespace hexa\yiisupport\actions;
 
+use hexa\yiisupport\interfaces\ConfigInterface;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -41,6 +42,32 @@ abstract class BaseAction extends Action
         if (!$this->modelClass) {
             throw new InvalidConfigException("Property modelClass must be set");
         }
+    }
+
+    /**
+     * @var ConfigInterface
+     */
+    protected $config;
+
+    /**
+     * @param ConfigInterface $configService
+     *
+     * @inheritdoc
+     */
+    public function __construct($id, $controller, ConfigInterface $configService, $config = [])
+    {
+        parent::__construct($id, $controller, $config);
+
+        $this->config = $configService;
+    }
+
+    /**
+     * Return translation category.
+     * @return string
+     */
+    protected function getLanguageCategory()
+    {
+        return $this->config->get('languageCategory', 'app');
     }
 
     /**

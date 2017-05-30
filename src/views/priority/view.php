@@ -12,7 +12,8 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 <div class="priority-view">
 
     <?php echo $this->render('/layouts/view', [
-        'model' => $model
+        'model'  => $model,
+        'context' => 'priority'
     ]); ?>
 
     <?php echo DetailView::widget([

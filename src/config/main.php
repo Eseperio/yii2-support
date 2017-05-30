@@ -1,13 +1,16 @@
 <?php
+
 return [
-    'id'                 => 'support',
-    'adminRole'          => 'admin',
-    'userRole'           => 'user',
-    'authorNameTemplate' => "{name} {email}",
-    'components'         => [
+    'id'                  => 'support',
+    'controllerNamespace' => 'hexa\yiisupport\controllers',
+    'components'          => [
 
     ],
-    'params'             => [
+    'params'              => [
         'secret' => 'comment'
-    ]
+    ],
+    'adminRole'           => 'admin',
+    'userRole'            => 'user',
+    'authorNameTemplate'  => "{name} {email}",
+    'languageCategory'    => 'app',
 ];

@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use hexa\yiisupport\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -16,29 +16,17 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?php echo $form->field($model, 'status_id')->dropdownList(
-        \hexa\yiisupport\models\TicketStatus::find()->select(['name', 'id'])
-            ->indexBy('id')
-            ->column(),
-        ['prompt' => Yii::t('app', 'Select Status')]
-    ); ?>
+    <?php echo $form->field($model, 'priority_id')->dropdownList($priorities, [
+        'prompt' => Html::translate('Select Priority')
+    ]); ?>
 
-    <?php echo $form->field($model, 'priority_id')->dropdownList(
-        \hexa\yiisupport\models\TicketPriority::find()->select(['name', 'id'])
-            ->indexBy('id')
-            ->column(),
-        ['prompt' => Yii::t('app', 'Select Priority')]
-    ); ?>
-    <?php echo $form->field($model, 'category_id')->dropdownList(
-        \hexa\yiisupport\models\TicketCategory::find()->select(['name', 'id'])
-            ->indexBy('id')
-            ->column(),
-        ['prompt' => Yii::t('app', 'Select Category')]
-    ); ?>
+    <?php echo $form->field($model, 'category_id')->dropdownList($categories, [
+        'prompt' => Html::translate('Select Category')
+    ]); ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(
-            Yii::t('app', 'Save'), [
+            Html::translate('Save'), [
             'class' => 'btn btn-primary',
         ]); ?>
     </div>

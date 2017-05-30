@@ -3,6 +3,7 @@
 use hexa\yiisupport\models\Ticket;
 use hexa\yiisupport\models\TicketComment;
 use hexa\yiisupport\widgets\Comment;
+use yii\helpers\ArrayHelper;
 use yii\widgets\DetailView;
 
 /**
@@ -13,16 +14,29 @@ use yii\widgets\DetailView;
  * @var $authorNameTemplate    string
  **/
 
-$this->title                   = Yii::t('app', 'Ticket: {subject}', ['subject' => $model->subject]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
+$category                      = ArrayHelper::getValue($this->context->module, 'languageCategory');
+$this->title                   = Yii::t($category, 'Ticket: {subject}', ['subject' => $model->subject]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t($category, 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="ticket-view">
+    <p>
+        <?php if (Yii::$app->user->can('updateTicket')):
+            echo $this->render('/layouts/_update-button', [
+                'model' => $model
+            ]);
+        endif; ?>
 
-    <?php echo $this->render('/layouts/view', [
-        'model' => $model
-    ]); ?>
+        <?php if (Yii::$app->user->can('deleteTicket')):
+            echo $this->render('/layouts/_delete-button', [
+                'model' => $model
+            ]);
+        endif; ?>
 
+        <?php echo $this->render('_resolve-button', [
+            'model' => $model
+        ]); ?>
+    </p>
     <?php echo DetailView::widget([
         'model'      => $model,
         'attributes' => [
@@ -40,12 +54,12 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
     <?php echo Comment::widget([
         'ticketId'           => $model->id,
-        'hash'               => $model->getHash($secret),
+        'hash'               => $hash,
         'comments'           => $comments,
         'authorNameTemplate' => $authorNameTemplate,
         'formOptions'        => [
             'action' => [
-                'comment/create', 'entity' => $model->getHash($secret)
+                'comment/create', 'entity' => $hash
             ]
         ]
     ]); ?>

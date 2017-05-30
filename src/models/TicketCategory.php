@@ -3,7 +3,7 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use hexa\yiisupport\db\ActiveRecord;
 
 /**
  * This is the model class for table "ticket_category".
@@ -41,10 +41,12 @@ class TicketCategory extends ActiveRecord
      */
     public function attributeLabels()
     {
+        $category = $this->getConfig('languageCategory', 'app');
+
         return [
-            'id'    => 'ID',
-            'name'  => 'Category',
-            'color' => 'Color',
+            'id'    => \Yii::t($category, 'ID'),
+            'name'  => \Yii::t($category, 'Category'),
+            'color' => \Yii::t($category, 'Color'),
         ];
     }
 
@@ -53,7 +55,7 @@ class TicketCategory extends ActiveRecord
      */
     public function getTickets()
     {
-        return $this->hasMany(Ticket::className(), ['ticket_category_id' => 'id']);
+        return $this->hasMany(Ticket::className(), ['category_id' => 'id']);
     }
 
     /**

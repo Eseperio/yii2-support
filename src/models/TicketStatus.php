@@ -2,8 +2,8 @@
 
 namespace hexa\yiisupport\models;
 
-use hexa\yiisupport\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use hexa\yiisupport\db\ActiveRecord;
+use hexa\yiisupport\db\TicketStatusQuery;
 
 /**
  * This is the model class for table "ticket_status".
@@ -11,11 +11,16 @@ use yii\db\ActiveRecord;
  * @property integer  $id
  * @property string   $name
  * @property string   $color
+ * @property integer  $resolve
+ * @property integer  $default
  *
  * @property Ticket[] $tickets
  */
 class TicketStatus extends ActiveRecord
 {
+    const STATUS_DEFAULT_RESOLVED = 2;
+    const STATUS_DEFAULT          = 1;
+
     /**
      * @inheritdoc
      */
@@ -41,10 +46,12 @@ class TicketStatus extends ActiveRecord
      */
     public function attributeLabels()
     {
+        $category = $this->getConfig('languageCategory', 'app');
+
         return [
-            'id'    => 'ID',
-            'name'  => 'Status',
-            'color' => 'Color',
+            'id'    => \Yii::t($category, 'ID'),
+            'name'  => \Yii::t($category, 'Status'),
+            'color' => \Yii::t($category, 'Color'),
         ];
     }
 
@@ -55,15 +62,40 @@ class TicketStatus extends ActiveRecord
     {
         return $this->hasMany(
             Ticket::className(),
-            ['ticket_status_id' => 'id']
+            ['status_id' => 'id']
         );
     }
 
     /**
-     * @return ActiveQuery
+     * Do not allow to delete default status and resolved status.
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        return !($this->resolve || $this->default);
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public static function resolvedId()
+    {
+        return static::find()->select('id')->resolved()->scalar();
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function defaultId()
+    {
+        return static::find()->select('id')->default()->scalar();
+    }
+
+    /**
+     * @return TicketStatusQuery
      */
     public static function find()
     {
-        return new ActiveQuery(get_called_class());
+        return new TicketStatusQuery(get_called_class());
     }
 }

@@ -18,7 +18,8 @@ use yii\web\IdentityInterface;
  * @property string            $updated_at
  *
  * @property Ticket            $ticket
- * @property IdentityInterface $user
+ * @property IdentityInterface $user   Ticket owner.
+ * @property IdentityInterface $author Comment author.
  */
 class TicketComment extends ActiveRecord
 {
@@ -61,6 +62,12 @@ class TicketComment extends ActiveRecord
                 'targetClass'     => Ticket::className(),
                 'targetAttribute' => ['ticket_id' => 'id'],
             ],
+            [
+                'created_by',
+                'exist',
+                'targetClass'     => \Yii::$app->user->identityClass,
+                'targetAttribute' => 'id'
+            ]
         ];
     }
 
@@ -69,12 +76,14 @@ class TicketComment extends ActiveRecord
      */
     public function attributeLabels()
     {
+        $category = $this->getConfig('languageCategory', 'app');
+
         return [
-            'id'         => 'ID',
-            'content'    => 'Content',
-            'ticket_id'  => 'Ticket',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id'         => \Yii::t($category, 'ID'),
+            'content'    => \Yii::t($category, 'Content'),
+            'ticket_id'  => \Yii::t($category, 'Ticket'),
+            'created_at' => \Yii::t($category, 'Created At'),
+            'updated_at' => \Yii::t($category, 'Updated At'),
         ];
     }
 
@@ -84,6 +93,14 @@ class TicketComment extends ActiveRecord
     public function getTicket()
     {
         return $this->hasOne(Ticket::className(), ['id' => 'ticket_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(\Yii::$app->user->identityClass, ['id' => 'created_by']);
     }
 
     /**
@@ -110,8 +127,8 @@ class TicketComment extends ActiveRecord
             list($property) = $matches;
 
             $property = str_replace(['{', '}'], '', $property);
-            if (isset($this->ticket->user->{$property})) {
-                return $this->ticket->user->{$property};
+            if (isset($this->author->{$property})) {
+                return $this->author->{$property};
             }
 
             return null;

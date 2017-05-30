@@ -10,7 +10,8 @@
 
 namespace hexa\yiisupport\db;
 
-use \yii\db\ActiveRecord as BaseActiveRecord;
+use hexa\yiisupport\interfaces\ConfigInterface;
+use yii\db\ActiveRecord as BaseActiveRecord;
 
 /**
  * Class ActiveRecord
@@ -23,5 +24,24 @@ class ActiveRecord extends BaseActiveRecord
     public static function find()
     {
         return new ActiveQuery(get_called_class());
+    }
+
+    /**
+     * @return array
+     */
+    public static function list()
+    {
+        return static::find()->select(['name', 'id'])->indexBy('id')->column();
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return mixed
+     */
+    protected function getConfig($key, $default = null)
+    {
+        return \Yii::$container->get(ConfigInterface::class)->get($key, $default);
     }
 }

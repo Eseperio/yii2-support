@@ -11,6 +11,7 @@
 namespace hexa\yiisupport\actions;
 
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class CreateAction
@@ -29,8 +30,8 @@ class CreateAction extends BaseAction
             return $this->redirect([$this->controller->getUniqueId() . '/view', 'id' => $model->id]);
         }
 
-        return $this->controller->render('create', [
+        return $this->controller->render('create', ArrayHelper::merge([
             'model' => $model,
-        ]);
+        ], (array)$this->params));
     }
 }

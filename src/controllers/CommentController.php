@@ -8,8 +8,9 @@ use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
 use hexa\yiisupport\models\TicketComment;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
-use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\widgets\ActiveForm;
 
 /**
@@ -52,18 +53,18 @@ class CommentController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['index', 'view', 'create', 'delete', 'update'],
+                'only'  => ['index', 'view', 'delete', 'update'],
                 'rules' => [
                     [
                         'allow'   => true,
-                        'actions' => ['index', 'view', 'create'],
-                        'roles'   => ['@'],
+                        'actions' => ['view'],
+                        'roles'   => [$this->module->adminRole],
                     ],
                     [
                         'allow'   => true,
                         'actions' => ['delete', 'update'],
                         'roles'   => [$this->module->adminRole],
-                    ]
+                    ],
                 ],
             ],
         ];
@@ -76,31 +77,29 @@ class CommentController extends Controller
      * @param $entity string encrypt entity
      *
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionCreate($entity)
     {
-        $hash = \Yii::$app->security->decryptByKey(utf8_decode($entity), $this->module->param('secret'));
+        $hash = \Yii::$app->security->decryptByKey(utf8_decode($entity), $this->config->get('params.secret'));
+        $hash = Json::decode($hash);
 
-        if ($hash !== false) {
+        $ticket = $this->isAuthor(ArrayHelper::getValue($hash, 'ticket_id'));
+        $model  = new TicketComment();
+        $model->setAttributes($hash);
 
-            $model = new TicketComment();
-            $model->setAttributes(Json::decode($hash));
-
-            if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-                return $this->asJson([
-                    'status' => 'success'
-                ]);
-            }
+        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+            $ticket->setResolved(false)->save(false);
 
             return $this->asJson([
-                'status' => 'error',
-                'errors' => ActiveForm::validate($model)
+                'status' => 'success'
             ]);
         }
 
         return $this->asJson([
-            'status'  => 'error',
-            'message' => \Yii::t('app', 'Oops, something went wrong. Please try again later.')
+            'status' => 'error',
+            'errors' => ActiveForm::validate($model)
         ]);
+
     }
 }

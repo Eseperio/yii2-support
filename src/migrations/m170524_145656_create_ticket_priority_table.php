@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Migration;
+use yii\db\Schema;
 
 /**
  * Handles the creation of table `ticket_priority`.
