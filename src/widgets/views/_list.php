@@ -17,18 +17,17 @@ if (!empty($comments)) : ?>
             <li class="comment <?php echo $comment->isByAuthor() ? 'author' : 'admin'; ?>-comment"
                 id="comment-<?php echo $comment->id; ?>">
                 <div class="info">
-                    <a href="#">
+                    <a href="#comment-<?php echo $comment->id; ?>">
                         <?php echo $comment->resolveAuthorSignature($authorNameTemplate); ?>
                     </a>
-                    <span><?php echo Yii::$app->formatter->asDatetime($comment->created_at); ?></span>
+                    <span><?php echo Yii::$app->formatter->asRelativeTime($comment->created_at); ?></span>
                 </div>
 
-                <a class="avatar" href="#comment-<?php echo $comment->id; ?>">
-                    <img width="35" alt="Profile Avatar"
-                         title="<?php echo $comment->resolveAuthorSignature($authorNameTemplate); ?>"/>
-                </a>
+                <a class="avatar" href="#comment-<?php echo $comment->id; ?>">&nbsp;</a>
 
-                <p><?php echo nl2br($comment->content); ?></p>
+                <p>
+                    <?php echo nl2br($comment->content); ?>
+                </p>
 
             </li>
         <?php endforeach; ?>

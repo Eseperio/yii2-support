@@ -28,7 +28,7 @@ class m170524_145710_create_ticket_category_table extends Migration
 
         $this->batchInsert(
             self::$_tableName, ['name', 'color'], [
-                ['Technical', '#ffffff'],
+                ['Support', '#ffffff'],
                 ['Billing', '#ffffff'],
                 ['Customer Services', '#ffffff']
             ]
