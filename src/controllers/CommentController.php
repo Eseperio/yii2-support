@@ -6,7 +6,7 @@ use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\TicketComment;
+use hexa\yiisupport\models\Comment;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -23,7 +23,7 @@ class CommentController extends Controller
      */
     public function actions()
     {
-        $className = TicketComment::className();
+        $className = Comment::className();
 
         return [
             'index'  => [
@@ -85,7 +85,7 @@ class CommentController extends Controller
         $hash = Json::decode($hash);
 
         $ticket = $this->isAuthor(ArrayHelper::getValue($hash, 'ticket_id'));
-        $model  = new TicketComment();
+        $model  = new Comment();
         $model->setAttributes($hash);
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {

@@ -7,7 +7,7 @@ use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\TicketCategory;
+use hexa\yiisupport\models\Category;
 use yii\filters\AccessControl;
 
 /**
@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function actions()
     {
-        $className = TicketCategory::className();
+        $className = Category::className();
 
         return [
             'index'  => [

@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var $this        \yii\web\View
- * @var $model       \hexa\yiisupport\models\TicketComment
+ * @var $model       \hexa\yiisupport\models\Comment
  * @var $hash        string
  * @var $formOptions array of html attributes
  */

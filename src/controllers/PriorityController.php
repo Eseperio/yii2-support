@@ -7,7 +7,7 @@ use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\TicketPriority;
+use hexa\yiisupport\models\Priority;
 use yii\filters\AccessControl;
 
 /**
@@ -20,7 +20,7 @@ class PriorityController extends Controller
      */
     public function actions()
     {
-        $className = TicketPriority::className();
+        $className = Priority::className();
 
         return [
             'index'  => [

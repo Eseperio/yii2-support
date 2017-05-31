@@ -3,7 +3,6 @@
 namespace hexa\yiisupport\widgets;
 
 use hexa\yiisupport\CommentAsset;
-use hexa\yiisupport\models\TicketComment;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\db\ActiveRecord;
@@ -14,7 +13,7 @@ use yii\helpers\Json;
  * @property mixed formId
  * @property array clientOptions
  */
-class Comment extends Widget
+class Comments extends Widget
 {
     /**
      * @var string encrypted entity key from params: entity, entityId, relatedTo
@@ -34,14 +33,14 @@ class Comment extends Widget
     /**
      * Generate author name from template.
      * @var string
-     * @see TicketComment::resolveAuthorSignature()
+     * @see Comment::resolveAuthorSignature()
      */
     public $authorNameTemplate = "{name} {email}";
 
     /**
      * @var string
      */
-    public $commentClass = 'hexa\yiisupport\models\TicketComment';
+    public $commentClass = 'hexa\yiisupport\models\Comment';
 
     /**
      * @var array the HTML attributes for the widget container tag.

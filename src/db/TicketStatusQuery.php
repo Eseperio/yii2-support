@@ -10,7 +10,7 @@
 
 namespace hexa\yiisupport\db;
 
-use hexa\yiisupport\models\TicketStatus;
+use hexa\yiisupport\models\Status;
 
 /**
  * Class TicketStatusQuery

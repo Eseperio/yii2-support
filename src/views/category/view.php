@@ -3,16 +3,16 @@
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\TicketCategory */
+/* @var $model \hexa\yiisupport\models\Category */
 
-$this->title                   = Yii::t('app', 'Category: {category}', ['category' => $model->name]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
+$this->title                   = Yii::t('category', 'Category: {category}', ['category' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('category', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="category-view">
 
     <?php echo $this->render('/layouts/view', [
-        'model'  => $model,
+        'model'   => $model,
         'context' => 'category'
     ]); ?>
 

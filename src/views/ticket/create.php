@@ -5,8 +5,8 @@
 
 use hexa\yiisupport\helpers\Html;
 
-$this->title                   = Yii::t('app', 'Create Ticket');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tickets'), 'url' => ['index']];
+$this->title                   = Yii::t('ticket', 'Create Ticket');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::beginTag('div', [

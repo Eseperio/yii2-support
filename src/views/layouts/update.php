@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var       $this  yii\web\View
- * @var       $model \hexa\yiisupport\models\TicketPriority
+ * @var       $model \hexa\yiisupport\models\Priority
  * @var array $options
  */
 

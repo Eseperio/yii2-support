@@ -16,7 +16,7 @@ use hexa\yiisupport\db\TicketStatusQuery;
  *
  * @property Ticket[] $tickets
  */
-class TicketStatus extends ActiveRecord
+class Status extends ActiveRecord
 {
     const STATUS_DEFAULT_RESOLVED = 2;
     const STATUS_DEFAULT          = 1;
@@ -46,12 +46,10 @@ class TicketStatus extends ActiveRecord
      */
     public function attributeLabels()
     {
-        $category = $this->getConfig('languageCategory', 'app');
-
         return [
-            'id'    => \Yii::t($category, 'ID'),
-            'name'  => \Yii::t($category, 'Status'),
-            'color' => \Yii::t($category, 'Color'),
+            'id'    => \Yii::t('ticket', 'ID'),
+            'name'  => \Yii::t('ticket', 'Status'),
+            'color' => \Yii::t('ticket', 'Color'),
         ];
     }
 

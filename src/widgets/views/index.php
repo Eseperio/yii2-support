@@ -1,14 +1,14 @@
 <?php
 
 use hexa\yiisupport\db\ActiveRecord;
-use hexa\yiisupport\models\TicketComment;
+use hexa\yiisupport\models\Comment;
 use yii\web\View;
 use yii\widgets\Pjax;
 
 /**
  * @var $this                                   View
  * @var $comments                               array
- * @var $model                                  TicketComment|ActiveRecord
+ * @var $model                                  Comment|ActiveRecord
  * @var $maxLevel                               null|integer comments max level
  * @var $hash                                   string
  * @var $authorNameTemplate                     string

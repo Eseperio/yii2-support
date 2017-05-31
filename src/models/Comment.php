@@ -14,6 +14,7 @@ use yii\web\IdentityInterface;
  * @property integer           $id
  * @property string            $content
  * @property integer           $ticket_id
+ * @property integer           $created_by
  * @property string            $created_at
  * @property string            $updated_at
  *
@@ -21,7 +22,7 @@ use yii\web\IdentityInterface;
  * @property IdentityInterface $user   Ticket owner.
  * @property IdentityInterface $author Comment author.
  */
-class TicketComment extends ActiveRecord
+class Comment extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -76,14 +77,12 @@ class TicketComment extends ActiveRecord
      */
     public function attributeLabels()
     {
-        $category = $this->getConfig('languageCategory', 'app');
-
         return [
-            'id'         => \Yii::t($category, 'ID'),
-            'content'    => \Yii::t($category, 'Content'),
-            'ticket_id'  => \Yii::t($category, 'Ticket'),
-            'created_at' => \Yii::t($category, 'Created At'),
-            'updated_at' => \Yii::t($category, 'Updated At'),
+            'id'         => \Yii::t('comment', 'ID'),
+            'content'    => \Yii::t('comment', 'Content'),
+            'ticket_id'  => \Yii::t('comment', 'Ticket'),
+            'created_at' => \Yii::t('comment', 'Created At'),
+            'updated_at' => \Yii::t('comment', 'Updated At'),
         ];
     }
 
@@ -111,6 +110,14 @@ class TicketComment extends ActiveRecord
         $query = static::find()->byTicketId($this->ticket_id);
 
         return $query->count();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isByAuthor()
+    {
+        return $this->created_by === $this->ticket->created_by;
     }
 
     /**

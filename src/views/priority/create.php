@@ -1,10 +1,10 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\TicketPriority */
+/* @var $model \hexa\yiisupport\models\Priority */
 
-$this->title                   = Yii::t('app', "Create Priority");
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Priorities'), 'url' => ['index']];
+$this->title                   = Yii::t('priority', "Create Priority");
+$this->params['breadcrumbs'][] = ['label' => Yii::t('priority', 'Priorities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 echo $this->render('/layouts/create', [

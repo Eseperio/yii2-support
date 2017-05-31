@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title                   = Yii::t('app', 'Tickets');
+$this->title                   = Yii::t('ticket', 'Tickets');
 $this->params['breadcrumbs'][] = $this->title;
 
 echo $this->render('/layouts/index', [

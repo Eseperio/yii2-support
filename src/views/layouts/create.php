@@ -4,7 +4,7 @@ use hexa\yiisupport\helpers\Html;
 
 /**
  * @var $this  yii\web\View
- * @var $model \hexa\yiisupport\models\TicketPriority
+ * @var $model \hexa\yiisupport\models\Priority
  */
 
 echo Html::beginTag('div', $options); ?>

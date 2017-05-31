@@ -1,26 +1,23 @@
 <?php
 
 use hexa\yiisupport\models\Ticket;
-use hexa\yiisupport\models\TicketComment;
-use hexa\yiisupport\widgets\Comment;
-use yii\helpers\ArrayHelper;
+use hexa\yiisupport\widgets\Comments;
 use yii\widgets\DetailView;
 
 /**
  * @var $this                  yii\web\View
  * @var $model                 Ticket
- * @var $comments              TicketComment[]
+ * @var $comments              Comments[]
  * @var $secret                string
  * @var $authorNameTemplate    string
  **/
 
-$category                      = ArrayHelper::getValue($this->context->module, 'languageCategory');
-$this->title                   = Yii::t($category, 'Ticket: {subject}', ['subject' => $model->subject]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t($category, 'Tickets'), 'url' => ['index']];
+$this->title                   = Yii::t('ticket', 'Ticket: {subject}', ['subject' => $model->subject]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="ticket-view">
-    <p>
+    <div class="btn-group">
         <?php if (Yii::$app->user->can('updateTicket')):
             echo $this->render('/layouts/_update-button', [
                 'model' => $model
@@ -36,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
         <?php echo $this->render('_resolve-button', [
             'model' => $model
         ]); ?>
-    </p>
+    </div>
     <?php echo DetailView::widget([
         'model'      => $model,
         'attributes' => [
@@ -52,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
         ]
     ]); ?>
 
-    <?php echo Comment::widget([
+    <?php echo Comments::widget([
         'ticketId'           => $model->id,
         'hash'               => $hash,
         'comments'           => $comments,

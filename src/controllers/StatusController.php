@@ -7,7 +7,7 @@ use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\TicketStatus;
+use hexa\yiisupport\models\Status;
 use yii\filters\AccessControl;
 
 /**
@@ -20,7 +20,7 @@ class StatusController extends Controller
      */
     public function actions()
     {
-        $className = TicketStatus::className();
+        $className = Status::className();
 
         return [
             'index'  => [

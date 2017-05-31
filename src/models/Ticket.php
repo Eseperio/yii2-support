@@ -13,20 +13,21 @@ use yii\helpers\Json;
 /**
  * This is the model class for table "ticket".
  *
- * @property integer         $id
- * @property string          $subject
- * @property string          $content
- * @property integer         $status_id
- * @property integer         $priority_id
- * @property integer         $category_id
- * @property string          $created_at
- * @property string          $completed_at
- * @property string          $updated_at
+ * @property integer   $id
+ * @property string    $subject
+ * @property string    $content
+ * @property integer   $status_id
+ * @property integer   $priority_id
+ * @property integer   $category_id
+ * @property integer   $created_by
+ * @property string    $created_at
+ * @property string    $completed_at
+ * @property string    $updated_at
  *
- * @property TicketCategory  $category
- * @property TicketPriority  $priority
- * @property TicketStatus    $status
- * @property TicketComment[] $comments
+ * @property Category  $category
+ * @property Priority  $priority
+ * @property Status    $status
+ * @property Comment[] $comments
  */
 class Ticket extends ActiveRecord
 {
@@ -102,28 +103,28 @@ class Ticket extends ActiveRecord
             ],
             [['content'], 'string'],
             [['status_id', 'priority_id', 'category_id'], 'integer'],
-            ['status_id', 'default', 'value' => TicketStatus::defaultId()],
+            ['status_id', 'default', 'value' => Status::defaultId()],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'max' => 255],
             [
                 ['category_id'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => TicketCategory::className(),
+                'targetClass'     => Category::className(),
                 'targetAttribute' => ['category_id' => 'id']
             ],
             [
                 ['priority_id'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => TicketPriority::className(),
+                'targetClass'     => Priority::className(),
                 'targetAttribute' => ['priority_id' => 'id']
             ],
             [
                 ['status_id'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => TicketStatus::className(),
+                'targetClass'     => Status::className(),
                 'targetAttribute' => ['status_id' => 'id']
             ]
         ];
@@ -134,18 +135,17 @@ class Ticket extends ActiveRecord
      */
     public function attributeLabels()
     {
-        $category = $this->getConfig('languageCategory', 'app');
-
         return [
-            'created_by'  => \Yii::t($category, 'Author'),
-            'id'          => \Yii::t($category, 'ID'),
-            'subject'     => \Yii::t($category, 'Subject'),
-            'content'     => \Yii::t($category, 'Content'),
-            'status_id'   => \Yii::t($category, 'Ticket Status'),
-            'priority_id' => \Yii::t($category, 'Ticket Priority'),
-            'category_id' => \Yii::t($category, 'Ticket Category'),
-            'created_at'  => \Yii::t($category, 'Created At'),
-            'updated_at'  => \Yii::t($category, 'Updated At'),
+            'created_by'   => \Yii::t('ticket', 'Author'),
+            'id'           => \Yii::t('ticket', 'ID'),
+            'subject'      => \Yii::t('ticket', 'Subject'),
+            'content'      => \Yii::t('ticket', 'Content'),
+            'status_id'    => \Yii::t('ticket', 'Status'),
+            'priority_id'  => \Yii::t('ticket', 'Priority'),
+            'category_id'  => \Yii::t('ticket', 'Category'),
+            'completed_at' => \Yii::t('ticket', 'Completed at'),
+            'created_at'   => \Yii::t('ticket', 'Created At'),
+            'updated_at'   => \Yii::t('ticket', 'Updated At'),
         ];
     }
 
@@ -167,7 +167,7 @@ class Ticket extends ActiveRecord
      */
     public function isResolved()
     {
-        return $this->status_id === TicketStatus::resolvedId();
+        return $this->status_id === Status::resolvedId();
     }
 
     /**
@@ -175,7 +175,7 @@ class Ticket extends ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(TicketCategory::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -183,7 +183,7 @@ class Ticket extends ActiveRecord
      */
     public function getPriority()
     {
-        return $this->hasOne(TicketPriority::className(), ['id' => 'priority_id']);
+        return $this->hasOne(Priority::className(), ['id' => 'priority_id']);
     }
 
     /**
@@ -191,7 +191,7 @@ class Ticket extends ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(TicketStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -207,7 +207,7 @@ class Ticket extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(TicketComment::className(), ['ticket_id' => 'id'])->orderBy(['created_at' => SORT_DESC]);
+        return $this->hasMany(Comment::className(), ['ticket_id' => 'id'])->orderBy(['created_at' => SORT_DESC]);
     }
 
     /**
@@ -234,14 +234,14 @@ class Ticket extends ActiveRecord
      */
     public function setResolved($isResolved = true)
     {
-        $resolvedId = (int)TicketStatus::resolvedId();
+        $resolvedId = (int)Status::resolvedId();
 
         if ($isResolved && $resolvedId !== $this->status_id) {
             $this->status_id    = $resolvedId;
             $this->completed_at = new Expression('NOW()');
 
         } elseif (!$isResolved && $resolvedId === $this->status_id) {
-            $this->status_id = TicketStatus::defaultId();
+            $this->status_id = Status::defaultId();
         }
 
         return $this;

@@ -6,7 +6,7 @@ use hexa\yiisupport\db\ActiveQuery;
 use hexa\yiisupport\db\ActiveRecord;
 
 /**
- * This is the model class for table "ticket_category".
+ * This is the model class for table "ticket_priority".
  *
  * @property integer  $id
  * @property string   $name
@@ -14,14 +14,14 @@ use hexa\yiisupport\db\ActiveRecord;
  *
  * @property Ticket[] $tickets
  */
-class TicketCategory extends ActiveRecord
+class Priority extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%ticket_category}}';
+        return '{{%ticket_priority}}';
     }
 
     /**
@@ -41,12 +41,10 @@ class TicketCategory extends ActiveRecord
      */
     public function attributeLabels()
     {
-        $category = $this->getConfig('languageCategory', 'app');
-
         return [
-            'id'    => \Yii::t($category, 'ID'),
-            'name'  => \Yii::t($category, 'Category'),
-            'color' => \Yii::t($category, 'Color'),
+            'id'    => \Yii::t('priority', 'ID'),
+            'name'  => \Yii::t('priority', 'Priority'),
+            'color' => \Yii::t('priority', 'Color'),
         ];
     }
 
@@ -55,7 +53,7 @@ class TicketCategory extends ActiveRecord
      */
     public function getTickets()
     {
-        return $this->hasMany(Ticket::className(), ['category_id' => 'id']);
+        return $this->hasMany(Ticket::className(), ['ticket_priority_id' => 'id']);
     }
 
     /**

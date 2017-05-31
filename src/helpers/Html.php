@@ -26,11 +26,7 @@ class Html extends \yii\helpers\Html
     public static function title($title, $tag)
     {
         if (static::config('showTitle')) {
-
-            $title = static::encode($title);
-            $title = static::translate($title);
-
-            return static::tag($tag, $title);
+            return static::tag($tag, static::encode($title));
         }
 
         return null;

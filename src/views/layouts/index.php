@@ -1,7 +1,7 @@
 <?php
 
+use hexa\yiisupport\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /**
@@ -13,10 +13,10 @@ use yii\widgets\Pjax;
 
 echo Html::beginTag('div', $options)
 
-    . Html::tag('h1', Html::encode($this->title))
+    . Html::title(Html::encode($this->title), 'h1')
     . Html::beginTag('p')
     . Html::a(
-        Yii::t('app', "Create {$modelName}"),
+        Yii::t('default', "Create {$modelName}"),
         ['create'],
         ['class' => 'btn btn-success']
     )

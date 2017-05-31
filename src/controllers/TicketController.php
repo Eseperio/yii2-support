@@ -8,9 +8,9 @@ use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\ResolveAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\models\Ticket;
-use hexa\yiisupport\models\TicketCategory;
-use hexa\yiisupport\models\TicketComment;
-use hexa\yiisupport\models\TicketPriority;
+use hexa\yiisupport\models\Category;
+use hexa\yiisupport\models\Comment;
+use hexa\yiisupport\models\Priority;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
 
@@ -36,8 +36,8 @@ class TicketController extends Controller
                 'class'      => CreateAction::className(),
                 'modelClass' => $className,
                 'params'     => [
-                    'categories' => TicketCategory::list(),
-                    'priorities' => TicketPriority::list()
+                    'categories' => Category::list(),
+                    'priorities' => Priority::list()
                 ]
             ],
             'delete'  => [

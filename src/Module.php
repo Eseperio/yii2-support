@@ -5,13 +5,14 @@ namespace hexa\yiisupport;
 use hexa\yiisupport\helpers\Config;
 use hexa\yiisupport\interfaces\ConfigInterface;
 use yii\base\BootstrapInterface;
+use yii\base\Module as BaseModule;
 use yii\console\Application;
 use yii\helpers\ArrayHelper;
 
 /**
  * Class Module
  */
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends BaseModule implements BootstrapInterface
 {
     /**
      * @var string Admin role
@@ -32,12 +33,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
      * @var string
      */
     public $authorNameTemplate;
-
-    /**
-     * Category for translated properties.
-     * @var string
-     */
-    public $languageCategory;
 
     /**
      * @inheritdoc
