@@ -53,7 +53,7 @@ class Comment extends ActiveRecord
     {
         return [
             [['content', 'ticket_id'], 'required'],
-            [['content'], 'string'],
+            [['content'], 'string', 'max' => 1000],
             [['ticket_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [

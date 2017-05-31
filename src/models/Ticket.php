@@ -101,7 +101,7 @@ class Ticket extends ActiveRecord
                 ],
                 'required'
             ],
-            [['content'], 'string'],
+            [['content'], 'string', 'max' => 1000],
             [['status_id', 'priority_id', 'category_id'], 'integer'],
             ['status_id', 'default', 'value' => Status::defaultId()],
             [['created_at', 'updated_at'], 'safe'],

@@ -28,7 +28,7 @@ Pjax::begin([
         <div class="title-block clearfix clear">
 
             <h3 class="h3-body-title">
-                <?php echo Yii::t('app', 'Comments') . '(' . $model->getCommentsCount() . ')'; ?>
+                <?php echo Yii::t('app', 'Comments') . ' (' . $model->getCommentsCount() . ')'; ?>
             </h3>
 
             <div class="title-separator"></div>

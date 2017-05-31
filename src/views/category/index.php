@@ -1,21 +1,29 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\grid\GridView;
+use yii\widgets\Pjax;
+
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title                   = Yii::t('category', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('/layouts/index', [
+$this->beginContent('@yiisupport/views/layouts/index.php', [
+    'options' => [
+        'class' => 'category-index js-category-index'
+    ]
+]);
+
+Pjax::begin();
+echo GridView::widget([
     'dataProvider' => $dataProvider,
-    'modelName'    => 'Category',
     'columns'      => [
         'id',
         'name',
         'color',
         ['class' => 'yii\grid\ActionColumn'],
     ],
-    'options'      => [
-        'class' => 'category-index js-category-index'
-    ]
 ]);
+Pjax::end();
+$this->endContent();

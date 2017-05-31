@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
  * @var $this                  yii\web\View
  * @var $model                 Ticket
  * @var $comments              Comments[]
- * @var $secret                string
+ * @var $hash                  string
  * @var $authorNameTemplate    string
  **/
 
