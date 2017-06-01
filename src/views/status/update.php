@@ -8,9 +8,14 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('status', 'Status'), 'url' =
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('status', 'Update');
 
-echo $this->render('/layouts/update', [
-    'model'   => $model,
+$this->beginContent('@yiisupport/views/layouts/update.php', [
     'options' => [
         'class' => 'status-update js-status-update'
     ]
 ]);
+
+echo $this->render('_form', [
+    'model' => $model,
+]);
+
+$this->endContent();

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="category-view">
 
-    <?php echo $this->render('/layouts/view', [
+    <?php echo $this->render('@yiisupport/views/layouts/view.php', [
         'model'   => $model,
         'context' => 'category'
     ]); ?>

@@ -3,7 +3,7 @@
 use hexa\yiisupport\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\db\ActiveRecord */
+/* @var $model \hexa\yiisupport\models\ActiveRecord */
 
 
 echo Html::a(

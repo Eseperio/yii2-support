@@ -3,7 +3,6 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\ActiveQuery;
-use hexa\yiisupport\db\ActiveRecord;
 
 /**
  * This is the model class for table "ticket_priority".

@@ -11,8 +11,8 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="priority-view">
 
-    <?php echo $this->render('/layouts/view', [
-        'model'  => $model,
+    <?php echo $this->render('@yiisupport/views/layouts/view', [
+        'model'   => $model,
         'context' => 'priority'
     ]); ?>
 

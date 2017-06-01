@@ -30,6 +30,16 @@ class Module extends BaseModule implements BootstrapInterface
     public $showTitle;
 
     /**
+     * On/off action buttons for Ticket.
+     * @var array
+     */
+    public $buttons = [
+        'delete'  => true,
+        'update'  => true,
+        'resolve' => true,
+    ];
+
+    /**
      * @var string
      */
     public $authorNameTemplate;

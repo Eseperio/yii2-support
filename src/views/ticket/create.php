@@ -3,22 +3,20 @@
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Ticket */
 
-use hexa\yiisupport\helpers\Html;
-
 $this->title                   = Yii::t('ticket', 'Create Ticket');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::beginTag('div', [
-    'class' => 'status-create js-status-create'
-]); ?>
+$this->beginContent('@yiisupport/views/layouts/create.php', [
+    'options' => [
+        'class' => 'ticket-create js-ticket-create'
+    ]
+]);
 
-<?php echo Html::title($this->title, 'h1'); ?>
-
-<?php echo $this->context->renderPartial('_form', [
+echo $this->render('_form', [
     'model'      => $model,
     'categories' => $categories,
     'priorities' => $priorities,
 ]);
 
-echo Html::endTag('div');
+$this->endContent();

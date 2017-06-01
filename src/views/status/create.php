@@ -7,9 +7,13 @@ $this->title                   = Yii::t('status', 'Create Status');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('status', 'Statuses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('/layouts/create', [
-    'model'   => $model,
+$this->beginContent('@yiisupport/views/layouts/create.php', [
     'options' => [
-        'class' => 'status-create js-status-create'
+        'class' => 'status-create js-status-creat'
     ]
 ]);
+echo $this->context->renderPartial('_form', [
+    'model'   => $model,
+]);
+$this->endContent();
+

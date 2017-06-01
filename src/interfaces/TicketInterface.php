@@ -15,6 +15,8 @@ namespace hexa\yiisupport\interfaces;
  */
 interface TicketInterface
 {
+    const EVENT_CREATE = 'create';
+
     /**
      * @param bool $isResolved
      *

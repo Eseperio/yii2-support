@@ -11,8 +11,6 @@ echo Html::beginTag('div', $options); ?>
 
 <?php echo Html::title($this->title, 'h1'); ?>
 
-<?php echo $this->context->renderPartial('_form', [
-    'model' => $model,
-]);
+<?php echo $content;
 
 echo Html::endTag('div');

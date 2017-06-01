@@ -13,6 +13,7 @@ namespace hexa\yiisupport\actions;
 
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class IndexAction
@@ -28,15 +29,14 @@ class IndexAction extends BaseAction
             'query' => $this->getQuery(),
             'sort'  => [
                 'defaultOrder' => [
-                    'created_at'   => SORT_DESC,
-                    'completed_at' => SORT_DESC
+                    'id' => SORT_DESC
                 ]
             ]
         ]);
 
-        return $this->controller->render('index', [
+        return $this->controller->render('index', ArrayHelper::merge([
             'dataProvider' => $dataProvider,
-        ]);
+        ], (array)$this->params));
     }
 
     /**

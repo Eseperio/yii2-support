@@ -10,7 +10,8 @@
 
 namespace hexa\yiisupport\actions;
 
-use hexa\yiisupport\db\ActiveRecord;
+use hexa\yiisupport\models\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class UpdateAction
@@ -31,8 +32,8 @@ class UpdateAction extends BaseAction
             return $this->redirect([$this->controller->getUniqueId() . '/view', 'id' => $model->id]);
         }
 
-        return $this->controller->render('update', [
+        return $this->controller->render('update', ArrayHelper::merge([
             'model' => $model,
-        ]);
+        ], (array)$this->params));
     }
 }

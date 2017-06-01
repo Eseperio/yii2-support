@@ -7,10 +7,9 @@ use hexa\yiisupport\actions\DeleteAction;
 use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\ResolveAction;
 use hexa\yiisupport\actions\UpdateAction;
-use hexa\yiisupport\models\Ticket;
 use hexa\yiisupport\models\Category;
-use hexa\yiisupport\models\Comment;
 use hexa\yiisupport\models\Priority;
+use hexa\yiisupport\models\Ticket;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
 
@@ -25,19 +24,25 @@ class TicketController extends Controller
      */
     public function actions()
     {
-        $className = Ticket::className();
+        $className  = Ticket::className();
+        $categories = Category::list();
+        $priorities = Priority::list();
 
         return [
             'index'   => [
                 'class'      => IndexAction::className(),
-                'modelClass' => $className
+                'modelClass' => $className,
+                'params'     => [
+                    'isUpdate' => $this->config->get('buttons.update'),
+                    'isDelete' => $this->config->get('buttons.update'),
+                ]
             ],
             'create'  => [
                 'class'      => CreateAction::className(),
                 'modelClass' => $className,
                 'params'     => [
-                    'categories' => Category::list(),
-                    'priorities' => Priority::list()
+                    'categories' => $categories,
+                    'priorities' => $priorities
                 ]
             ],
             'delete'  => [
@@ -46,7 +51,11 @@ class TicketController extends Controller
             ],
             'update'  => [
                 'class'      => UpdateAction::className(),
-                'modelClass' => $className
+                'modelClass' => $className,
+                'params'     => [
+                    'categories' => $categories,
+                    'priorities' => $priorities
+                ]
             ],
             'resolve' => [
                 'class'      => ResolveAction::className(),

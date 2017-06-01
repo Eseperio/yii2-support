@@ -4,7 +4,11 @@
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/**
+ * @var $dataProvider yii\data\ActiveDataProvider
+ * @var $isUpdate     bool
+ * @var $isDelete     bool
+ */
 
 $this->title                   = Yii::t('ticket', 'Tickets');
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,7 +24,7 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'      => [
         'id',
-        'subject',
+        'subject:ntext',
         'content:ntext',
         [
             'attribute' => 'status_id',
@@ -36,12 +40,11 @@ echo GridView::widget([
         ],
         'completed_at',
         'created_at',
-        'updated_at',
         [
             'class'          => 'yii\grid\ActionColumn',
             'visibleButtons' => [
-                'update' => Yii::$app->user->can($this->context->module->adminRole),
-                'delete' => Yii::$app->user->can($this->context->module->adminRole),
+                'update' => Yii::$app->user->can($this->context->module->adminRole) && $isUpdate,
+                'delete' => Yii::$app->user->can($this->context->module->adminRole) && $isDelete,
             ]
         ],
     ],

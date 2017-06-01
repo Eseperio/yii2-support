@@ -89,7 +89,7 @@ class CommentController extends Controller
         $model->setAttributes($hash);
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            $ticket->setResolved(false)->save(false);
+            $ticket->setResolved(false)->touch('updated_at')->save(false);
 
             return $this->asJson([
                 'status' => 'success'

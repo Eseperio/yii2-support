@@ -2,7 +2,6 @@
 
 namespace hexa\yiisupport\models;
 
-use hexa\yiisupport\db\ActiveRecord;
 use hexa\yiisupport\db\TicketCommentQuery;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;

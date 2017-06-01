@@ -2,7 +2,6 @@
 
 namespace hexa\yiisupport\models;
 
-use hexa\yiisupport\db\ActiveRecord;
 use hexa\yiisupport\db\TicketQuery;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -241,7 +240,8 @@ class Ticket extends ActiveRecord
             $this->completed_at = new Expression('NOW()');
 
         } elseif (!$isResolved && $resolvedId === $this->status_id) {
-            $this->status_id = Status::defaultId();
+            $this->status_id    = Status::defaultId();
+            $this->completed_at = null;
         }
 
         return $this;

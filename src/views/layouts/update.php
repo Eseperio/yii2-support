@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 
 /**
  * @var       $this  yii\web\View
@@ -8,10 +7,10 @@ use yii\helpers\Html;
  * @var array $options
  */
 
+use hexa\yiisupport\helpers\Html;
+
 echo Html::beginTag('div', $options)
 
-    . Html::tag('h1', Html::encode($this->title))
-    . $this->context->renderPartial('_form', [
-        'model' => $model,
-    ])
+    . Html::title($this->title, 'h1')
+    . $content
     . Html::endTag('div');
