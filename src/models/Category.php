@@ -60,6 +60,6 @@ class Category extends ActiveRecord
      */
     public static function find()
     {
-        return new ActiveQuery(get_called_class());
+        return (new ActiveQuery(get_called_class()))->alias(static::getAlias());
     }
 }

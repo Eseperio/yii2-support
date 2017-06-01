@@ -10,6 +10,7 @@
 
 namespace hexa\yiisupport\models;
 
+use hexa\yiisupport\db\ActiveQuery;
 use yii\db\ActiveRecord as BaseActiveRecord;
 
 /**
@@ -18,11 +19,23 @@ use yii\db\ActiveRecord as BaseActiveRecord;
 class ActiveRecord extends BaseActiveRecord
 {
     /**
+     * Make alias for table. Use first symbol of class.
+     * @return string
+     */
+    public static function getAlias()
+    {
+        $className = (new \ReflectionClass(get_called_class()))->getShortName();
+        $alias     = substr($className, 0, 1);
+
+        return strtoupper($alias);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public static function find()
     {
-        return new ActiveQuery(get_called_class());
+        return (new ActiveQuery(get_called_class()))->alias(static::getAlias());
     }
 
     /**

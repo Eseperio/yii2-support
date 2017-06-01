@@ -252,6 +252,6 @@ class Ticket extends ActiveRecord
      */
     public static function find()
     {
-        return new TicketQuery(get_called_class());
+        return (new TicketQuery(get_called_class()))->alias(static::getAlias());
     }
 }

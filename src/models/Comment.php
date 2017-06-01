@@ -149,6 +149,6 @@ class Comment extends ActiveRecord
      */
     public static function find()
     {
-        return new TicketCommentQuery(get_called_class());
+        return (new TicketCommentQuery(get_called_class()))->alias(static::getAlias());
     }
 }
