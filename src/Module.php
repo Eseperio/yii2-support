@@ -82,6 +82,7 @@ class Module extends BaseModule implements BootstrapInterface
 
         \Yii::setAlias('@yiisupport', __DIR__);
         \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
+        \Yii::$app->getView()->registerAssetBundle(SupportAsset::className());
     }
 
     /**

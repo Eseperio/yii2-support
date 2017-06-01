@@ -1,5 +1,6 @@
 <?php
 
+use hexa\yiisupport\helpers\Html;
 use hexa\yiisupport\models\Comment;
 use yii\web\View;
 
@@ -26,7 +27,7 @@ if (!empty($comments)) : ?>
                 <a class="avatar" href="#comment-<?php echo $comment->id; ?>">&nbsp;</a>
 
                 <p>
-                    <?php echo nl2br($comment->content); ?>
+                    <?php echo nl2br(Html::encode($comment->content)); ?>
                 </p>
 
             </li>

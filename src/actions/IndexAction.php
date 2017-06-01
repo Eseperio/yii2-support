@@ -10,7 +10,6 @@
 
 namespace hexa\yiisupport\actions;
 
-
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -21,18 +20,28 @@ use yii\helpers\ArrayHelper;
 class IndexAction extends BaseAction
 {
     /**
+     * Params will be passed to dataProvider.
+     * @var array
+     * @see ActiveDataProvider
+     */
+    public $providerParams = [
+        'sort' => [
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ]
+        ]
+    ];
+
+    /**
      * @return mixed
      */
     public function run()
     {
-        $dataProvider = new ActiveDataProvider([
+        $providerParams = ArrayHelper::merge([
             'query' => $this->getQuery(),
-            'sort'  => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
-            ]
-        ]);
+        ], $this->providerParams);
+
+        $dataProvider = new ActiveDataProvider($providerParams);
 
         return $this->controller->render('index', ArrayHelper::merge([
             'dataProvider' => $dataProvider,

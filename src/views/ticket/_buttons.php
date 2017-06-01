@@ -30,7 +30,14 @@ if (Yii::$app->user->can('deleteTicket') && $isDelete) :
     ]);
 endif;
 
-if ((Yii::$app->user->can('isAuthor') || Yii::$app->user->can($adminRole)) && $isResolve) :
+if (!$model->isResolved() ||
+    $isResolve &&
+    (
+        !$model->isResolved() ||
+        Yii::$app->user->can('isAuthor', ['ticket' => $model]) ||
+        Yii::$app->user->can($adminRole)
+    )
+) :
     echo $this->render('@yiisupport/views/layouts/_resolve-button', [
         'model' => $model
     ]);

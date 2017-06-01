@@ -31,7 +31,7 @@ echo GridView::widget([
             ]
         ],
         [
-            'attribute'      => 'subject',
+            'attribute'      => 'content',
             'contentOptions' => [
                 'class' => 'pre-wrap'
             ]

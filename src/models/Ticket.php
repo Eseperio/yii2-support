@@ -100,11 +100,11 @@ class Ticket extends ActiveRecord
                 ],
                 'required'
             ],
-            [['content'], 'string', 'max' => 1000],
+            [['content'], 'string', 'min' => 3, 'max' => 1000],
             [['status_id', 'priority_id', 'category_id'], 'integer'],
             ['status_id', 'default', 'value' => Status::defaultId()],
             [['created_at', 'updated_at'], 'safe'],
-            [['subject'], 'string', 'max' => 255],
+            [['subject'], 'string', 'min' => 3, 'max' => 255],
             [
                 ['category_id'],
                 'exist',
@@ -166,7 +166,7 @@ class Ticket extends ActiveRecord
      */
     public function isResolved()
     {
-        return $this->status_id === Status::resolvedId();
+        return $this->status_id == Status::resolvedId();
     }
 
     /**

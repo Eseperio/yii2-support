@@ -30,11 +30,34 @@ class TicketController extends Controller
 
         return [
             'index'   => [
-                'class'      => IndexAction::className(),
-                'modelClass' => $className,
-                'params'     => [
+                'class'          => IndexAction::className(),
+                'modelClass'     => $className,
+                'params'         => [
                     'isUpdate' => $this->config->get('buttons.update'),
                     'isDelete' => $this->config->get('buttons.update'),
+                ],
+                'providerParams' => [
+                    'query' => Ticket::find()->joinWith(['status S', 'priority P', 'category C']),
+                    'sort'  => [
+                        'attributes' => [
+                            'status_id'   => [
+                                'asc'  => ['S.name' => SORT_ASC],
+                                'desc' => ['S.name' => SORT_DESC],
+                            ],
+                            'priority_id' => [
+                                'asc'  => ['P.name' => SORT_ASC],
+                                'desc' => ['P.name' => SORT_DESC],
+                            ],
+                            'category_id' => [
+                                'asc'  => ['C.name' => SORT_ASC],
+                                'desc' => ['C.name' => SORT_DESC],
+                            ],
+                            'id',
+                            'subject',
+                            'completed_at',
+                            'created_at',
+                        ]
+                    ]
                 ]
             ],
             'create'  => [
