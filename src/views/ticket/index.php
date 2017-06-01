@@ -24,8 +24,18 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'      => [
         'id',
-        'subject:ntext',
-        'content:ntext',
+        [
+            'attribute'      => 'subject',
+            'contentOptions' => [
+                'class' => 'pre-wrap'
+            ]
+        ],
+        [
+            'attribute'      => 'subject',
+            'contentOptions' => [
+                'class' => 'pre-wrap'
+            ]
+        ],
         [
             'attribute' => 'status_id',
             'value'     => 'status.name',
