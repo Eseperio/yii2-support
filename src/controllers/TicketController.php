@@ -32,13 +32,15 @@ class TicketController extends Controller
             'index'   => [
                 'class'          => IndexAction::className(),
                 'modelClass'     => $className,
+                'query'          => function ($query) {
+                    $query->joinWith(['status S', 'priority P', 'category C']);
+                },
                 'params'         => [
                     'isUpdate' => $this->config->get('buttons.update'),
                     'isDelete' => $this->config->get('buttons.update'),
                 ],
                 'providerParams' => [
-                    'query' => Ticket::find()->joinWith(['status S', 'priority P', 'category C'])->byUserId(\Yii::$app->user->id),
-                    'sort'  => [
+                    'sort' => [
                         'attributes' => [
                             'status_id'   => [
                                 'asc'  => ['S.name' => SORT_ASC],

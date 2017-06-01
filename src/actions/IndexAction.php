@@ -20,6 +20,12 @@ use yii\helpers\ArrayHelper;
 class IndexAction extends BaseAction
 {
     /**
+     * Closure for modify query.
+     * @var \Closure
+     */
+    public $query;
+
+    /**
      * Params will be passed to dataProvider.
      * @var array
      * @see ActiveDataProvider
@@ -57,6 +63,10 @@ class IndexAction extends BaseAction
 
         if (!\Yii::$app->user->can($this->config->get('adminRole'))) {
             $query->where(['created_by' => \Yii::$app->user->id]);
+        }
+
+        if (is_callable($this->query)) {
+            call_user_func($this->query, $query);
         }
 
         return $query;
