@@ -10,8 +10,6 @@
 
 namespace hexa\yiisupport\db;
 
-use yii\db\Expression;
-
 /**
  * Class TicketQuery
  */
@@ -25,6 +23,16 @@ class TicketQuery extends ActiveQuery
     public function byTicketId($id)
     {
         return $this->byAttribute('ticket_id', $id);
+    }
+
+    /**
+     * @param integer $id
+     *
+     * @return $this
+     */
+    public function byUserId($id)
+    {
+        return $this->byAttribute('created_by', $id);
     }
 
     /**

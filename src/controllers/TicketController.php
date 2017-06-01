@@ -37,7 +37,7 @@ class TicketController extends Controller
                     'isDelete' => $this->config->get('buttons.update'),
                 ],
                 'providerParams' => [
-                    'query' => Ticket::find()->joinWith(['status S', 'priority P', 'category C']),
+                    'query' => Ticket::find()->joinWith(['status S', 'priority P', 'category C'])->byUserId(\Yii::$app->user->id),
                     'sort'  => [
                         'attributes' => [
                             'status_id'   => [
