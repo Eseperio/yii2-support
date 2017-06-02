@@ -4,7 +4,6 @@ namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketQuery;
 use hexa\yiisupport\traits\DownloadableTrait;
-use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -263,11 +262,9 @@ class Ticket extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function getUploadPath()
+    public function getUploadPath($uploadRoot)
     {
-        $path = Yii::$app->controller->module->uploadDir;
-
-        return $path . '/ticket';
+        return $uploadRoot . '/ticket';
     }
 
     /**

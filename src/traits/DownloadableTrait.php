@@ -29,10 +29,10 @@ trait DownloadableTrait
      */
     public function download()
     {
-        $path     = \Yii::getAlias($this->getUploadPath());
-        $basePath = \Yii::getAlias('@upload');
+        $basePath = Yii::$app->controller->module->getUploadDir();
+        $path     = $this->getUploadPath($basePath);
 
-        if ($this->file instanceof UploadedFile && Yii::$app->controller->module->getUploadDir()) {
+        if ($this->file instanceof UploadedFile && file_exists($basePath)) {
 
             $path .= $this->generateName($this->file->baseName);
             $isOk = $this->file->saveAs($path) ? $path : false;
@@ -64,9 +64,11 @@ trait DownloadableTrait
     }
 
     /**
+     * @param string $uploadRoot Document root for uploads.
+     *
      * @return string
      */
-    abstract public function getUploadPath();
+    abstract public function getUploadPath($uploadRoot);
 
     /**
      * @param string $name

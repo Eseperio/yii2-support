@@ -4,7 +4,6 @@ namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketCommentQuery;
 use hexa\yiisupport\traits\DownloadableTrait;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
@@ -168,10 +167,8 @@ class Comment extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function getUploadPath()
+    public function getUploadPath($uploadRoot)
     {
-        $path = Yii::$app->controller->module->uploadDir;
-
-        return $path . '/comment';
+        return $uploadRoot . '/comment';
     }
 }

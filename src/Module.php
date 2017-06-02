@@ -41,7 +41,7 @@ class Module extends BaseModule implements BootstrapInterface
     /**
      * @var string
      */
-    public $uploadDir = '@webroot/uploads/support';
+    public $uploadDir = '@upload/uploads/support';
 
     /**
      * @var string
