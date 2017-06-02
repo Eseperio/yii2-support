@@ -3,8 +3,8 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketQuery;
-use hexa\yiisupport\interfaces\ConfigInterface;
 use hexa\yiisupport\traits\DownloadableTrait;
+use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -113,8 +113,8 @@ class Ticket extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => static::$extensions,
-                'mimeTypes'                => static::$mimeTypes
+                'extensions'               => \Yii::$app->controller->module->param('extensions', []),
+                'mimeTypes'                => \Yii::$app->controller->module->param('mimeTypes', [])
             ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],
@@ -265,9 +265,9 @@ class Ticket extends ActiveRecord
      */
     public function getUploadPath()
     {
-        $path = \Yii::$container->get(ConfigInterface::class)->get('params.uploadDir');
+        $path = Yii::$app->controller->module->param('uploadDir');
 
-        return $path . '/ticket/';
+        return $path . '/ticket';
     }
 
     /**

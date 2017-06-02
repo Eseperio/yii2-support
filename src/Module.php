@@ -4,10 +4,14 @@ namespace hexa\yiisupport;
 
 use hexa\yiisupport\helpers\Config;
 use hexa\yiisupport\interfaces\ConfigInterface;
+use Yii;
 use yii\base\BootstrapInterface;
+use yii\base\InvalidConfigException;
 use yii\base\Module as BaseModule;
 use yii\console\Application;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
+use yii\helpers\Url;
 
 /**
  * Class Module
@@ -30,6 +34,21 @@ class Module extends BaseModule implements BootstrapInterface
     public $showTitle;
 
     /**
+     * @var string
+     */
+    public $authorNameTemplate;
+
+    /**
+     * @var string
+     */
+    public $uploadDir = '@webroot/uploads/support';
+
+    /**
+     * @var string
+     */
+    public $mediaUrl = '/media/get';
+
+    /**
      * On/off action buttons for Ticket.
      * @var array
      */
@@ -40,9 +59,37 @@ class Module extends BaseModule implements BootstrapInterface
     ];
 
     /**
-     * @var string
+     * List of accepted extensions.
+     * @var array
      */
-    public $authorNameTemplate;
+    public $extensions = [
+        'png',
+        'jpg',
+        'pdf',
+        'doc',
+        'docx',
+        'ppt',
+        'pptx',
+        'xls',
+        'xlsx'
+    ];
+
+    /**
+     * List of accepted mime types.
+     * @var array
+     */
+    public $mimeTypes = [
+        'image/png',
+        'image/jpeg',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.ms-excel',
+        'application/xml',
+        'application/mspowerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentatio',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ];
 
     /**
      * @inheritdoc
@@ -61,7 +108,18 @@ class Module extends BaseModule implements BootstrapInterface
     }
 
     /**
-     * @param \yii\base\Application $app
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        \Yii::setAlias('@yiisupport', __DIR__);
+        \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
+    }
+
+    /**
+     * @inheritdoc
      */
     public function bootstrap($app)
     {
@@ -71,17 +129,6 @@ class Module extends BaseModule implements BootstrapInterface
                 'module' => $this,
             ];
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        \Yii::setAlias('@yiisupport', __DIR__);
-        \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
     }
 
     /**
@@ -95,5 +142,54 @@ class Module extends BaseModule implements BootstrapInterface
     public function param($key, $default = null)
     {
         return ArrayHelper::getValue($this->params, $key, $default);
+    }
+
+    /**
+     * Return sub folder for current user.
+     * @return int|string
+     */
+    public function getOwnerPath()
+    {
+        return Yii::$app->user->isGuest ? 'guest' : Yii::$app->user->id;
+    }
+
+    /**
+     * Returns path to the upload dir.
+     * @throws InvalidConfigException
+     */
+    public function getUploadDir()
+    {
+        if (!$path = \Yii::getAlias($this->uploadDir)) {
+            throw new InvalidConfigException('Invalid config $uploadDir');
+        }
+
+        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR . \Yii::$app->user->id, 0777)) {
+            return $path . DIRECTORY_SEPARATOR . $this->getOwnerPath();
+        }
+
+        throw new InvalidConfigException('$uploadDir is not writable');
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     * @throws InvalidConfigException
+     */
+    public function getMediaPath($name)
+    {
+        return $this->getUploadDir() . DIRECTORY_SEPARATOR . $name;
+    }
+
+    /**
+     * Return url for href or src attributes.
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function getMediaUrl($name)
+    {
+        return Url::to([$this->mediaUrl, 'name' => $name]);
     }
 }

@@ -3,8 +3,8 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketCommentQuery;
-use hexa\yiisupport\interfaces\ConfigInterface;
 use hexa\yiisupport\traits\DownloadableTrait;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
@@ -77,8 +77,8 @@ class Comment extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => static::$extensions,
-                'mimeTypes'                => static::$mimeTypes
+                'extensions'               => \Yii::$app->controller->module->param('extensions', []),
+                'mimeTypes'                => \Yii::$app->controller->module->param('mimeTypes', [])
             ],
         ];
     }
@@ -170,8 +170,8 @@ class Comment extends ActiveRecord
      */
     public function getUploadPath()
     {
-        $path = \Yii::$container->get(ConfigInterface::class)->get('params.uploadDir');
+        $path = Yii::$app->controller->module->param('uploadDir');
 
-        return $path . '/comment/';
+        return $path . '/comment';
     }
 }

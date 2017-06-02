@@ -16,7 +16,7 @@ return [
     ],
     'params'              => [
         'secret'    => 'comment',
-        'uploadDir' => '@webroot/images/uploads'
+        'uploadDir' => '@webroot/uploads/support'
     ],
     'adminRole'           => 'admin',
     'userRole'            => 'user',
