@@ -1,7 +1,6 @@
 <?php
 
 use yii\db\Migration;
-use yii\db\Schema;
 
 /**
  * Handles the creation of table `ticket_priority`.
@@ -18,13 +17,17 @@ class m170524_145656_create_ticket_priority_table extends Migration
      */
     public function up()
     {
-        $this->createTable(
-            self::$_tableName, [
-                'id'    => $this->primaryKey(),
-                'name'  => $this->string(255)->notNull(),
-                'color' => $this->string(45)
-            ]
-        );
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
+        $this->createTable(self::$_tableName, [
+            'id'    => $this->primaryKey(),
+            'name'  => $this->string(255)->notNull(),
+            'color' => $this->string(45)
+        ], $tableOptions);
 
         $this->batchInsert(
             self::$_tableName, ['name', 'color'], [

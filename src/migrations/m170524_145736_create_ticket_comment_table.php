@@ -17,17 +17,21 @@ class m170524_145736_create_ticket_comment_table extends Migration
      */
     public function up()
     {
-        $this->createTable(
-            self::$_tableName, [
-                'id'         => $this->primaryKey(),
-                'content'    => $this->text(),
-                'file'       => $this->string(1000)->null(),
-                'ticket_id'  => $this->integer(),
-                'created_by' => $this->integer(),
-                'created_at' => $this->timestamp()->defaultValue(null),
-                'updated_at' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
-            ]
-        );
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
+        $this->createTable(self::$_tableName, [
+            'id'         => $this->primaryKey(),
+            'content'    => $this->text(),
+            'file'       => $this->string(1000)->null(),
+            'ticket_id'  => $this->integer(),
+            'created_by' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultValue(null),
+            'updated_at' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+        ], $tableOptions);
 
         $this->addForeignKey(
             'FK_TC_ticket_id',
