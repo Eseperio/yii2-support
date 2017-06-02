@@ -163,7 +163,7 @@ class Module extends BaseModule implements BootstrapInterface
             throw new InvalidConfigException('Invalid config $uploadDir');
         }
 
-        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR . \Yii::$app->user->id, 0777)) {
+        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR . $this->getOwnerPath(), 0777)) {
             return $path . DIRECTORY_SEPARATOR . $this->getOwnerPath();
         }
 

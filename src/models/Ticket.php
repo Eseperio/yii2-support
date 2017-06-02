@@ -113,8 +113,8 @@ class Ticket extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => \Yii::$app->controller->module->param('extensions', []),
-                'mimeTypes'                => \Yii::$app->controller->module->param('mimeTypes', [])
+                'extensions'               => \Yii::$app->controller->module->extensions,
+                'mimeTypes'                => \Yii::$app->controller->module->mimeTypes
             ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],
@@ -265,7 +265,7 @@ class Ticket extends ActiveRecord
      */
     public function getUploadPath()
     {
-        $path = Yii::$app->controller->module->param('uploadDir');
+        $path = Yii::$app->controller->module->uploadDir;
 
         return $path . '/ticket';
     }

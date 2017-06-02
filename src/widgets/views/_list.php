@@ -30,7 +30,9 @@ if (!empty($comments)) : ?>
 
                     <?php if ($comment->file) : ?>
                         <span class="center-block text-right">
-                            <a href="<?php echo $comment->file; ?>" class="comment-attachment js-comment-attachment"
+
+                            <a href="<?php echo Yii::$app->controller->module->getMediaUrl($comment->file); ?>"
+                               class="comment-attachment js-comment-attachment"
                                data-pjax="0">
                                 <i class="fa fa-paperclip" aria-hidden="true"></i>
                                 <?php echo Yii::t('comment', 'Attachment'); ?>

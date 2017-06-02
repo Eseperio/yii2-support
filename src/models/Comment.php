@@ -77,8 +77,8 @@ class Comment extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => \Yii::$app->controller->module->param('extensions', []),
-                'mimeTypes'                => \Yii::$app->controller->module->param('mimeTypes', [])
+                'extensions'               => \Yii::$app->controller->module->extensions,
+                'mimeTypes'                => \Yii::$app->controller->module->mimeTypes
             ],
         ];
     }

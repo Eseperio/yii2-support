@@ -63,10 +63,6 @@ class TicketSearch extends Ticket implements SearchInterface
                 'asc'  => ['C.name' => SORT_ASC],
                 'desc' => ['C.name' => SORT_DESC],
             ],
-            'id',
-            'subject',
-            'completed_at',
-            'created_at',
         ]);
         $dataProvider->setSort($sort);
 

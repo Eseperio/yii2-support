@@ -10,7 +10,7 @@
 
 namespace hexa\yiisupport\traits;
 
-use yii\helpers\FileHelper;
+use Yii;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
@@ -32,13 +32,13 @@ trait DownloadableTrait
         $path     = \Yii::getAlias($this->getUploadPath());
         $basePath = \Yii::getAlias('@upload');
 
-        if ($this->file instanceof UploadedFile && FileHelper::createDirectory($path)) {
+        if ($this->file instanceof UploadedFile && Yii::$app->controller->module->getUploadDir()) {
 
             $path .= $this->generateName($this->file->baseName);
             $isOk = $this->file->saveAs($path) ? $path : false;
 
             $this->file = ($isOk ? str_replace($basePath, '', $path) : false);
-        };
+        }
 
         return $this;
     }
