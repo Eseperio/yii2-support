@@ -170,7 +170,7 @@ class Comment extends ActiveRecord
      */
     public function getUploadPath()
     {
-        $path = Yii::$app->controller->module->param('uploadDir');
+        $path = Yii::$app->controller->module->uploadDir;
 
         return $path . '/comment';
     }
