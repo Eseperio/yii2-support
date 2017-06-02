@@ -48,7 +48,27 @@ class TicketSearch extends Ticket implements SearchInterface
             ]
         ], $providerParams);
 
-        $dataProvider = new ActiveDataProvider($providerParams);
+        $dataProvider     = new ActiveDataProvider($providerParams);
+        $sort             = $dataProvider->getSort();
+        $sort->attributes = ArrayHelper::merge($sort->attributes, [
+            'status_id'   => [
+                'asc'  => ['S.name' => SORT_ASC],
+                'desc' => ['S.name' => SORT_DESC],
+            ],
+            'priority_id' => [
+                'asc'  => ['P.name' => SORT_ASC],
+                'desc' => ['P.name' => SORT_DESC],
+            ],
+            'category_id' => [
+                'asc'  => ['C.name' => SORT_ASC],
+                'desc' => ['C.name' => SORT_DESC],
+            ],
+            'id',
+            'subject',
+            'completed_at',
+            'created_at',
+        ]);
+        $dataProvider->setSort($sort);
 
         if (!$this->load($queryParams) || !$this->validate()) {
             return $dataProvider;

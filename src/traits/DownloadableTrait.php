@@ -79,5 +79,5 @@ trait DownloadableTrait
         $name = time() . '_' . Inflector::slug($name) . '.' . $this->file->extension;
 
         return $name;
-    }ё
+    }
 }
