@@ -92,6 +92,10 @@
     word-wrap: break-word;
 }
 
+.comment.attachment p {
+    padding-bottom: 5px;
+}
+
 .comment.admin-comment p {
     background-color: #f3f3f3;
 }
@@ -165,6 +169,10 @@
 
     padding: 10px 25px;
     margin-top: 18px;
+}
+
+.comment-attachment {
+    text-align: right;
 }
 
 /* Responsive styles */

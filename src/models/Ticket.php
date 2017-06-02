@@ -3,33 +3,39 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketQuery;
+use hexa\yiisupport\interfaces\ConfigInterface;
+use hexa\yiisupport\traits\DownloadableTrait;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\UploadedFile as File;
 
 /**
  * This is the model class for table "ticket".
  *
- * @property integer   $id
- * @property string    $subject
- * @property string    $content
- * @property integer   $status_id
- * @property integer   $priority_id
- * @property integer   $category_id
- * @property integer   $created_by
- * @property string    $created_at
- * @property string    $completed_at
- * @property string    $updated_at
+ * @property integer     $id
+ * @property string      $subject
+ * @property string      $content
+ * @property integer     $status_id
+ * @property integer     $priority_id
+ * @property integer     $category_id
+ * @property integer     $created_by
+ * @property string      $created_at
+ * @property string      $completed_at
+ * @property string      $updated_at
+ * @property string|File $file
  *
- * @property Category  $category
- * @property Priority  $priority
- * @property Status    $status
- * @property Comment[] $comments
+ * @property Category    $category
+ * @property Priority    $priority
+ * @property Status      $status
+ * @property Comment[]   $comments
  */
 class Ticket extends ActiveRecord
 {
+    use DownloadableTrait;
+
     /**
      * @inheritdoc
      */
@@ -103,6 +109,13 @@ class Ticket extends ActiveRecord
             [['content'], 'string', 'min' => 3, 'max' => 1000],
             [['status_id', 'priority_id', 'category_id'], 'integer'],
             ['status_id', 'default', 'value' => Status::defaultId()],
+            [
+                '!file',
+                'file',
+                'checkExtensionByMimeType' => true,
+                'extensions'               => ['png', 'jpg', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx'],
+                'mimeTypes'                => ['image/png', 'image/jpeg']
+            ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],
             [
@@ -245,6 +258,16 @@ class Ticket extends ActiveRecord
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUploadPath()
+    {
+        $path = \Yii::$container->get(ConfigInterface::class)->get('params.uploadDir');
+
+        return $path . '/ticket/';
     }
 
     /**

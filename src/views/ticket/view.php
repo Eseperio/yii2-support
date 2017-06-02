@@ -38,6 +38,13 @@ $this->params['breadcrumbs'][] = $this->title; ?>
             'status.name',
             'priority.name',
             'category.name',
+            [
+                'attribute' => 'file',
+                'format'    => 'html',
+                'value'     => function ($model) {
+                    return \yii\helpers\Html::a($model->basename(), $model->file);
+                }
+            ],
             'completed_at',
             'created_at',
             'updated_at',

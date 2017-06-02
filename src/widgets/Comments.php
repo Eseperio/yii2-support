@@ -46,7 +46,7 @@ class Comments extends Widget
      * @var array the HTML attributes for the widget container tag.
      * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
      */
-    public $formOptions = [];
+    public $formOptions = ['enctype' => 'multipart/form-data'];
 
     /**
      * @var array comment widget client options

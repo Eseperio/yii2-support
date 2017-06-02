@@ -2,16 +2,16 @@
 
 namespace hexa\yiisupport\controllers;
 
-use hexa\yiisupport\actions\CreateAction;
 use hexa\yiisupport\actions\DeleteAction;
-use hexa\yiisupport\actions\IndexAction;
 use hexa\yiisupport\actions\ResolveAction;
 use hexa\yiisupport\actions\UpdateAction;
 use hexa\yiisupport\models\Category;
 use hexa\yiisupport\models\Priority;
+use hexa\yiisupport\models\search\TicketSearch;
 use hexa\yiisupport\models\Ticket;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
+use yii\web\UploadedFile;
 
 /**
  * Class TicketController
@@ -29,47 +29,6 @@ class TicketController extends Controller
         $priorities = Priority::list();
 
         return [
-            'index'   => [
-                'class'          => IndexAction::className(),
-                'modelClass'     => $className,
-                'query'          => function ($query) {
-                    $query->joinWith(['status S', 'priority P', 'category C']);
-                },
-                'params'         => [
-                    'isUpdate' => $this->config->get('buttons.update'),
-                    'isDelete' => $this->config->get('buttons.update'),
-                ],
-                'providerParams' => [
-                    'sort' => [
-                        'attributes' => [
-                            'status_id'   => [
-                                'asc'  => ['S.name' => SORT_ASC],
-                                'desc' => ['S.name' => SORT_DESC],
-                            ],
-                            'priority_id' => [
-                                'asc'  => ['P.name' => SORT_ASC],
-                                'desc' => ['P.name' => SORT_DESC],
-                            ],
-                            'category_id' => [
-                                'asc'  => ['C.name' => SORT_ASC],
-                                'desc' => ['C.name' => SORT_DESC],
-                            ],
-                            'id',
-                            'subject',
-                            'completed_at',
-                            'created_at',
-                        ]
-                    ]
-                ]
-            ],
-            'create'  => [
-                'class'      => CreateAction::className(),
-                'modelClass' => $className,
-                'params'     => [
-                    'categories' => $categories,
-                    'priorities' => $priorities
-                ]
-            ],
             'delete'  => [
                 'class'      => DeleteAction::className(),
                 'modelClass' => $className
@@ -125,6 +84,28 @@ class TicketController extends Controller
     }
 
     /**
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $query = Ticket::find();
+        if (!\Yii::$app->user->can($this->config->get('adminRole'))) {
+            $query->byUserId(\Yii::$app->user->id);
+        }
+
+        $filterModel  = new TicketSearch();
+        $dataProvider = $filterModel->search(\Yii::$app->request->queryParams, [
+            'query' => $query
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'isUpdate'     => $this->config->get('buttons.update'),
+            'isDelete'     => $this->config->get('buttons.update'),
+        ]);
+    }
+
+    /**
      * @param integer $id
      *
      * @return string
@@ -142,6 +123,31 @@ class TicketController extends Controller
             'model'              => $model,
             'comments'           => $model->comments,
             'authorNameTemplate' => $this->config->get('params.authorNameTemplate', "{name} {email}")
+        ]);
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new Ticket();
+
+        if (\Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->load(\Yii::$app->request->post()) &&
+                $model->validate() &&
+                $model->download()->save(false)
+            ) {
+                return $this->redirect(['ticket/view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('create', [
+            'model'      => $model,
+            'categories' => Category::list(),
+            'priorities' => Priority::list()
         ]);
     }
 }

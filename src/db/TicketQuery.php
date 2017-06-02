@@ -49,6 +49,6 @@ class TicketQuery extends ActiveQuery
      */
     public function resolved($isResolved = true)
     {
-        return $this->andOnCondition(['T.status_id' => 'TS.id'])->andOnCondition(['TS.resolve' => (int)$isResolved]);
+        return $this->byAttribute('S.resolve', (int)$isResolved);
     }
 }

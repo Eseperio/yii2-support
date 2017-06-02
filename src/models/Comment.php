@@ -3,6 +3,8 @@
 namespace hexa\yiisupport\models;
 
 use hexa\yiisupport\db\TicketCommentQuery;
+use hexa\yiisupport\interfaces\ConfigInterface;
+use hexa\yiisupport\traits\DownloadableTrait;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
@@ -12,6 +14,7 @@ use yii\web\IdentityInterface;
  *
  * @property integer           $id
  * @property string            $content
+ * @property string            $file
  * @property integer           $ticket_id
  * @property integer           $created_by
  * @property string            $created_at
@@ -23,6 +26,8 @@ use yii\web\IdentityInterface;
  */
 class Comment extends ActiveRecord
 {
+    use DownloadableTrait;
+
     /**
      * @inheritdoc
      */
@@ -67,7 +72,14 @@ class Comment extends ActiveRecord
                 'exist',
                 'targetClass'     => \Yii::$app->user->identityClass,
                 'targetAttribute' => 'id'
-            ]
+            ],
+            [
+                '!file',
+                'file',
+                'checkExtensionByMimeType' => true,
+                'extensions'               => ['png', 'jpg', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx'],
+                'mimeTypes'                => ['image/png', 'image/jpeg']
+            ],
         ];
     }
 
@@ -82,6 +94,7 @@ class Comment extends ActiveRecord
             'ticket_id'  => \Yii::t('comment', 'Ticket'),
             'created_at' => \Yii::t('comment', 'Created At'),
             'updated_at' => \Yii::t('comment', 'Updated At'),
+            'file'       => \Yii::t('comment', 'Add attachment'),
         ];
     }
 
@@ -150,5 +163,15 @@ class Comment extends ActiveRecord
     public static function find()
     {
         return (new TicketCommentQuery(get_called_class()))->alias(static::getAlias());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUploadPath()
+    {
+        $path = \Yii::$container->get(ConfigInterface::class)->get('params.uploadDir');
+
+        return $path . '/comment/';
     }
 }

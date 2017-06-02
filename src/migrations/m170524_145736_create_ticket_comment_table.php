@@ -21,6 +21,7 @@ class m170524_145736_create_ticket_comment_table extends Migration
             self::$_tableName, [
                 'id'         => $this->primaryKey(),
                 'content'    => $this->text(),
+                'file'       => $this->string(1000)->null(),
                 'ticket_id'  => $this->integer(),
                 'created_by' => $this->integer(),
                 'created_at' => $this->timestamp()->defaultValue(null),

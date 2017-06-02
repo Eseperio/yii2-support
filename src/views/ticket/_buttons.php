@@ -30,10 +30,9 @@ if (Yii::$app->user->can('deleteTicket') && $isDelete) :
     ]);
 endif;
 
-if (!$model->isResolved() ||
+if (!$model->isResolved() &&
     $isResolve &&
     (
-        !$model->isResolved() ||
         Yii::$app->user->can('isAuthor', ['ticket' => $model]) ||
         Yii::$app->user->can($adminRole)
     )

@@ -15,7 +15,7 @@ use yii\web\View;
 if (!empty($comments)) : ?>
     <ul class="comment-section">
         <?php foreach ($comments as $comment) : ?>
-            <li class="comment <?php echo $comment->isByAuthor() ? 'author' : 'admin'; ?>-comment"
+            <li class="comment <?php echo $comment->isByAuthor() ? 'author' : 'admin'; ?>-comment <?php echo $comment->file ? 'attachment' : null; ?>"
                 id="comment-<?php echo $comment->id; ?>">
                 <div class="info">
                     <a href="#comment-<?php echo $comment->id; ?>">
@@ -25,9 +25,18 @@ if (!empty($comments)) : ?>
                 </div>
 
                 <a class="avatar" href="#comment-<?php echo $comment->id; ?>">&nbsp;</a>
-
                 <p>
                     <?php echo nl2br(Html::encode($comment->content)); ?>
+
+                    <?php if ($comment->file) : ?>
+                        <span class="center-block text-right">
+                            <a href="<?php echo $comment->file; ?>" class="comment-attachment js-comment-attachment"
+                               data-pjax="0">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <?php echo Yii::t('comment', 'Attachment'); ?>
+                            </a>
+                        </span>
+                    <?php endif; ?>
                 </p>
 
             </li>

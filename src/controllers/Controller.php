@@ -12,6 +12,7 @@ namespace hexa\yiisupport\controllers;
 
 use hexa\yiisupport\interfaces\ConfigInterface;
 use hexa\yiisupport\models\Ticket;
+use hexa\yiisupport\SupportAsset;
 use yii\web\Controller as BaseController;
 use yii\web\NotFoundHttpException;
 
@@ -36,6 +37,8 @@ class Controller extends BaseController
         parent::__construct($id, $module, $config);
 
         $this->config = $configService;
+
+        $this->view->registerAssetBundle(SupportAsset::className());
     }
 
     /**

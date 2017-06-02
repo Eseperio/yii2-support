@@ -4,7 +4,7 @@ return [
     'id'                  => 'support',
     'controllerNamespace' => 'hexa\yiisupport\controllers',
     'components'          => [
-        'i18n' => [
+        'i18n'         => [
             'class'        => '\yii\i18n\I18N',
             'translations' => [
                 '*' => [
@@ -15,7 +15,8 @@ return [
         ],
     ],
     'params'              => [
-        'secret' => 'comment'
+        'secret'    => 'comment',
+        'uploadDir' => '@webroot/images/uploads'
     ],
     'adminRole'           => 'admin',
     'userRole'            => 'user',

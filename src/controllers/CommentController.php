@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
 /**
@@ -85,10 +86,15 @@ class CommentController extends Controller
         $hash = Json::decode($hash);
 
         $ticket = $this->isAuthor(ArrayHelper::getValue($hash, 'ticket_id'));
-        $model  = new Comment();
+
+        $model       = new Comment();
+        $model->file = UploadedFile::getInstance($model, 'file');
         $model->setAttributes($hash);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(\Yii::$app->request->post()) &&
+            $model->validate() &&
+            $model->download()->save(false)
+        ) {
             $ticket->setResolved(false)->touch('updated_at');
             $ticket->save(false);
 
@@ -101,6 +107,5 @@ class CommentController extends Controller
             'status' => 'error',
             'errors' => ActiveForm::validate($model)
         ]);
-
     }
 }

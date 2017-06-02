@@ -1,7 +1,6 @@
 <?php
 
 use yii\db\Migration;
-use yii\db\Schema;
 
 /**
  * Handles the creation of table `ticket`.
@@ -23,6 +22,7 @@ class m170524_145721_create_ticket_table extends Migration
                 'id'           => $this->primaryKey(),
                 'subject'      => $this->string(255)->notNull(),
                 'content'      => $this->text(),
+                'file'         => $this->string(1000)->null(),
                 'status_id'    => $this->integer(),
                 'priority_id'  => $this->integer(),
                 'category_id'  => $this->integer(),

@@ -16,8 +16,8 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $all    = Ticket::find()->count();
-        $opened = Ticket::find()->resolved(false)->count();
-        $closed = Ticket::find()->resolved(true)->count();
+        $opened = Ticket::find()->joinWith('status')->resolved(false)->count();
+        $closed = Ticket::find()->joinWith('status')->resolved(true)->count();
 
         return $this->render('index', [
             'all'    => $all,

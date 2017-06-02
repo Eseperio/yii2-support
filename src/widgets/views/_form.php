@@ -19,7 +19,9 @@ use yii\widgets\ActiveForm;
         'placeholder' => Yii::t('app', 'Add a comment...'),
         'rows'        => 4,
         'data'        => ['comment' => 'content']
-    ]); ?>
+    ]);
+
+    echo $form->field($model, 'file')->fileInput(); ?>
 
     <div class="comment-box-partial">
         <div class="button-container show">
