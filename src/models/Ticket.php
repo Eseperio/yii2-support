@@ -113,8 +113,8 @@ class Ticket extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => ['png', 'jpg', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx'],
-                'mimeTypes'                => ['image/png', 'image/jpeg']
+                'extensions'               => static::$extensions,
+                'mimeTypes'                => static::$mimeTypes
             ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],

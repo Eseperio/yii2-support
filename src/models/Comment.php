@@ -77,8 +77,8 @@ class Comment extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => true,
-                'extensions'               => ['png', 'jpg', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx'],
-                'mimeTypes'                => ['image/png', 'image/jpeg']
+                'extensions'               => static::$extensions,
+                'mimeTypes'                => static::$mimeTypes
             ],
         ];
     }

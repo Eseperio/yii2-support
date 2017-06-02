@@ -19,6 +19,37 @@ use yii\db\ActiveRecord as BaseActiveRecord;
 class ActiveRecord extends BaseActiveRecord
 {
     /**
+     * List of accepted extensions.
+     * @var array
+     */
+    public static $extensions = [
+        'png',
+        'jpg',
+        'pdf',
+        'doc',
+        'docx',
+        'ppt',
+        'pptx',
+        'xls',
+        'xlsx'
+    ];
+
+    /**
+     * List of accepted mime types.
+     * @var array
+     */
+    public static $mimeTypes = [
+        'image/png',
+        'image/jpeg',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.ms-excel',
+        'application/xml',
+        'application/mspowerpoint'
+    ];
+
+
+    /**
      * Make alias for table. Use first symbol of class.
      * @return string
      */
