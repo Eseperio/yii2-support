@@ -41,12 +41,13 @@ class Module extends BaseModule implements BootstrapInterface
     /**
      * @var string
      */
-    public $uploadDir = '@upload/uploads/support';
+    public $uploadDir = '@webroot/uploads/support';
 
     /**
+     * Url to upload folder.
      * @var string
      */
-    public $mediaUrl = '/media/get';
+    public $uploadUrl = '@web/uploads/support';
 
     /**
      * On/off action buttons for Ticket.
@@ -132,7 +133,7 @@ class Module extends BaseModule implements BootstrapInterface
     }
 
     /**
-     * Get param value.
+     * Retrieves value from module "params".
      *
      * @param string|int $key
      * @param mixed      $default
@@ -155,11 +156,14 @@ class Module extends BaseModule implements BootstrapInterface
 
     /**
      * Returns path to the upload dir.
+     *
+     * @return string
      * @throws InvalidConfigException
      */
-    public function getUploadDir()
+    public function getSaveDir()
     {
-        if (!$path = \Yii::getAlias($this->uploadDir)) {
+        $path = Yii::getAlias($this->uploadDir);
+        if (!file_exists($path)) {
             throw new InvalidConfigException('Invalid config $uploadDir');
         }
 
@@ -176,20 +180,24 @@ class Module extends BaseModule implements BootstrapInterface
      * @return string
      * @throws InvalidConfigException
      */
-    public function getMediaPath($name)
+    public function getPath($name)
     {
-        return $this->getUploadDir() . DIRECTORY_SEPARATOR . $name;
+        return $this->getSaveDir() . DIRECTORY_SEPARATOR . $name;
     }
 
     /**
-     * Return url for href or src attributes.
+     * Return url to file.
      *
      * @param string $name
      *
      * @return mixed
      */
-    public function getMediaUrl($name)
+    public function getUrl($name)
     {
-        return Url::to([$this->mediaUrl, 'name' => $name]);
+        if (is_callable($this->uploadUrl)) {
+            return call_user_func($this->uploadUrl, $this->getPath($name));
+        }
+
+        return Url::to($this->uploadUrl . '/' . $this->getOwnerPath() . '/' . $name);
     }
 }

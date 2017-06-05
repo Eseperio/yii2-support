@@ -1,5 +1,6 @@
 <?php
 
+use hexa\yiisupport\helpers\Html;
 use hexa\yiisupport\models\Ticket;
 use hexa\yiisupport\widgets\Comments;
 use yii\widgets\DetailView;
@@ -42,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                 'attribute' => 'file',
                 'format'    => 'html',
                 'value'     => function ($model) {
-                    return \yii\helpers\Html::a($model->basename(), $model->file);
+                    return Html::a($model->basename(), Yii::$app->controller->module->getUrl($model->file));
                 }
             ],
             'completed_at',

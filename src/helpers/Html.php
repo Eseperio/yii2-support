@@ -10,8 +10,6 @@
 
 namespace hexa\yiisupport\helpers;
 
-use hexa\yiisupport\interfaces\ConfigInterface;
-
 /**
  * Class Html
  */
@@ -25,33 +23,10 @@ class Html extends \yii\helpers\Html
      */
     public static function title($title, $tag)
     {
-        if (static::config('showTitle')) {
+        if (\Yii::$app->controller->module->showTitle) {
             return static::tag($tag, static::encode($title));
         }
 
         return null;
-    }
-
-    /**
-     * @param string $text
-     *
-     * @return string
-     */
-    public static function translate($text)
-    {
-        return \Yii::t(static::config('languageCategory', 'app'), $text);
-    }
-
-    /**
-     * @param string $key
-     * @param null   $default
-     *
-     * @see ConfigInterface::get()
-     *
-     * @return ConfigInterface
-     */
-    public static function config($key, $default = null)
-    {
-        return \Yii::$container->get(ConfigInterface::class)->get($key, $default);
     }
 }

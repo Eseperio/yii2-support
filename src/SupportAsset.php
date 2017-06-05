@@ -23,6 +23,9 @@ class SupportAsset extends AssetBundle
      */
     public $sourcePath = '@yiisupport/assets';
 
+    /**
+     * @inheritdoc
+     */
     public $css = [
         'css/support.css'
     ];

@@ -10,7 +10,7 @@
 
 namespace hexa\yiisupport\traits;
 
-use Yii;
+use yii\helpers\FileHelper;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 use yii\web\UploadedFile;
@@ -29,15 +29,13 @@ trait DownloadableTrait
      */
     public function download()
     {
-        $basePath = Yii::$app->controller->module->getUploadDir();
-        $path     = $this->getUploadPath($basePath);
-
+        $basePath = FileHelper::normalizePath($this->getUploadPath());
         if ($this->file instanceof UploadedFile && file_exists($basePath)) {
 
-            $path .= $this->generateName($this->file->baseName);
-            $isOk = $this->file->saveAs($path) ? $path : false;
+            $name = $this->generateName($this->file->baseName);
+            $path = $basePath . '/' . $name;
 
-            $this->file = ($isOk ? str_replace($basePath, '', $path) : false);
+            $this->file = $this->file->saveAs($path) ? $name : false;
         }
 
         return $this;
@@ -64,13 +62,6 @@ trait DownloadableTrait
     }
 
     /**
-     * @param string $uploadRoot Document root for uploads.
-     *
-     * @return string
-     */
-    abstract public function getUploadPath($uploadRoot);
-
-    /**
      * @param string $name
      *
      * @return string
@@ -81,5 +72,13 @@ trait DownloadableTrait
         $name = time() . '_' . Inflector::slug($name) . '.' . $this->file->extension;
 
         return $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUploadPath()
+    {
+        return \Yii::$app->controller->module->getSaveDir();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace hexa\yiisupport\models;
 
-use hexa\yiisupport\db\TicketCommentQuery;
+use hexa\yiisupport\db\CommentQuery;
 use hexa\yiisupport\traits\DownloadableTrait;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -124,6 +124,7 @@ class Comment extends ActiveRecord
     }
 
     /**
+     * Is it ticket author comment or no.
      * @return bool
      */
     public function isByAuthor()
@@ -157,18 +158,10 @@ class Comment extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TicketCommentQuery
+     * @return CommentQuery
      */
     public static function find()
     {
-        return (new TicketCommentQuery(get_called_class()))->alias(static::getAlias());
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getUploadPath($uploadRoot)
-    {
-        return $uploadRoot . '/comment';
+        return (new CommentQuery(get_called_class()))->alias(static::getAlias());
     }
 }

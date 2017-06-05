@@ -1,6 +1,6 @@
 <?php
 /**
- * TicketStatusQuery
+ * CommentQuery
  * @version     1.0
  * @license     http://mit-license.org/
  * @coder       Yevhenii Pylypenko <i.pylypenko@hexa.com.ua>
@@ -10,26 +10,18 @@
 
 namespace hexa\yiisupport\db;
 
-use hexa\yiisupport\models\Status;
-
 /**
- * Class TicketStatusQuery
+ * Class CommentQuery
  */
-class TicketStatusQuery extends ActiveQuery
+class CommentQuery extends ActiveQuery
 {
     /**
+     * @param integer $id
+     *
      * @return $this
      */
-    public function resolved()
+    public function byTicketId($id)
     {
-        return $this->byAttribute('resolve', true);
-    }
-
-    /**
-     * @return $this
-     */
-    public function default()
-    {
-        return $this->byAttribute('default', true);
+        return $this->byAttribute('ticket_id', $id);
     }
 }

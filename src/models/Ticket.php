@@ -260,14 +260,6 @@ class Ticket extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getUploadPath($uploadRoot)
-    {
-        return $uploadRoot . '/ticket';
-    }
-
-    /**
      * @return TicketQuery
      */
     public static function find()

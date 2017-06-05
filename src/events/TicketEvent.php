@@ -10,7 +10,7 @@
 
 namespace hexa\yiisupport\events;
 
-use hexa\yiisupport\models\Comment;
+use hexa\yiisupport\models\Ticket;
 use yii\base\Event;
 
 /**
@@ -19,9 +19,9 @@ use yii\base\Event;
 class TicketEvent extends Event
 {
     /**
-     * @var Comment
+     * @var Ticket
      */
-    public $comment;
+    public $ticket;
 
     /**
      * @var bool

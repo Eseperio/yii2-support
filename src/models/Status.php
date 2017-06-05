@@ -2,7 +2,7 @@
 
 namespace hexa\yiisupport\models;
 
-use hexa\yiisupport\db\TicketStatusQuery;
+use hexa\yiisupport\db\StatusQuery;
 
 /**
  * This is the model class for table "ticket_status".
@@ -89,10 +89,10 @@ class Status extends ActiveRecord
     }
 
     /**
-     * @return TicketStatusQuery
+     * @return StatusQuery
      */
     public static function find()
     {
-        return (new TicketStatusQuery(get_called_class()))->alias(static::getAlias());
+        return (new StatusQuery(get_called_class()))->alias(static::getAlias());
     }
 }
