@@ -167,8 +167,8 @@ class Module extends BaseModule implements BootstrapInterface
             throw new InvalidConfigException('Invalid config $uploadDir');
         }
 
-        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR . $this->getOwnerPath(), 0777)) {
-            return $path . DIRECTORY_SEPARATOR . $this->getOwnerPath();
+        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR, 0777)) {
+            return $path . DIRECTORY_SEPARATOR;
         }
 
         throw new InvalidConfigException('$uploadDir is not writable');

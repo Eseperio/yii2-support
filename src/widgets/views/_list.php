@@ -31,7 +31,7 @@ if (!empty($comments)) : ?>
                     <?php if ($comment->file) : ?>
                         <span class="center-block text-right">
 
-                            <a href="<?php echo Yii::$app->controller->module->getUploadUrl($comment->file); ?>"
+                            <a href="<?php echo Yii::$app->controller->module->getUrl($comment->file); ?>"
                                class="comment-attachment js-comment-attachment"
                                data-pjax="0">
                                 <i class="fa fa-paperclip" aria-hidden="true"></i>
