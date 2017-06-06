@@ -167,15 +167,11 @@ class Module extends BaseModule implements BootstrapInterface
     public function getSaveDir()
     {
         $path = Yii::getAlias($this->uploadDir);
-        if (!file_exists($path)) {
-            throw new InvalidConfigException('Invalid config $uploadDir');
+        if (FileHelper::createDirectory($path, 0777) && file_exists($path)) {
+            return $path;
         }
 
-        if (FileHelper::createDirectory($path . DIRECTORY_SEPARATOR, 0777)) {
-            return $path . DIRECTORY_SEPARATOR;
-        }
-
-        throw new InvalidConfigException('$uploadDir is not writable');
+        throw new InvalidConfigException('Invalid config $uploadDir');
     }
 
     /**
@@ -202,7 +198,7 @@ class Module extends BaseModule implements BootstrapInterface
             return call_user_func($this->uploadUrl, $name);
         }
 
-        return Url::to($this->uploadUrl . '/' . $this->getOwnerPath() . '/' . $name);
+        return Url::to($this->uploadUrl . '/' . $name);
     }
 
     /**
