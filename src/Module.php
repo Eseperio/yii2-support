@@ -212,6 +212,6 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function onCommentCreate(Comment $model)
     {
-        $this->trigger(static::EVENT_AFTER_COMMENT_CREATE, new CommentEvent(['comment' => $model]));
+        $this->trigger(static::EVENT_AFTER_COMMENT_CREATE, new CommentEvent(['sender' => $model]));
     }
 }

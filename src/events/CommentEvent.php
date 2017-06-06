@@ -19,11 +19,6 @@ use yii\base\Event;
 class CommentEvent extends Event
 {
     /**
-     * @var Comment
-     */
-    public $comment;
-
-    /**
      * @var bool
      */
     public $isValid;
