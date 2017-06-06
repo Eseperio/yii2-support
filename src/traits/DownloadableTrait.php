@@ -62,6 +62,14 @@ trait DownloadableTrait
     }
 
     /**
+     * @return string
+     */
+    public function getUploadPath()
+    {
+        return \Yii::$app->controller->module->getSaveDir();
+    }
+
+    /**
      * @param string $name
      *
      * @return string
@@ -72,13 +80,5 @@ trait DownloadableTrait
         $name = time() . '_' . Inflector::slug($name) . '.' . $this->file->extension;
 
         return $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUploadPath()
-    {
-        return \Yii::$app->controller->module->getSaveDir();
     }
 }

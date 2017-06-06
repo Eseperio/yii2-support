@@ -195,7 +195,7 @@ class Module extends BaseModule implements BootstrapInterface
     public function getUrl($name)
     {
         if (is_callable($this->uploadUrl)) {
-            return call_user_func($this->uploadUrl, $this->getPath($name));
+            return call_user_func($this->uploadUrl, $name);
         }
 
         return Url::to($this->uploadUrl . '/' . $this->getOwnerPath() . '/' . $name);
