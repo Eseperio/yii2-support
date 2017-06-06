@@ -157,6 +157,19 @@ class Comment extends ActiveRecord
     }
 
     /**
+     * @param bool  $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            return \Yii::$app->controller->module->onCommentCreate($this);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
      * @inheritdoc
      * @return CommentQuery
      */

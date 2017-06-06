@@ -2,8 +2,10 @@
 
 namespace hexa\yiisupport;
 
+use hexa\yiisupport\events\CommentEvent;
 use hexa\yiisupport\helpers\Config;
 use hexa\yiisupport\interfaces\ConfigInterface;
+use hexa\yiisupport\models\Comment;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\InvalidConfigException;
@@ -18,6 +20,8 @@ use yii\helpers\Url;
  */
 class Module extends BaseModule implements BootstrapInterface
 {
+    const EVENT_AFTER_COMMENT_CREATE = 'afterCommentCreate';
+
     /**
      * @var string Admin role
      */
@@ -199,5 +203,15 @@ class Module extends BaseModule implements BootstrapInterface
         }
 
         return Url::to($this->uploadUrl . '/' . $this->getOwnerPath() . '/' . $name);
+    }
+
+    /**
+     * Triggers event after comment create.
+     *
+     * @param Comment $model
+     */
+    public function onCommentCreate(Comment $model)
+    {
+        $this->trigger(static::EVENT_AFTER_COMMENT_CREATE, new CommentEvent(['comment' => $model]));
     }
 }
