@@ -88,7 +88,7 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-        $query = Ticket::find();
+        $query = Ticket::find()->joinWith(['category', 'status', 'priority']);
         if (!\Yii::$app->user->can($this->config->get('adminRole'))) {
             $query->byUserId(\Yii::$app->user->id);
         }
