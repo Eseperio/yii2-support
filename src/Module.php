@@ -70,6 +70,7 @@ class Module extends BaseModule implements BootstrapInterface
     public $extensions = [
         'png',
         'jpg',
+        'jpeg',
         'pdf',
         'doc',
         'docx',
@@ -84,16 +85,16 @@ class Module extends BaseModule implements BootstrapInterface
      * @var array
      */
     public $mimeTypes = [
-        'image/png',
-        'image/jpeg',
-        'application/pdf',
-        'application/msword',
-        'application/vnd.ms-excel',
-        'application/xml',
-        'application/mspowerpoint',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentatio',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        'png'  => 'image/png',
+        'jpeg' => 'image/jpeg',
+        'jpg'  => 'image/jpeg',
+        'pdf'  => 'application/pdf',
+        'doc'  => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'ppt'  => 'application/vnd.ms-powerpoint',
+        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'xls'  => 'application/vnd.ms-excel',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ];
 
     /**
