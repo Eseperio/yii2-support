@@ -93,8 +93,7 @@ class Module extends BaseModule implements BootstrapInterface
         'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'ppt'  => 'application/vnd.ms-powerpoint',
         'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'xls'  => 'application/vnd.ms-excel',
-        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'xls'  => 'application/vnd.ms-excel'
     ];
 
     /**
