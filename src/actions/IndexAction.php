@@ -10,6 +10,7 @@
 
 namespace hexa\yiisupport\actions;
 
+use hexa\yiisupport\models\ActiveRecord;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -59,7 +60,9 @@ class IndexAction extends BaseAction
      */
     protected function getQuery()
     {
-        $query = $this->modelClass::find();
+        /** @var ActiveRecord $class */
+        $class = $this->modelClass;
+        $query = $class::find();
 
         if (!\Yii::$app->user->can($this->config->get('adminRole'))) {
             $query->where(['created_by' => \Yii::$app->user->id]);

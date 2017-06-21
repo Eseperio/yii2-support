@@ -93,7 +93,9 @@ abstract class BaseAction extends Action
      */
     protected function findModel($id)
     {
-        if (($model = $this->modelClass::find()->byId($id)->one()) !== null) {
+        /** @var \hexa\yiisupport\models\ActiveRecord $class */
+        $class = $this->modelClass;
+        if (($model = $class::find()->byId($id)->one()) !== null) {
             return $model;
         }
 

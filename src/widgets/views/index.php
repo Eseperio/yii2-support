@@ -1,6 +1,6 @@
 <?php
 
-use hexa\yiisupport\db\ActiveRecord;
+use hexa\yiisupport\models\ActiveRecord;
 use hexa\yiisupport\models\Comment;
 use yii\web\View;
 use yii\widgets\Pjax;
