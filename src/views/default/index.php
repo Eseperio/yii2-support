@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var $closed integer
  **/
 
-$this->title                   = Yii::t('default', 'Dashboard');
+$this->title                   = Yii::t('app', 'Dashboard');
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="ticket-index">
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                                 <?php echo $all ?>
                             </h1>
                             <div>
-                                <?php echo Yii::t('default', 'Total tickets'); ?>
+                                <?php echo Yii::t('app', 'Total tickets'); ?>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                         <div class="col-xs-9 text-right">
                             <h3><?php echo $opened; ?></h3>
                             <div>
-                                <?php echo Yii::t('default', 'Open tickets'); ?>
+                                <?php echo Yii::t('app', 'Open tickets'); ?>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
                                 <?php echo $closed; ?>
                             </h3>
                             <span>
-                                <?php echo Yii::t('default', 'Closed tickets'); ?>
+                                <?php echo Yii::t('app', 'Closed tickets'); ?>
                             </span>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
 use hexa\yiisupport\helpers\Html;
 
 echo Html::a(
-    Yii::t('default', 'Update'),
+    Yii::t('app', 'Update'),
     ['update', 'id' => $model->id],
     ['class' => 'btn btn-primary']
 );

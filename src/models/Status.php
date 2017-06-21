@@ -85,7 +85,7 @@ class Status extends ActiveRecord
      */
     public static function defaultId()
     {
-        return static::find()->select('id')->default()->scalar();
+        return static::find()->select('id')->byDefault()->scalar();
     }
 
     /**

@@ -26,7 +26,7 @@ class StatusQuery extends ActiveQuery
     /**
      * @return $this
      */
-    public function default()
+    public function byDefault()
     {
         return $this->byAttribute('default', true);
     }

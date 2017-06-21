@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?php echo Html::submitButton(
-            Yii::t('default', 'Save'), [
+            Yii::t('status', 'Save'), [
                 'class' => 'btn btn-primary',
             ]
         ) ?>

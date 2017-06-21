@@ -14,7 +14,7 @@ echo Html::beginTag('div', $options)
     . Html::title(Html::encode($this->title), 'h1')
     . Html::beginTag('p')
     . Html::a(
-        Yii::t('default', "Create"),
+        Yii::t('app', "Create"),
         ['create'],
         ['class' => 'btn btn-success']
     )

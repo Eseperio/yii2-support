@@ -7,12 +7,12 @@ use hexa\yiisupport\helpers\Html;
 
 
 echo Html::a(
-    Yii::t('default', 'Delete'),
+    Yii::t('app', 'Delete'),
     ['delete', 'id' => $model->id],
     [
         'class' => 'btn btn-danger',
         'data'  => [
-            'confirm' => Yii::t('default', 'Are you sure you want to delete this item?'),
+            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
             'method'  => 'post',
         ],
     ]
