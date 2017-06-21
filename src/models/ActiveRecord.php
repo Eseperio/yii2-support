@@ -41,7 +41,7 @@ class ActiveRecord extends BaseActiveRecord
     /**
      * @return array
      */
-    public static function list()
+    public static function getList()
     {
         return static::find()->select(['name', 'id'])->indexBy('id')->column();
     }

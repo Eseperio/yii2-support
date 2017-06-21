@@ -25,8 +25,8 @@ class TicketController extends Controller
     public function actions()
     {
         $className  = Ticket::className();
-        $categories = Category::list();
-        $priorities = Priority::list();
+        $categories = Category::getList();
+        $priorities = Priority::getList();
 
         return [
             'delete'  => [
@@ -146,8 +146,8 @@ class TicketController extends Controller
 
         return $this->render('create', [
             'model'      => $model,
-            'categories' => Category::list(),
-            'priorities' => Priority::list()
+            'categories' => Category::getList(),
+            'priorities' => Priority::getList()
         ]);
     }
 }
