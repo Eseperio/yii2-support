@@ -19,13 +19,13 @@ $isResolve = $config->get('buttons.resolve');
 
 echo Html::beginTag('div', ['class' => 'btn-group margin-bottom-20']);
 if (Yii::$app->user->can('updateTicket') && $isUpdate) :
-    echo $this->render('_update-button', [
+    echo $this->render('@yiisupport/views/layouts/_update-button', [
         'model' => $model
     ]);
 endif;
 
 if (Yii::$app->user->can('deleteTicket') && $isDelete) :
-    echo $this->render('_delete-button', [
+    echo $this->render('@yiisupport/views/layouts/_delete-button', [
         'model' => $model
     ]);
 endif;
