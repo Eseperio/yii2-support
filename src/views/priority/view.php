@@ -5,8 +5,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Priority */
 
-$this->title                   = Yii::t('priority', 'Priority: {priority}', ['priority' => $model->name]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('priority', 'Priorities'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Priority: {priority}', ['priority' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Priorities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="priority-view">

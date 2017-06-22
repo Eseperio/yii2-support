@@ -88,12 +88,12 @@ class Comment extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => \Yii::t('comment', 'ID'),
-            'content'    => \Yii::t('comment', 'Content'),
-            'ticket_id'  => \Yii::t('comment', 'Ticket'),
-            'created_at' => \Yii::t('comment', 'Created At'),
-            'updated_at' => \Yii::t('comment', 'Updated At'),
-            'file'       => \Yii::t('comment', 'Add attachment'),
+            'id'         => \Yii::t('support', 'ID'),
+            'content'    => \Yii::t('support', 'Content'),
+            'ticket_id'  => \Yii::t('support', 'Ticket'),
+            'created_at' => \Yii::t('support', 'Created At'),
+            'updated_at' => \Yii::t('support', 'Updated At'),
+            'file'       => \Yii::t('support', 'Add attachment'),
         ];
     }
 

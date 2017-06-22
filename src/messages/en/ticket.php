@@ -19,5 +19,5 @@ return [
     'Completed At' => 'Completed at',
     'Created At'   => 'Created At',
     'Updated At'   => 'Updated At',
-    'Tickets'      => 'Тикеты'
+    'Tickets'      => 'Tickets'
 ];

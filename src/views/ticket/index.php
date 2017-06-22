@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var $isDelete     bool
  */
 
-$this->title                   = Yii::t('ticket', 'Tickets');
+$this->title                   = Yii::t('support', 'Tickets');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->beginContent('@yiisupport/views/layouts/index.php', [

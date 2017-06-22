@@ -35,7 +35,7 @@ if (!empty($comments)) : ?>
                                class="comment-attachment js-comment-attachment"
                                data-pjax="0">
                                 <i class="fa fa-paperclip" aria-hidden="true"></i>
-                                <?php echo Yii::t('comment', 'Attachment'); ?>
+                                <?php echo Yii::t('support', 'Attachment'); ?>
                             </a>
                         </span>
                     <?php endif; ?>

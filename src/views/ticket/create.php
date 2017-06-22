@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Ticket */
 
-$this->title                   = Yii::t('ticket', 'Create Ticket');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Create Ticket');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->beginContent('@yiisupport/views/layouts/create.php', [

@@ -3,10 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Category */
 
-$this->title                   = Yii::t('category', 'Update Category: {category}', ['category' => $model->name]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('category', 'Categories'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Update Category: {category}', ['category' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('category', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('support', 'Update');
 
 $this->beginContent('@yiisupport/views/layouts/update.php', [
     'options' => [

@@ -41,9 +41,9 @@ class Priority extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'    => \Yii::t('priority', 'ID'),
-            'name'  => \Yii::t('priority', 'Priority'),
-            'color' => \Yii::t('priority', 'Color'),
+            'id'    => \Yii::t('support', 'ID'),
+            'name'  => \Yii::t('support', 'Priority'),
+            'color' => \Yii::t('support', 'Color'),
         ];
     }
 

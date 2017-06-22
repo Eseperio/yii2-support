@@ -7,10 +7,10 @@
  * @var $priorities array
  */
 
-$this->title                   = Yii::t('ticket', 'Update Ticket: {ticket}', ['ticket' => $model->id]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Update Ticket: {ticket}', ['ticket' => $model->id]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('ticket', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('support', 'Update');
 
 $this->beginContent('@yiisupport/views/layouts/update.php', [
     'options' => [

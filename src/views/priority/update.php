@@ -3,10 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Priority */
 
-$this->title                   = Yii::t('priority', 'Update Priority: {priority}', ['priority' => $model->name]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('priority', 'Priorities'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Update Priority: {priority}', ['priority' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Priorities'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('priority', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('support', 'Update');
 
 $this->beginContent('@yiisupport/views/layouts/update.php', [
     'options' => [

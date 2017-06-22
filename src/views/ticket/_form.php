@@ -19,16 +19,16 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'subject')->textInput(['maxlength' => true]);
     echo $form->field($model, 'content')->textarea(['rows' => 6]);
     echo $form->field($model, 'priority_id')->dropdownList($priorities, [
-        'prompt' => Yii::t('ticket', 'Select Priority')
+        'prompt' => Yii::t('support', 'Select Priority')
     ]);
     echo $form->field($model, 'category_id')->dropdownList($categories, [
-        'prompt' => Yii::t('ticket', 'Select Category')
+        'prompt' => Yii::t('support', 'Select Category')
     ]);
     echo $form->field($model, 'file')->fileInput(); ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(
-            Yii::t('main', 'Save'), [
+            Yii::t('support', 'Save'), [
             'class' => 'btn btn-primary',
         ]); ?>
     </div>

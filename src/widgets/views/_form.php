@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin($formOptions); ?>
 
     <?php echo $form->field($model, 'content', ['template' => '{input}{error}'])->textarea([
-        'placeholder' => Yii::t('app', 'Add a comment...'),
+        'placeholder' => Yii::t('support', 'Add a comment...'),
         'rows'        => 4,
         'data'        => ['comment' => 'content']
     ]);
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
     <div class="comment-box-partial">
         <div class="button-container show">
             <?php echo Html::submitButton(
-                Yii::t('app', 'Comment'),
+                Yii::t('support', 'Comment'),
                 ['class' => 'btn btn-primary comment-submit']
             ); ?>
         </div>

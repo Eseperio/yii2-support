@@ -46,9 +46,9 @@ class Status extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'    => \Yii::t('ticket', 'ID'),
-            'name'  => \Yii::t('ticket', 'Status'),
-            'color' => \Yii::t('ticket', 'Color'),
+            'id'    => \Yii::t('support', 'ID'),
+            'name'  => \Yii::t('support', 'Status'),
+            'color' => \Yii::t('support', 'Color'),
         ];
     }
 

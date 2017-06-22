@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $model \hexa\yiisupport\models\Status */
 
-$this->title                   = Yii::t('status', 'Create Status');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('status', 'Statuses'), 'url' => ['index']];
+$this->title                   = Yii::t('support', 'Create Status');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Statuses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->beginContent('@yiisupport/views/layouts/create.php', [

@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title                   = Yii::t('category', 'Categories');
+$this->title                   = Yii::t('support', 'Categories');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->beginContent('@yiisupport/views/layouts/index.php', [

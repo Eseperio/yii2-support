@@ -14,9 +14,9 @@ use yii\widgets\DetailView;
  **/
 
 
-$this->title = Yii::t('ticket', 'Ticket: {subject}', ['subject' => $model->subject]);
+$this->title = Yii::t('support', 'Ticket: {subject}', ['subject' => $model->subject]);
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ticket', 'Tickets'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Tickets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="ticket-view">

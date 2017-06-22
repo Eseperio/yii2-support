@@ -146,16 +146,16 @@ class Ticket extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'created_by'   => \Yii::t('ticket', 'Author'),
-            'id'           => \Yii::t('ticket', 'ID'),
-            'subject'      => \Yii::t('ticket', 'Subject'),
-            'content'      => \Yii::t('ticket', 'Content'),
-            'status_id'    => \Yii::t('ticket', 'Status'),
-            'priority_id'  => \Yii::t('ticket', 'Priority'),
-            'category_id'  => \Yii::t('ticket', 'Category'),
-            'completed_at' => \Yii::t('ticket', 'Completed at'),
-            'created_at'   => \Yii::t('ticket', 'Created At'),
-            'updated_at'   => \Yii::t('ticket', 'Updated At'),
+            'created_by'   => \Yii::t('support', 'Author'),
+            'id'           => \Yii::t('support', 'ID'),
+            'subject'      => \Yii::t('support', 'Subject'),
+            'content'      => \Yii::t('support', 'Content'),
+            'status_id'    => \Yii::t('support', 'Status'),
+            'priority_id'  => \Yii::t('support', 'Priority'),
+            'category_id'  => \Yii::t('support', 'Category'),
+            'completed_at' => \Yii::t('support', 'Completed at'),
+            'created_at'   => \Yii::t('support', 'Created At'),
+            'updated_at'   => \Yii::t('support', 'Updated At'),
         ];
     }
 
