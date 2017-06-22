@@ -121,6 +121,14 @@ class Module extends BaseModule implements BootstrapInterface
 
         \Yii::setAlias('@yiisupport', __DIR__);
         \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
+
+        if (!isset(\Yii::$app->i18n->translations['support'])) {
+            \Yii::$app->i18n->translations['support'] = [
+                'class'          => 'yii\i18n\PhpMessageSource',
+                'sourceLanguage' => 'en',
+                'basePath'       => '@yiisupport/messages'
+            ];
+        }
     }
 
     /**

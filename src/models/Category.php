@@ -41,9 +41,9 @@ class Category extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'    => \Yii::t('category', 'ID'),
-            'name'  => \Yii::t('category', 'Category'),
-            'color' => \Yii::t('category', 'Color'),
+            'id'    => \Yii::t('support', 'ID'),
+            'name'  => \Yii::t('support', 'Category'),
+            'color' => \Yii::t('support', 'Color'),
         ];
     }
 
