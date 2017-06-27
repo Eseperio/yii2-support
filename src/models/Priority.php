@@ -30,6 +30,7 @@ class Priority extends ActiveRecord
     {
         return [
             [['name'], 'required'],
+            [['name'], 'unique'],
             [['name'], 'string', 'max' => 255],
             [['color'], 'string', 'max' => 45],
         ];
