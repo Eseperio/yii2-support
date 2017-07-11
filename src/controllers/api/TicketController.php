@@ -45,7 +45,7 @@ class TicketController extends ActiveController
 
         return new ActiveDataProvider([
             'query' => $modelClass::find()->where([
-                'client_id' => $userId
+                'created_by' => $userId
             ]),
         ]);
     }
