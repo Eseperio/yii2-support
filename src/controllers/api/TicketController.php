@@ -41,7 +41,7 @@ class TicketController extends ActiveController
     {
         $modelClass = $this->modelClass;
 
-        $userId = \Yii::$app->getUser()->getIdentity()->getId();
+        $userId = \Yii::$app->user->id;
 
         return new ActiveDataProvider([
             'query' => $modelClass::find()->where([
