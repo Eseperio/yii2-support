@@ -3,9 +3,11 @@
 namespace hexa\yiisupport;
 
 use hexa\yiisupport\events\CommentEvent;
+use hexa\yiisupport\events\TicketEvent;
 use hexa\yiisupport\helpers\Config;
 use hexa\yiisupport\interfaces\ConfigInterface;
 use hexa\yiisupport\models\Comment;
+use hexa\yiisupport\models\Ticket;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\InvalidConfigException;
@@ -21,6 +23,7 @@ use yii\helpers\Url;
 class Module extends BaseModule implements BootstrapInterface
 {
     const EVENT_AFTER_COMMENT_CREATE = 'afterCommentCreate';
+    const EVENT_AFTER_TICKET_CREATE = 'afterTicketCreate';
 
     /**
      * @var string Admin role
@@ -49,52 +52,60 @@ class Module extends BaseModule implements BootstrapInterface
 
     /**
      * Url to upload folder.
+     *
      * @var string
      */
     public $uploadUrl = '@web/uploads/support';
 
     /**
      * On/off action buttons for Ticket.
+     *
      * @var array
      */
-    public $buttons = [
-        'delete'  => true,
-        'update'  => true,
-        'resolve' => true,
-    ];
+    public $buttons
+        = [
+            'delete' => true,
+            'update' => true,
+            'resolve' => true,
+        ];
 
     /**
      * List of accepted extensions.
+     *
      * @var array
      */
-    public $extensions = [
-        'png',
-        'jpg',
-        'jpeg',
-        'pdf',
-        'doc',
-        'docx',
-        'ppt',
-        'pptx',
-        'xls',
-        'xlsx'
-    ];
+    public $extensions
+        = [
+            'png',
+            'jpg',
+            'jpeg',
+            'pdf',
+            'doc',
+            'docx',
+            'ppt',
+            'pptx',
+            'xls',
+            'xlsx'
+        ];
 
     /**
      * List of accepted mime types.
+     *
      * @var array
      */
-    public $mimeTypes = [
-        'png'  => 'image/png',
-        'jpeg' => 'image/jpeg',
-        'jpg'  => 'image/jpeg',
-        'pdf'  => 'application/pdf',
-        'doc'  => 'application/msword',
-        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'ppt'  => 'application/vnd.ms-powerpoint',
-        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'xls'  => 'application/vnd.ms-excel'
-    ];
+    public $mimeTypes
+        = [
+            'png' => 'image/png',
+            'jpeg' => 'image/jpeg',
+            'jpg' => 'image/jpeg',
+            'pdf' => 'application/pdf',
+            'doc' => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'ppt' => 'application/vnd.ms-powerpoint',
+            'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'xls' => 'application/vnd.ms-excel',
+            'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
 
     /**
      * @inheritdoc
@@ -107,7 +118,10 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function __construct($id, $parent = null, $config = [])
     {
-        $config = ArrayHelper::merge(require(__DIR__ . '/config/main.php'), $config);
+        $config = ArrayHelper::merge(
+            require(__DIR__ . '/config/main.php'),
+            $config
+        );
 
         parent::__construct($id, $parent, $config);
     }
@@ -120,13 +134,14 @@ class Module extends BaseModule implements BootstrapInterface
         parent::init();
 
         \Yii::setAlias('@yiisupport', __DIR__);
-        \Yii::$container->setSingleton(ConfigInterface::class, Config::class, [$this]);
+        \Yii::$container->setSingleton(ConfigInterface::class, Config::class,
+            [$this]);
 
-        if (!isset(\Yii::$app->i18n->translations['support'])) {
-            \Yii::$app->i18n->translations['support'] = [
-                'class'          => 'yii\i18n\PhpMessageSource',
+        if (!isset(\Yii::$app->getI18n()->translations['support'])) {
+            \Yii::$app->getI18n()->translations['support'] = [
+                'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
-                'basePath'       => '@yiisupport/messages'
+                'basePath' => '@yiisupport/messages'
             ];
         }
     }
@@ -136,9 +151,14 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        $app->getUrlManager()->addRules(
+            require(__DIR__ . '/config/routes.php'),
+            false
+        );
+
         if ($app instanceof Application) {
             $app->controllerMap[$this->id] = [
-                'class'  => 'hexa\yiisupport\console\RbacController',
+                'class' => 'hexa\yiisupport\console\RbacController',
                 'module' => $this,
             ];
         }
@@ -159,6 +179,7 @@ class Module extends BaseModule implements BootstrapInterface
 
     /**
      * Return sub folder for current user.
+     *
      * @return int|string
      */
     public function getOwnerPath()
@@ -216,6 +237,20 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function onCommentCreate(Comment $model)
     {
-        $this->trigger(static::EVENT_AFTER_COMMENT_CREATE, new CommentEvent(['sender' => $model]));
+        $this->trigger(static::EVENT_AFTER_COMMENT_CREATE,
+            new CommentEvent(['sender' => $model]));
+    }
+
+    /**
+     * Triggers event after ticket create.
+     *
+     * @param Ticket $model
+     */
+    public function onTicketCreate(Ticket $model)
+    {
+        $this->trigger(
+            static::EVENT_AFTER_COMMENT_CREATE,
+            new TicketEvent(['sender' => $model])
+        );
     }
 }

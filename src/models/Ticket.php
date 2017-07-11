@@ -50,12 +50,12 @@ class Ticket extends ActiveRecord
     {
         return [
             [
-                'class'              => TimestampBehavior::className(),
-                'value'              => new Expression('NOW()'),
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('NOW()'),
                 'createdAtAttribute' => 'created_at',
             ],
             [
-                'class'              => BlameableBehavior::className(),
+                'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => false,
             ],
@@ -72,7 +72,7 @@ class Ticket extends ActiveRecord
             'subject',
             'created_by',
             'content',
-            'status'   => function ($model) {
+            'status' => function ($model) {
                 return $model->status;
             },
             'priority' => function ($model) {
@@ -112,29 +112,29 @@ class Ticket extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => false,
-                'mimeTypes'                => \Yii::$app->controller->module->mimeTypes
+                'mimeTypes' => \Yii::$app->controller->module->mimeTypes
             ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],
             [
                 ['category_id'],
                 'exist',
-                'skipOnError'     => true,
-                'targetClass'     => Category::className(),
+                'skipOnError' => true,
+                'targetClass' => Category::className(),
                 'targetAttribute' => ['category_id' => 'id']
             ],
             [
                 ['priority_id'],
                 'exist',
-                'skipOnError'     => true,
-                'targetClass'     => Priority::className(),
+                'skipOnError' => true,
+                'targetClass' => Priority::className(),
                 'targetAttribute' => ['priority_id' => 'id']
             ],
             [
                 ['status_id'],
                 'exist',
-                'skipOnError'     => true,
-                'targetClass'     => Status::className(),
+                'skipOnError' => true,
+                'targetClass' => Status::className(),
                 'targetAttribute' => ['status_id' => 'id']
             ]
         ];
@@ -146,16 +146,16 @@ class Ticket extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'created_by'   => \Yii::t('support', 'Author'),
-            'id'           => \Yii::t('support', 'ID'),
-            'subject'      => \Yii::t('support', 'Subject'),
-            'content'      => \Yii::t('support', 'Content'),
-            'status_id'    => \Yii::t('support', 'Status'),
-            'priority_id'  => \Yii::t('support', 'Priority'),
-            'category_id'  => \Yii::t('support', 'Category'),
+            'created_by' => \Yii::t('support', 'Author'),
+            'id' => \Yii::t('support', 'ID'),
+            'subject' => \Yii::t('support', 'Subject'),
+            'content' => \Yii::t('support', 'Content'),
+            'status_id' => \Yii::t('support', 'Status'),
+            'priority_id' => \Yii::t('support', 'Priority'),
+            'category_id' => \Yii::t('support', 'Category'),
             'completed_at' => \Yii::t('support', 'Completed at'),
-            'created_at'   => \Yii::t('support', 'Created At'),
-            'updated_at'   => \Yii::t('support', 'Updated At'),
+            'created_at' => \Yii::t('support', 'Created At'),
+            'updated_at' => \Yii::t('support', 'Updated At'),
         ];
     }
 
@@ -209,7 +209,8 @@ class Ticket extends ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\Yii::$app->user->identityClass, ['id' => 'created_by']);
+        return $this->hasOne(\Yii::$app->user->identityClass,
+            ['id' => 'created_by']);
     }
 
     /**
@@ -217,7 +218,8 @@ class Ticket extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comment::className(), ['ticket_id' => 'id'])->orderBy(['created_at' => SORT_DESC]);
+        return $this->hasMany(Comment::className(), ['ticket_id' => 'id'])
+            ->orderBy(['created_at' => SORT_DESC]);
     }
 
     /**
@@ -247,11 +249,11 @@ class Ticket extends ActiveRecord
         $resolvedId = (int)Status::resolvedId();
 
         if ($isResolved && $resolvedId !== $this->status_id) {
-            $this->status_id    = $resolvedId;
+            $this->status_id = $resolvedId;
             $this->completed_at = new Expression('NOW()');
 
         } elseif (!$isResolved && $resolvedId === $this->status_id) {
-            $this->status_id    = Status::defaultId();
+            $this->status_id = Status::defaultId();
             $this->completed_at = null;
         }
 
@@ -264,5 +266,18 @@ class Ticket extends ActiveRecord
     public static function find()
     {
         return (new TicketQuery(get_called_class()))->alias(static::getAlias());
+    }
+
+    /**
+     * @param bool  $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            return \Yii::$app->controller->module->onTicketCreate($this);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
     }
 }

@@ -24,6 +24,11 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'category_id')->dropdownList($categories, [
         'prompt' => Yii::t('support', 'Select Category')
     ]);
+
+    if ($model->file) {
+        echo Html::a($model->basename(), Yii::$app->controller->module->getUrl($model->file), ['target' => '_blank']);
+    }
+
     echo $form->field($model, 'file')->fileInput(); ?>
 
     <div class="form-group">

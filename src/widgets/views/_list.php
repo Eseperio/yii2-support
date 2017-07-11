@@ -33,7 +33,7 @@ if (!empty($comments)) : ?>
 
                             <a href="<?php echo Yii::$app->controller->module->getUrl($comment->file); ?>"
                                class="comment-attachment js-comment-attachment"
-                               data-pjax="0">
+                               data-pjax="0" target="_blank">
                                 <i class="fa fa-paperclip" aria-hidden="true"></i>
                                 <?php echo Yii::t('support', 'Attachment'); ?>
                             </a>
