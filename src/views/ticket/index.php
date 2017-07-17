@@ -53,8 +53,8 @@ echo GridView::widget([
         [
             'class'          => 'yii\grid\ActionColumn',
             'visibleButtons' => [
-                'update' => Yii::$app->user->can($this->context->module->adminRole) && $isUpdate,
-                'delete' => Yii::$app->user->can($this->context->module->adminRole) && $isDelete,
+                'update' => Yii::$app->user->can('updateTicket'),
+                'delete' => Yii::$app->user->can('deleteTicket'),
             ]
         ],
     ],

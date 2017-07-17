@@ -36,7 +36,6 @@ class RbacController extends Controller
 
         $this
             ->addChild($userRole, $createTicket)   // Add createTicket to userRole
-
             ->addChild($adminRole, $createTicket)  // Add createTicket to adminRole
             ->addChild($adminRole, $deleteTicket)  // Add deleteTicket to adminRole
             ->addChild($adminRole, $updateTicket); // Add updateTicket to adminRole
