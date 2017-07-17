@@ -38,16 +38,6 @@ class m170524_145721_create_ticket_table extends Migration
         ], $tableOptions);
 
         $this->addForeignKey(
-            'FK_T_status_id',
-            self::$_tableName,
-            'status_id',
-            '{{%ticket_status}}',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
-
-        $this->addForeignKey(
             'FK_T_priority_id',
             self::$_tableName,
             'priority_id',
