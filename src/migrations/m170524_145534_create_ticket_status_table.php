@@ -17,12 +17,6 @@ class m170524_145534_create_ticket_status_table extends Migration
      */
     public function up()
     {
-        $tableSchema = \Yii::$app->getDb()->getTableSchema('ticket_status', true);
-
-        if($tableSchema !== null) {
-            $this->dropTable('ticket_status');
-        }
-
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
@@ -30,7 +24,7 @@ class m170524_145534_create_ticket_status_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'      => $this->primaryKey(),
+            'id'      => $this->primaryKey()->unsigned(),
             'name'    => $this->string(255)->notNull(),
             'color'   => $this->string(45),
             'default' => $this->integer(1)->defaultValue(0),
