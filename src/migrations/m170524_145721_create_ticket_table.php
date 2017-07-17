@@ -17,6 +17,12 @@ class m170524_145721_create_ticket_table extends Migration
      */
     public function up()
     {
+        $tableSchema = \Yii::$app->getDb()->getTableSchema('ticket', true);
+
+        if($tableSchema !== null) {
+            $this->dropTable('ticket');
+        }
+
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
