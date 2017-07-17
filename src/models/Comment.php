@@ -75,9 +75,9 @@ class Comment extends ActiveRecord
             [
                 '!file',
                 'file',
-                'checkExtensionByMimeType' => true,
-                'extensions'               => \Yii::$app->controller->module->extensions,
-                'mimeTypes'                => \Yii::$app->controller->module->mimeTypes
+                'checkExtensionByMimeType' => false,
+                'extensions' => \Yii::$app->controller->module->extensions,
+                'wrongExtension' => 'Extension of filename "{file}" is not allowed'
             ],
         ];
     }

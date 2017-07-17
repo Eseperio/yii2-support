@@ -112,7 +112,8 @@ class Ticket extends ActiveRecord
                 '!file',
                 'file',
                 'checkExtensionByMimeType' => false,
-                'mimeTypes' => \Yii::$app->controller->module->mimeTypes
+                'extensions' => \Yii::$app->controller->module->extensions,
+                'wrongExtension' => 'Extension of filename "{file}" is not allowed'
             ],
             [['created_at', 'updated_at'], 'safe'],
             [['subject'], 'string', 'min' => 3, 'max' => 255],
