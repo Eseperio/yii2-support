@@ -24,7 +24,7 @@ class m170524_145710_create_ticket_category_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'    => $this->primaryKey()->unsigned(),
+            'id'    => $this->primaryKey(),
             'name'  => $this->string(255)->notNull(),
             'color' => $this->string(45)
         ], $tableOptions);

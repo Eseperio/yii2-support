@@ -24,7 +24,7 @@ class m170524_145721_create_ticket_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'           => $this->primaryKey()->unsigned(),
+            'id'           => $this->primaryKey(),
             'subject'      => $this->string(255)->notNull(),
             'content'      => $this->text(),
             'file'         => $this->string(1000)->null(),
