@@ -24,25 +24,15 @@ class TicketController extends Controller
      */
     public function actions()
     {
-        $className  = Ticket::className();
-        $categories = Category::getList();
-        $priorities = Priority::getList();
+        $className = Ticket::className();
 
         return [
-            'delete'  => [
-                'class'      => DeleteAction::className(),
+            'delete' => [
+                'class' => DeleteAction::className(),
                 'modelClass' => $className
             ],
-            'update'  => [
-                'class'      => UpdateAction::className(),
-                'modelClass' => $className,
-                'params'     => [
-                    'categories' => $categories,
-                    'priorities' => $priorities
-                ]
-            ],
             'resolve' => [
-                'class'      => ResolveAction::className(),
+                'class' => ResolveAction::className(),
                 'modelClass' => $className
             ]
         ];
@@ -56,27 +46,27 @@ class TicketController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'  => ['index', 'create', 'delete', 'update'],
+                'only' => ['index', 'create', 'delete', 'update'],
                 'rules' => [
                     [
-                        'allow'   => true,
+                        'allow' => true,
                         'actions' => ['delete'],
-                        'roles'   => ['deleteTicket'],
+                        'roles' => ['deleteTicket'],
                     ],
                     [
-                        'allow'   => true,
+                        'allow' => true,
                         'actions' => ['update'],
-                        'roles'   => ['updateTicket'],
+                        'roles' => ['updateTicket'],
                     ],
                     [
-                        'allow'   => true,
+                        'allow' => true,
                         'actions' => ['create'],
-                        'roles'   => ['createTicket'],
+                        'roles' => ['createTicket'],
                     ],
                     [
-                        'allow'   => true,
+                        'allow' => true,
                         'actions' => ['index'],
-                        'roles'   => ['@'],
+                        'roles' => ['@'],
                     ]
                 ],
             ],
@@ -89,19 +79,20 @@ class TicketController extends Controller
     public function actionIndex()
     {
         $query = Ticket::find()->joinWith(['category', 'status', 'priority']);
+
         if (!\Yii::$app->user->can($this->config->get('adminRole'))) {
             $query->byUserId(\Yii::$app->user->id);
         }
 
-        $filterModel  = new TicketSearch();
+        $filterModel = new TicketSearch();
         $dataProvider = $filterModel->search(\Yii::$app->request->queryParams, [
             'query' => $query
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'isUpdate'     => $this->config->get('buttons.update'),
-            'isDelete'     => $this->config->get('buttons.update'),
+            'isUpdate' => $this->config->get('buttons.update'),
+            'isDelete' => $this->config->get('buttons.update'),
         ]);
     }
 
@@ -114,15 +105,41 @@ class TicketController extends Controller
     public function actionView($id)
     {
         $model = $this->isAuthor($id);
-        $hash  = $model->getHash($this->config->get('params.secret'), [
+        $hash = $model->getHash($this->config->get('params.secret'), [
             'created_by' => \Yii::$app->user->id
         ]);
 
         return $this->render('view', [
-            'hash'               => $hash,
-            'model'              => $model,
-            'comments'           => $model->comments,
-            'authorNameTemplate' => $this->config->get('params.authorNameTemplate', "{name} {email}")
+            'hash' => $hash,
+            'model' => $model,
+            'comments' => $model->comments,
+            'authorNameTemplate' => $this->config->get('params.authorNameTemplate',
+                "{name} {email}")
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        $categories = Category::getList();
+        $priorities = Priority::getList();
+
+        $model = $this->isAuthor($id);
+
+        if (\Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->load(\Yii::$app->request->post()) && $model->validate()
+                && $model->download()->save(false)
+            ) {
+                return $this->redirect(['ticket/view', 'id' => $model->id]);
+            }
+        }
+
+
+        return $this->render('update', [
+            'model' => $model,
+            'categories' => $categories,
+            'priorities' => $priorities
         ]);
     }
 
@@ -136,16 +153,15 @@ class TicketController extends Controller
         if (\Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
 
-            if ($model->load(\Yii::$app->request->post()) &&
-                $model->validate() &&
-                $model->download()->save(false)
+            if ($model->load(\Yii::$app->request->post()) && $model->validate()
+                && $model->download()->save(false)
             ) {
                 return $this->redirect(['ticket/view', 'id' => $model->id]);
             }
         }
 
         return $this->render('create', [
-            'model'      => $model,
+            'model' => $model,
             'categories' => Category::getList(),
             'priorities' => Priority::getList()
         ]);
