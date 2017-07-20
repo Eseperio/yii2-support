@@ -306,10 +306,7 @@ class Ticket extends ActiveRecord
         $path = \Yii::getAlias(\Yii::$app->controller->module->uploadDir);
 
         if ($this->file) {
-            if (unlink($path . DS . $this->file)) {
-                return true;
-            }
-            return false;
+            return unlink($path . DS . $this->file);
         }
         return false;
     }
