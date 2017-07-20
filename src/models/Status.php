@@ -35,6 +35,7 @@ class Status extends ActiveRecord
     {
         return [
             [['name'], 'required'],
+            [['name'], 'trim'],
             [['name'], 'unique'],
             [['name'], 'string', 'max' => 255],
             [['color'], 'string', 'max' => 45],
