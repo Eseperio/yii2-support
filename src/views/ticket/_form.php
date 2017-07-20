@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin();
 
+    echo $form->errorSummary($model);
+
     echo $form->field($model, 'subject')->textInput(['maxlength' => true]);
     echo $form->field($model, 'content')->textarea(['rows' => 6]);
     echo $form->field($model, 'priority_id')->dropdownList($priorities, [
