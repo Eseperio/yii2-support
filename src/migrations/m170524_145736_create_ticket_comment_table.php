@@ -24,10 +24,10 @@ class m170524_145736_create_ticket_comment_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'         => $this->primaryKey(),
+            'id'         => $this->primaryKey()->unsigned(),
             'content'    => $this->text(),
             'file'       => $this->string(1000)->null(),
-            'ticket_id'  => $this->integer(),
+            'ticket_id'  => $this->integer()->unsigned(),
             'created_by' => $this->integer(),
             'created_at' => $this->timestamp()->defaultValue(null),
             'updated_at' => 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',

@@ -24,13 +24,13 @@ class m170524_145721_create_ticket_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'           => $this->primaryKey(),
+            'id'           => $this->primaryKey()->unsigned(),
             'subject'      => $this->string(255)->notNull(),
             'content'      => $this->text(),
             'file'         => $this->string(1000)->null(),
-            'status_id'    => $this->integer(),
-            'priority_id'  => $this->integer(),
-            'category_id'  => $this->integer(),
+            'status_id'    => $this->integer()->unsigned(),
+            'priority_id'  => $this->integer()->unsigned(),
+            'category_id'  => $this->integer()->unsigned(),
             'created_by'   => $this->integer(),
             'completed_at' => $this->timestamp()->defaultValue(null),
             'created_at'   => $this->timestamp()->defaultValue(null),

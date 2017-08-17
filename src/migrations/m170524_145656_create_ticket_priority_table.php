@@ -24,7 +24,7 @@ class m170524_145656_create_ticket_priority_table extends Migration
         }
 
         $this->createTable(self::$_tableName, [
-            'id'    => $this->primaryKey(),
+            'id'    => $this->primaryKey()->unsigned(),
             'name'  => $this->string(255)->notNull(),
             'color' => $this->string(45)
         ], $tableOptions);

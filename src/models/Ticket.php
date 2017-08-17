@@ -202,7 +202,10 @@ class Ticket extends ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(Status::className(), ['id' => 'status_id']);
+        return $this->hasOne(
+            Status::className(),
+            ['id' => 'status_id']
+        );
     }
 
     /**
@@ -210,8 +213,10 @@ class Ticket extends ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\Yii::$app->user->identityClass,
-            ['id' => 'created_by']);
+        return $this->hasOne(
+            \Yii::$app->user->identityClass,
+            ['id' => 'created_by']
+        );
     }
 
     /**
@@ -229,8 +234,12 @@ class Ticket extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comment::className(), ['ticket_id' => 'id'])
-            ->orderBy(['created_at' => SORT_DESC]);
+        return $this->hasMany(
+            Comment::className(),
+            ['ticket_id' => 'id'])
+            ->orderBy([
+                'created_at' => SORT_DESC
+            ]);
     }
 
     /**
