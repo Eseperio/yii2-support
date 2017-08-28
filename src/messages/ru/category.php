@@ -4,10 +4,10 @@ return [
     'Category'                    => 'Категория',
     'Color'                       => 'Цвет',
     'Save'                        => 'Сохранить',
-    'Create Category'             => 'Create Category',
-    'Categories'                  => 'Categories',
+    'Create Category'             => 'Добавить категорию',
+    'Categories'                  => 'Категории',
     'Update'                      => 'Обновить',
-    'Update Category: {category}' => 'Update Category: {category}',
-    'Category: {category}'        => 'Category: {category}',
+    'Update Category: {category}' => 'Обновить категорию: {category}',
+    'Category: {category}'        => 'Категория: {category}',
 
 ];
