@@ -6,7 +6,7 @@
 use hexa\yiisupport\helpers\Html;
 
 echo Html::a(
-    Yii::t('app', 'Resolve'),
+    Yii::t('support', 'Resolve'),
     ['resolve', 'id' => $model->id],
     ['class' => 'btn btn-success']
 );
