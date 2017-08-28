@@ -1,12 +1,12 @@
 <?php
 return [
     'ID'                          => 'ID',
-    'Category'                    => 'Category',
-    'Color'                       => 'Color',
-    'Save'                        => 'Save',
+    'Category'                    => 'Категория',
+    'Color'                       => 'Цвет',
+    'Save'                        => 'Сохранить',
     'Create Category'             => 'Create Category',
     'Categories'                  => 'Categories',
-    'Update'                      => 'Update',
+    'Update'                      => 'Обновить',
     'Update Category: {category}' => 'Update Category: {category}',
     'Category: {category}'        => 'Category: {category}',
 
