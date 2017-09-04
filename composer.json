@@ -5,7 +5,7 @@
     "homepage"         : "https://git.hexa.com.ua/hexa/yiisupport",
     "type"             : "yii2-extension",
     "minimum-stability": "stable",
-    "author"           : [
+    "authors"           : [
         {
             "name" : "Yevhenii Pylypenko",
             "email": "i.pylypenko@hexa.com.ua",
