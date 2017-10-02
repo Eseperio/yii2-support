@@ -302,21 +302,28 @@ class Ticket extends ActiveRecord
         return parent::afterSave($insert, $changedAttributes);
     }
 
+    /**
+     * @return bool
+     */
     public function beforeDelete()
     {
-        if (!$this->unlinkFile()) {
-            return false;
+        $isOk = parent::beforeDelete();
+        if($isOk) {
+            $this->unlinkFile();
         }
-        return parent::beforeDelete();
+
+        return $isOk;
     }
 
-
+    /**
+     * @return bool
+     */
     protected function unlinkFile()
     {
         $path = \Yii::getAlias(\Yii::$app->controller->module->uploadDir);
 
         if ($this->file) {
-            return unlink($path . DS . $this->file);
+            return unlink($path . DIRECTORY_SEPARATOR . $this->file);
         }
         return false;
     }
