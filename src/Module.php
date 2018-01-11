@@ -249,7 +249,7 @@ class Module extends BaseModule implements BootstrapInterface
     public function onTicketCreate(Ticket $model)
     {
         $this->trigger(
-            static::EVENT_AFTER_COMMENT_CREATE,
+            static::EVENT_AFTER_TICKET_CREATE,
             new TicketEvent(['sender' => $model])
         );
     }
