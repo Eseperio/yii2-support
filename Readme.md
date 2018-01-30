@@ -4,11 +4,11 @@
 ### Installation
 Edit your composer.json file, in **require** section add
 ```php
-"hexaua/yiisupport": "dev-master"
+"hexaua/yii2-support": "dev-master"
 
 // Example
 "require": {
-    "hexaua/yiisupport": "dev-master"
+    "hexaua/yii2-support": "dev-master"
 }
 ```
 ### Apply migrations
