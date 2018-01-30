@@ -1,8 +1,8 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
-use hexa\yiisupport\models\Ticket;
-use hexa\yiisupport\widgets\Comments;
+use hexaua\yiisupport\helpers\Html;
+use hexaua\yiisupport\models\Ticket;
+use hexaua\yiisupport\widgets\Comments;
 use yii\widgets\DetailView;
 
 /**

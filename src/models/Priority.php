@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\models;
+namespace hexaua\yiisupport\models;
 
-use hexa\yiisupport\db\ActiveQuery;
+use hexaua\yiisupport\db\ActiveQuery;
 
 /**
  * This is the model class for table "ticket_priority".

@@ -3,11 +3,11 @@
 
 /**
  * @var       $this  yii\web\View
- * @var       $model \hexa\yiisupport\models\Priority
+ * @var       $model \hexaua\yiisupport\models\Priority
  * @var array $options
  */
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 echo Html::beginTag('div', $options)
 

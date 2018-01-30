@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Status */
+/* @var $model \hexaua\yiisupport\models\Status */
 
 $this->title                   = Yii::t('support', 'Update Status: {status}', ['status' => $model->name]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Status'), 'url' => ['index']];

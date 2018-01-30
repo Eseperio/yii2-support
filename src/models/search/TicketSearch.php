@@ -8,10 +8,10 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\models\search;
+namespace hexaua\yiisupport\models\search;
 
-use hexa\yiisupport\interfaces\SearchInterface;
-use hexa\yiisupport\models\Ticket;
+use hexaua\yiisupport\interfaces\SearchInterface;
+use hexaua\yiisupport\models\Ticket;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 

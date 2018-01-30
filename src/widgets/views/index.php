@@ -1,7 +1,7 @@
 <?php
 
-use hexa\yiisupport\models\ActiveRecord;
-use hexa\yiisupport\models\Comment;
+use hexaua\yiisupport\models\ActiveRecord;
+use hexaua\yiisupport\models\Comment;
 use yii\web\View;
 use yii\widgets\Pjax;
 

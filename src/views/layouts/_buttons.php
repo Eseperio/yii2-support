@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 echo Html::beginTag('div', ['class' => 'btn-group margin-bottom-20']);
 

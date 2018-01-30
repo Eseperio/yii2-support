@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\traits;
+namespace hexaua\yiisupport\traits;
 
 use yii\helpers\FileHelper;
 use yii\helpers\Inflector;

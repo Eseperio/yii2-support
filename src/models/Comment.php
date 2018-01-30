@@ -1,9 +1,9 @@
 <?php
 
-namespace hexa\yiisupport\models;
+namespace hexaua\yiisupport\models;
 
-use hexa\yiisupport\db\CommentQuery;
-use hexa\yiisupport\traits\DownloadableTrait;
+use hexaua\yiisupport\db\CommentQuery;
+use hexaua\yiisupport\traits\DownloadableTrait;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\IdentityInterface;

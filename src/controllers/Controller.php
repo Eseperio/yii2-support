@@ -8,11 +8,11 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\controllers;
+namespace hexaua\yiisupport\controllers;
 
-use hexa\yiisupport\interfaces\ConfigInterface;
-use hexa\yiisupport\models\Ticket;
-use hexa\yiisupport\SupportAsset;
+use hexaua\yiisupport\interfaces\ConfigInterface;
+use hexaua\yiisupport\models\Ticket;
+use hexaua\yiisupport\SupportAsset;
 use yii\web\Controller as BaseController;
 use yii\web\NotFoundHttpException;
 

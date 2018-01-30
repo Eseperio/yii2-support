@@ -2,7 +2,7 @@
 
 /**
  * @var $this       yii\web\View
- * @var $model      \hexa\yiisupport\models\Ticket
+ * @var $model      \hexaua\yiisupport\models\Ticket
  * @var $categories array
  * @var $priorities array
  */

@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\helpers;
+namespace hexaua\yiisupport\helpers;
 
 /**
  * Class Html

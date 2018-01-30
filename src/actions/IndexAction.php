@@ -8,9 +8,9 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\actions;
+namespace hexaua\yiisupport\actions;
 
-use hexa\yiisupport\models\ActiveRecord;
+use hexaua\yiisupport\models\ActiveRecord;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;

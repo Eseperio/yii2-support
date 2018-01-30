@@ -1,9 +1,9 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\ActiveRecord */
+/* @var $model \hexaua\yiisupport\models\ActiveRecord */
 
 
 echo Html::a(

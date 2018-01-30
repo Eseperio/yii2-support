@@ -8,9 +8,9 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\actions;
+namespace hexaua\yiisupport\actions;
 
-use hexa\yiisupport\interfaces\ConfigInterface;
+use hexaua\yiisupport\interfaces\ConfigInterface;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -93,7 +93,7 @@ abstract class BaseAction extends Action
      */
     protected function findModel($id)
     {
-        /** @var \hexa\yiisupport\models\ActiveRecord $class */
+        /** @var \hexaua\yiisupport\models\ActiveRecord $class */
         $class = $this->modelClass;
         if (($model = $class::find()->byId($id)->one()) !== null) {
             return $model;

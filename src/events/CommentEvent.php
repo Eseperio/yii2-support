@@ -8,9 +8,9 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\events;
+namespace hexaua\yiisupport\events;
 
-use hexa\yiisupport\models\Comment;
+use hexaua\yiisupport\models\Comment;
 use yii\base\Event;
 
 /**

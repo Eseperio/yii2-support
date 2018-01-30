@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\actions;
+namespace hexaua\yiisupport\actions;
 
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;

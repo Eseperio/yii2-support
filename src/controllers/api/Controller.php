@@ -1,5 +1,5 @@
 <?php
-namespace hexa\yiisupport\controllers\api;
+namespace hexaua\yiisupport\controllers\api;
 
 use yii\rest\ActiveController;
 use yii\filters\AccessControl;

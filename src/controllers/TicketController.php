@@ -1,14 +1,14 @@
 <?php
 
-namespace hexa\yiisupport\controllers;
+namespace hexaua\yiisupport\controllers;
 
-use hexa\yiisupport\actions\DeleteAction;
-use hexa\yiisupport\actions\ResolveAction;
-use hexa\yiisupport\actions\UpdateAction;
-use hexa\yiisupport\models\Category;
-use hexa\yiisupport\models\Priority;
-use hexa\yiisupport\models\search\TicketSearch;
-use hexa\yiisupport\models\Ticket;
+use hexaua\yiisupport\actions\DeleteAction;
+use hexaua\yiisupport\actions\ResolveAction;
+use hexaua\yiisupport\actions\UpdateAction;
+use hexaua\yiisupport\models\Category;
+use hexaua\yiisupport\models\Priority;
+use hexaua\yiisupport\models\search\TicketSearch;
+use hexaua\yiisupport\models\Ticket;
 use yii\filters\AccessControl;
 use yii\web\HttpException;
 use yii\web\UploadedFile;

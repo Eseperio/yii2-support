@@ -2,7 +2,7 @@
 
 return [
     'id'                  => 'support',
-    'controllerNamespace' => 'hexa\yiisupport\controllers',
+    'controllerNamespace' => 'hexaua\yiisupport\controllers',
     'components'          => [
         'i18n' => [
             'class'        => '\yii\i18n\I18N',

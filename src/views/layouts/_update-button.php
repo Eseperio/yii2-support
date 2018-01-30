@@ -1,9 +1,9 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Priority */
+/* @var $model \hexaua\yiisupport\models\Priority */
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 echo Html::a(
     Yii::t('support', 'Update'),

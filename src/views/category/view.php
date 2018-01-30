@@ -3,7 +3,7 @@
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Category */
+/* @var $model \hexaua\yiisupport\models\Category */
 
 $this->title                   = Yii::t('support', 'Category: {category}', ['category' => $model->name]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Categories'), 'url' => ['index']];

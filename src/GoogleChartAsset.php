@@ -1,6 +1,6 @@
 <?php
 
-namespace hexa\yiisupport;
+namespace hexaua\yiisupport;
 
 use yii\web\AssetBundle;
 

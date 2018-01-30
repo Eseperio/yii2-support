@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 echo Html::title($this->title, 'h1');
 

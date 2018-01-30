@@ -1,9 +1,9 @@
 <?php
 
-namespace hexa\yiisupport\controllers\api;
+namespace hexaua\yiisupport\controllers\api;
 
-use hexa\yiisupport\models\Comment;
-use hexa\yiisupport\models\Ticket;
+use hexaua\yiisupport\models\Comment;
+use hexaua\yiisupport\models\Ticket;
 use yii\data\ActiveDataProvider;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;

@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\controllers\api;
+namespace hexaua\yiisupport\controllers\api;
 
-use hexa\yiisupport\models\Category;
+use hexaua\yiisupport\models\Category;
 use yii\rest\ActiveController;
 
 /**

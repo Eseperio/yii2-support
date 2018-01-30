@@ -1,9 +1,9 @@
 <?php
 
-namespace hexa\yiisupport\models;
+namespace hexaua\yiisupport\models;
 
-use hexa\yiisupport\db\TicketQuery;
-use hexa\yiisupport\traits\DownloadableTrait;
+use hexaua\yiisupport\db\TicketQuery;
+use hexaua\yiisupport\traits\DownloadableTrait;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;

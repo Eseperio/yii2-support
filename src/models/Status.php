@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\models;
+namespace hexaua\yiisupport\models;
 
-use hexa\yiisupport\db\StatusQuery;
+use hexaua\yiisupport\db\StatusQuery;
 
 /**
  * This is the model class for table "ticket_status".

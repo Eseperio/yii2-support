@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\controllers\api;
+namespace hexaua\yiisupport\controllers\api;
 
-use hexa\yiisupport\models\Priority;
+use hexaua\yiisupport\models\Priority;
 use yii\rest\ActiveController;
 
 /**

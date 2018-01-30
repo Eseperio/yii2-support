@@ -1,13 +1,13 @@
 <?php
 
-namespace hexa\yiisupport\controllers;
+namespace hexaua\yiisupport\controllers;
 
-use hexa\yiisupport\actions\CreateAction;
-use hexa\yiisupport\actions\DeleteAction;
-use hexa\yiisupport\actions\IndexAction;
-use hexa\yiisupport\actions\UpdateAction;
-use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\Status;
+use hexaua\yiisupport\actions\CreateAction;
+use hexaua\yiisupport\actions\DeleteAction;
+use hexaua\yiisupport\actions\IndexAction;
+use hexaua\yiisupport\actions\UpdateAction;
+use hexaua\yiisupport\actions\ViewAction;
+use hexaua\yiisupport\models\Status;
 use yii\filters\AccessControl;
 
 /**

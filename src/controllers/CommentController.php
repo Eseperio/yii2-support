@@ -1,12 +1,12 @@
 <?php
 
-namespace hexa\yiisupport\controllers;
+namespace hexaua\yiisupport\controllers;
 
-use hexa\yiisupport\actions\DeleteAction;
-use hexa\yiisupport\actions\IndexAction;
-use hexa\yiisupport\actions\UpdateAction;
-use hexa\yiisupport\actions\ViewAction;
-use hexa\yiisupport\models\Comment;
+use hexaua\yiisupport\actions\DeleteAction;
+use hexaua\yiisupport\actions\IndexAction;
+use hexaua\yiisupport\actions\UpdateAction;
+use hexaua\yiisupport\actions\ViewAction;
+use hexaua\yiisupport\models\Comment;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;

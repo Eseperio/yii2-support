@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Ticket */
+/* @var $model \hexaua\yiisupport\models\Ticket */
 
 $this->title                   = Yii::t('support', 'Create Ticket');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Tickets'), 'url' => ['index']];

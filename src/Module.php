@@ -1,13 +1,13 @@
 <?php
 
-namespace hexa\yiisupport;
+namespace hexaua\yiisupport;
 
-use hexa\yiisupport\events\CommentEvent;
-use hexa\yiisupport\events\TicketEvent;
-use hexa\yiisupport\helpers\Config;
-use hexa\yiisupport\interfaces\ConfigInterface;
-use hexa\yiisupport\models\Comment;
-use hexa\yiisupport\models\Ticket;
+use hexaua\yiisupport\events\CommentEvent;
+use hexaua\yiisupport\events\TicketEvent;
+use hexaua\yiisupport\helpers\Config;
+use hexaua\yiisupport\interfaces\ConfigInterface;
+use hexaua\yiisupport\models\Comment;
+use hexaua\yiisupport\models\Ticket;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\InvalidConfigException;
@@ -158,7 +158,7 @@ class Module extends BaseModule implements BootstrapInterface
 
         if ($app instanceof Application) {
             $app->controllerMap[$this->id] = [
-                'class' => 'hexa\yiisupport\console\RbacController',
+                'class' => 'hexaua\yiisupport\console\RbacController',
                 'module' => $this,
             ];
         }

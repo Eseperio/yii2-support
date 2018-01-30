@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\widgets;
+namespace hexaua\yiisupport\widgets;
 
-use hexa\yiisupport\CommentAsset;
+use hexaua\yiisupport\CommentAsset;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\db\ActiveRecord;
@@ -40,7 +40,7 @@ class Comments extends Widget
     /**
      * @var string
      */
-    public $commentClass = 'hexa\yiisupport\models\Comment';
+    public $commentClass = 'hexaua\yiisupport\models\Comment';
 
     /**
      * @var array the HTML attributes for the widget container tag.

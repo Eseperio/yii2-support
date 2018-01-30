@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Priority */
+/* @var $model \hexaua\yiisupport\models\Priority */
 
 $this->title                   = Yii::t('support', "Create Priority");
 $this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Priorities'), 'url' => ['index']];

@@ -1,7 +1,7 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
-use hexa\yiisupport\models\Comment;
+use hexaua\yiisupport\helpers\Html;
+use hexaua\yiisupport\models\Comment;
 use yii\web\View;
 
 /**

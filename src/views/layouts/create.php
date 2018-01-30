@@ -1,10 +1,10 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 /**
  * @var $this  yii\web\View
- * @var $model \hexa\yiisupport\models\Priority
+ * @var $model \hexaua\yiisupport\models\Priority
  */
 
 echo Html::beginTag('div', $options); ?>

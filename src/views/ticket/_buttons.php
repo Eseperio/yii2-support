@@ -8,8 +8,8 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-use hexa\yiisupport\helpers\Html;
-use hexa\yiisupport\interfaces\ConfigInterface;
+use hexaua\yiisupport\helpers\Html;
+use hexaua\yiisupport\interfaces\ConfigInterface;
 
 $config    = Yii::$container->get(ConfigInterface::class);
 $adminRole = $config->get('adminRole');

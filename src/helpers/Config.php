@@ -8,10 +8,10 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\helpers;
+namespace hexaua\yiisupport\helpers;
 
-use hexa\yiisupport\interfaces\ConfigInterface;
-use hexa\yiisupport\Module;
+use hexaua\yiisupport\interfaces\ConfigInterface;
+use hexaua\yiisupport\Module;
 use yii\base\Object;
 use yii\di\ServiceLocator;
 use yii\helpers\ArrayHelper;

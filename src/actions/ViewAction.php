@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\actions;
+namespace hexaua\yiisupport\actions;
 
 use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;

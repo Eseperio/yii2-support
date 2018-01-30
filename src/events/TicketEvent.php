@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\events;
+namespace hexaua\yiisupport\events;
 
 use yii\base\Event;
 

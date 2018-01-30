@@ -8,7 +8,7 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\db;
+namespace hexaua\yiisupport\db;
 
 /**
  * Class CommentQuery

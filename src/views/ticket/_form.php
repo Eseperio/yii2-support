@@ -1,11 +1,11 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
  * @var $this       yii\web\View
- * @var $model      \hexa\yiisupport\models\Ticket
+ * @var $model      \hexaua\yiisupport\models\Ticket
  * @var $form       yii\widgets\ActiveForm
  * @var $categories array
  * @var $priorities array

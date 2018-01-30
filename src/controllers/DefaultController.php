@@ -1,8 +1,8 @@
 <?php
 
-namespace hexa\yiisupport\controllers;
+namespace hexaua\yiisupport\controllers;
 
-use hexa\yiisupport\models\Ticket;
+use hexaua\yiisupport\models\Ticket;
 use yii\filters\AccessControl;
 
 /**

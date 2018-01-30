@@ -1,6 +1,6 @@
 <?php
 
-use hexa\yiisupport\helpers\Html;
+use hexaua\yiisupport\helpers\Html;
 
 /**
  * @var yii\web\View                $this

@@ -1,8 +1,8 @@
 {
-    "name"             : "hexa/yiisupport",
+    "name"             : "hexaua/yii2-support",
     "version"          : "1.0.0",
     "description"      : "Yii2 support module. Ticket system with customer.",
-    "homepage"         : "https://git.hexa.com.ua/hexa/yiisupport",
+    "homepage"         : "https://github.com/HEXA-UA/yii2-support",
     "type"             : "yii2-extension",
     "minimum-stability": "stable",
     "authors"           : [
@@ -32,8 +32,8 @@
     },
     "autoload"         : {
         "psr-4": {
-            "hexa\\yiisupport\\"       : "src",
-            "hexa\\yiisupport\\tests\\": "tests"
+            "hexaua\\yiisupport\\"       : "src",
+            "hexaua\\yiisupport\\tests\\": "tests"
         }
     }
 }

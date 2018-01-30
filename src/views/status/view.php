@@ -3,7 +3,7 @@
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \hexa\yiisupport\models\Status */
+/* @var $model \hexaua\yiisupport\models\Status */
 
 $this->title                   = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('support', 'Statuses'), 'url' => ['index']];

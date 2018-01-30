@@ -4,32 +4,17 @@
 ### Installation
 Edit your composer.json file, in **require** section add
 ```php
-"hexa/yiisupport": "dev-master"
+"hexaua/yiisupport": "dev-master"
 
 // Example
 "require": {
-    "hexa/yiisupport": "dev-master"
+    "hexaua/yiisupport": "dev-master"
 }
-```
-Following lines need to be added in **repositories** section
-```php
-{
-    "type": "git",
-    "url" : "git@git.hexa.com.ua:yii2/support.git"
-}
-    
-// Example
-"repositories"     : [
-    {
-        "type": "git",
-        "url" : "git@git.hexa.com.ua:yii2/support.git"
-    }
-]
 ```
 ### Apply migrations
 To apply module migrations from project root run the following command
 ```text
-php yii migrate --migrationPath=hexa\yiisupport\migrations
+php yii migrate --migrationPath=hexaua\yiisupport\migrations
 ```
 
 ### Create permissions
@@ -44,7 +29,7 @@ Configuring module
 ```php
 'modules' => [
     'support' => [
-        'class'    => 'hexa\yiisupport\Module',
+        'class'    => 'hexaua\yiisupport\Module',
         'userRole' => 'partner', // Default to user
         'adminRole => 'admin'    // Default to admin
     ]

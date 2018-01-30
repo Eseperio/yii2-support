@@ -8,9 +8,9 @@
  * @copyright   Copyright (C) Hexa,  All rights reserved.
  */
 
-namespace hexa\yiisupport\console;
+namespace hexaua\yiisupport\console;
 
-use hexa\yiisupport\rbac\AuthorRule;
+use hexaua\yiisupport\rbac\AuthorRule;
 use Yii;
 use yii\console\Controller;
 use yii\rbac\Item;
