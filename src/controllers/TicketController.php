@@ -46,7 +46,7 @@ class TicketController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'delete', 'update'],
+                'only' => ['index', 'create', 'delete', 'update', 'view'],
                 'rules' => [
                     [
                         'allow' => true,
