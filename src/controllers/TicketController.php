@@ -47,6 +47,7 @@ class TicketController extends Controller
     {
         return [
             'access' => [
+
                 'class'      => AccessControl::className(),
                 'ruleConfig' => [
                     'class'      => AccessRule::class,
