@@ -9,7 +9,9 @@ use hexaua\yiisupport\models\Category;
 use hexaua\yiisupport\models\Priority;
 use hexaua\yiisupport\models\search\TicketSearch;
 use hexaua\yiisupport\models\Ticket;
+use function Sodium\crypto_box_publickey_from_secretkey;
 use yii\filters\AccessControl;
+use yii\filters\AccessRule;
 use yii\web\HttpException;
 use yii\web\UploadedFile;
 
@@ -27,12 +29,12 @@ class TicketController extends Controller
         $className = Ticket::className();
 
         return [
-            'delete' => [
-                'class' => DeleteAction::className(),
+            'delete'  => [
+                'class'      => DeleteAction::className(),
                 'modelClass' => $className
             ],
             'resolve' => [
-                'class' => ResolveAction::className(),
+                'class'      => ResolveAction::className(),
                 'modelClass' => $className
             ]
         ];
@@ -45,28 +47,42 @@ class TicketController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'delete', 'update'],
-                'rules' => [
+                'class'      => AccessControl::className(),
+                'ruleConfig' => [
+                    'class'      => AccessRule::class,
+                    'roleParams' => function ($rule) {
+
+                        return [
+                            'ticket' => $this->findTicket(\Yii::$app->request->get('id'))
+                        ];
+                    }
+                ],
+                'only'       => ['index', 'create', 'delete', 'update', 'view'],
+                'rules'      => [
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['delete'],
-                        'roles' => ['deleteTicket'],
+                        'roles'   => ['deleteTicket'],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['update'],
-                        'roles' => ['updateTicket'],
+                        'roles'   => ['updateTicket'],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
                         'actions' => ['create'],
-                        'roles' => ['createTicket'],
+                        'roles'   => ['createTicket'],
                     ],
                     [
-                        'allow' => true,
+                        'allow'   => true,
+                        'actions' => ['view'],
+                        'roles'   => ['isAuthor'],
+                    ],
+                    [
+                        'allow'   => true,
                         'actions' => ['index'],
-                        'roles' => ['@'],
+                        'roles'   => ['@'],
                     ]
                 ],
             ],
@@ -84,15 +100,15 @@ class TicketController extends Controller
             $query->byUserId(\Yii::$app->user->id);
         }
 
-        $filterModel = new TicketSearch();
+        $filterModel  = new TicketSearch();
         $dataProvider = $filterModel->search(\Yii::$app->request->queryParams, [
             'query' => $query
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'isUpdate' => $this->config->get('buttons.update'),
-            'isDelete' => $this->config->get('buttons.update'),
+            'isUpdate'     => $this->config->get('buttons.update'),
+            'isDelete'     => $this->config->get('buttons.update'),
         ]);
     }
 
@@ -100,19 +116,19 @@ class TicketController extends Controller
      * @param integer $id
      *
      * @return string
-     * @throws HttpException
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionView($id)
     {
-        $model = $this->isAuthor($id);
-        $hash = $model->getHash($this->config->get('params.secret'), [
+        $model = $this->findTicket($id);
+        $hash  = $model->getHash($this->config->get('params.secret'), [
             'created_by' => \Yii::$app->user->id
         ]);
 
         return $this->render('view', [
-            'hash' => $hash,
-            'model' => $model,
-            'comments' => $model->comments,
+            'hash'               => $hash,
+            'model'              => $model,
+            'comments'           => $model->comments,
             'authorNameTemplate' => $this->config->get('params.authorNameTemplate',
                 "{name} {email}")
         ]);
@@ -137,7 +153,7 @@ class TicketController extends Controller
 
 
         return $this->render('update', [
-            'model' => $model,
+            'model'      => $model,
             'categories' => $categories,
             'priorities' => $priorities
         ]);
@@ -161,7 +177,7 @@ class TicketController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model'      => $model,
             'categories' => Category::getList(),
             'priorities' => Priority::getList()
         ]);
